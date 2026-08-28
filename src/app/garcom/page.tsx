@@ -38,6 +38,8 @@ const ICONS: Record<WaiterRequestType, typeof BellRing> = {
   bill: Receipt,
 }
 
+const ALERT_VIBRATION = [350, 120, 350, 120, 700]
+
 function formatTime(value: string) {
   return new Intl.DateTimeFormat('pt-BR', {
     hour: '2-digit',
@@ -50,6 +52,29 @@ function elapsed(value: string) {
   if (seconds < 60) return `${seconds}s`
   const minutes = Math.floor(seconds / 60)
   return `${minutes} min`
+}
+
+async function showWaiterAlert(title: string, body: string, tag: string) {
+  navigator.vibrate?.(ALERT_VIBRATION)
+
+  if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return
+
+  try {
+    const registration = await navigator.serviceWorker?.ready
+    await registration?.showNotification(title, {
+      body,
+      icon: '/icon.svg',
+      badge: '/icon.svg',
+      tag,
+      renotify: true,
+      requireInteraction: true,
+      silent: false,
+      vibrate: ALERT_VIBRATION,
+      data: { url: '/garcom' },
+    })
+  } catch {
+    // The queue remains functional even if the OS blocks a notification enhancement.
+  }
 }
 
 export default function WaiterPage() {
@@ -73,21 +98,11 @@ export default function WaiterPage() {
       if (initialized.current) {
         const fresh = pending.find((request) => !knownPendingIds.current.has(request.id))
         if (fresh) {
-          navigator.vibrate?.([180, 90, 180])
-          if (Notification.permission === 'granted') {
-            try {
-              const registration = await navigator.serviceWorker?.ready
-              await registration?.showNotification(`Mesa ${fresh.table} · ${fresh.label}`, {
-                body: 'Nova solicitação no K2TAP Garçom',
-                icon: '/icon.svg',
-                badge: '/icon.svg',
-                tag: fresh.id,
-                data: { url: '/garcom' },
-              })
-            } catch {
-              // Notification is an enhancement; the queue remains functional.
-            }
-          }
+          await showWaiterAlert(
+            `🔔 Mesa ${fresh.table} · ${fresh.label}`,
+            `Nova solicitação da Mesa ${fresh.table}. Toque para abrir o K2TAP Garçom.`,
+            `k2tap-${fresh.id}`,
+          )
         }
       }
 
@@ -137,7 +152,24 @@ export default function WaiterPage() {
   async function enableNotifications() {
     if (typeof Notification === 'undefined') return
     const permission = await Notification.requestPermission()
-    setNotificationsEnabled(permission === 'granted')
+    const granted = permission === 'granted'
+    setNotificationsEnabled(granted)
+
+    if (granted) {
+      await showWaiterAlert(
+        '✅ Alertas K2TAP ativados',
+        'Este celular está pronto para receber chamadas de mesa.',
+        'k2tap-alerts-enabled',
+      )
+    }
+  }
+
+  async function testAlert() {
+    await showWaiterAlert(
+      '🔔 K2TAP · Teste de chamada',
+      'Mesa 12 está chamando o garçom. Vibração e alerta funcionando.',
+      `k2tap-test-${Date.now()}`,
+    )
   }
 
   async function installApp() {
@@ -182,6 +214,11 @@ export default function WaiterPage() {
               <BellRing size={17} />
               {notificationsEnabled ? 'Alertas ativos' : 'Ativar alertas'}
             </button>
+            {notificationsEnabled ? (
+              <button className={styles.primaryButton} onClick={testAlert} type="button">
+                <BellRing size={17} /> Testar alerta
+              </button>
+            ) : null}
             {installPrompt ? (
               <button className={styles.primaryButton} onClick={installApp} type="button">
                 <Download size={17} /> Instalar PWA
@@ -200,7 +237,7 @@ export default function WaiterPage() {
           <Smartphone size={19} />
           <div>
             <strong>Teste agora</strong>
-            <span>Abra a Mesa 12 em outra aba deste navegador e envie uma solicitação.</span>
+            <span>Ative os alertas e use “Testar alerta” para validar notificação e vibração neste celular.</span>
           </div>
           <Link href="/demo/mesa/12" target="_blank">Abrir Mesa 12</Link>
         </div>
