@@ -1,5 +1,6 @@
-const CACHE_NAME = 'k2tap-garcom-demo-v1'
+const CACHE_NAME = 'k2tap-garcom-demo-v2'
 const APP_SHELL = ['/garcom']
+const ALERT_VIBRATION = [350, 120, 350, 120, 700]
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)))
@@ -26,6 +27,35 @@ self.addEventListener('fetch', (event) => {
         return response
       })
       .catch(() => caches.match(event.request).then((cached) => cached || caches.match('/garcom'))),
+  )
+})
+
+self.addEventListener('push', (event) => {
+  let payload = {}
+
+  try {
+    payload = event.data?.json() || {}
+  } catch {
+    payload = { body: event.data?.text() || 'Nova chamada de mesa no K2TAP.' }
+  }
+
+  const title = payload.title || '🔔 K2TAP Garçom'
+  const body = payload.body || 'Nova solicitação de atendimento.'
+  const tag = payload.tag || `k2tap-push-${Date.now()}`
+  const url = payload.url || '/garcom'
+
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body,
+      icon: '/icon.svg',
+      badge: '/icon.svg',
+      tag,
+      renotify: true,
+      requireInteraction: true,
+      silent: false,
+      vibrate: ALERT_VIBRATION,
+      data: { url },
+    }),
   )
 })
 
