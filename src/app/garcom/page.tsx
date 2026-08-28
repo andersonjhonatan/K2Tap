@@ -18,7 +18,6 @@ import {
 import {
   clearWaiterRequests,
   K2TAP_DEMO_EVENT,
-  K2TAP_DEMO_STORAGE_KEY,
   readWaiterRequests,
   updateWaiterRequest,
   type WaiterRequest,
@@ -29,6 +28,12 @@ import styles from './page.module.css'
 type InstallPromptEvent = Event & {
   prompt: () => Promise<void>
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
+}
+
+type ExtendedNotificationOptions = NotificationOptions & {
+  renotify?: boolean
+  requireInteraction?: boolean
+  vibrate?: number[]
 }
 
 const ICONS: Record<WaiterRequestType, typeof BellRing> = {
@@ -61,7 +66,7 @@ async function showWaiterAlert(title: string, body: string, tag: string) {
 
   try {
     const registration = await navigator.serviceWorker?.ready
-    await registration?.showNotification(title, {
+    const options: ExtendedNotificationOptions = {
       body,
       icon: '/icon.svg',
       badge: '/icon.svg',
@@ -71,7 +76,8 @@ async function showWaiterAlert(title: string, body: string, tag: string) {
       silent: false,
       vibrate: ALERT_VIBRATION,
       data: { url: '/garcom' },
-    })
+    }
+    await registration?.showNotification(title, options)
   } catch {
     // The queue remains functional even if the OS blocks a notification enhancement.
   }
