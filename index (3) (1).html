@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#f3f6f9" name="theme-color"/>
+<title>K2 Tap — Um toque. Uma conexão.</title>
+<meta content="K2 Tap transforma uma aproximação do celular em uma experiência digital personalizada para seu negócio." name="description"/>
+<style>
+    :root{
+      --ink:#07111f; --muted:#5d6877; --blue:#146ef5; --blue2:#55a7ff;
+      --paper:#f4f7fa; --card:#ffffff; --line:#dce3ea; --deep:#071321;
+      --radius:28px; --shadow:0 26px 70px rgba(12,30,54,.10);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    a{color:inherit;text-decoration:none} button{font:inherit}
+    .wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+    .nav{position:sticky;top:0;z-index:50;background:rgba(244,247,250,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(7,17,31,.06)}
+    .navin{height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:-.05em;font-size:22px}.brandmark{width:38px;height:38px;border-radius:12px;background:var(--ink);display:grid;place-items:center;color:#fff;font-weight:950;position:relative;overflow:hidden}.brandmark:after{content:"";position:absolute;width:22px;height:2px;background:var(--blue2);transform:rotate(-32deg);box-shadow:0 5px 0 var(--blue2)}
+    .brand small{font-size:10px;letter-spacing:.12em;color:var(--muted);display:block;margin-top:2px}
+    .links{display:flex;align-items:center;gap:28px;font-size:13px;color:#3d4958}.links a:hover{color:var(--ink)}
+    .navcta,.btn{border:0;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;justify-content:center;transition:.25s ease}.navcta{padding:12px 18px;background:#fff;border:1px solid var(--line);font-size:13px;font-weight:700}.navcta:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    .hero{padding:74px 0 62px;min-height:730px;display:grid;align-items:center;position:relative}.hero:before{content:"";position:absolute;right:-220px;top:20px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(20,110,245,.15),transparent 65%);filter:blur(12px);pointer-events:none}
+    .herogrid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:60px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}.eyebrow:before{content:"";width:18px;height:2px;background:var(--blue)}
+    h1{font-size:clamp(54px,6vw,88px);line-height:.94;letter-spacing:-.07em;margin:20px 0 26px;max-width:760px}.stroke{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+    .lead{font-size:19px;line-height:1.65;color:var(--muted);max-width:610px;margin:0 0 32px}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{padding:16px 22px;font-weight:800;font-size:14px}.btn.primary{background:var(--ink);color:white;box-shadow:0 14px 34px rgba(7,17,31,.2)}.btn.primary:hover{transform:translateY(-3px)}.btn.ghost{background:transparent;border:1px solid #cbd4de}.btn.ghost:hover{background:white}
+    .trust{margin-top:40px;display:flex;gap:24px;flex-wrap:wrap;color:#697586;font-size:12px}.trust span{display:flex;align-items:center;gap:8px}.dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}
+    .stage{height:540px;position:relative;perspective:1200px}.halo{position:absolute;inset:80px 20px 20px 40px;border-radius:50%;background:radial-gradient(circle at 50% 42%,rgba(73,161,255,.26),rgba(20,110,245,.06) 44%,transparent 70%);filter:blur(3px)}
+    .phone{position:absolute;right:20px;top:32px;width:260px;height:510px;border-radius:46px;background:#08111d;border:7px solid #07111f;box-shadow:0 40px 80px rgba(4,16,31,.24);transform:rotate(5deg);overflow:hidden}.phone:before{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);width:86px;height:23px;border-radius:20px;background:#000;z-index:2}.screen{position:absolute;inset:7px;border-radius:33px;background:linear-gradient(180deg,#f8fbff,#e9f2ff);padding:52px 19px 20px}.profiletop{background:linear-gradient(135deg,#08182d,#123b73);height:150px;border-radius:25px;padding:20px;color:#fff;position:relative;overflow:hidden}.profiletop:after{content:"K2";font-weight:900;font-size:74px;position:absolute;right:-4px;bottom:-20px;color:rgba(255,255,255,.08)}.avatar{width:52px;height:52px;border-radius:18px;background:white;display:grid;place-items:center;color:#07111f;font-weight:950}.profiletop h3{margin:12px 0 2px;font-size:17px}.profiletop p{margin:0;color:#bdd7ff;font-size:11px}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:11px}.q{height:54px;background:white;border:1px solid #dfe7f1;border-radius:16px;display:grid;place-items:center;font-size:10px;font-weight:800}.linkcard{margin-top:9px;height:60px;background:#fff;border:1px solid #dfe7f1;border-radius:17px;display:flex;align-items:center;gap:10px;padding:10px;font-size:10px;font-weight:700}.ico{width:35px;height:35px;border-radius:12px;background:#e8f2ff;display:grid;place-items:center;color:#146ef5}
+    .tag{position:absolute;left:10px;top:170px;width:310px;height:196px;border-radius:34px;background:linear-gradient(145deg,#0b1727,#07101b);box-shadow:0 40px 80px rgba(7,17,31,.28);transform:rotate(-11deg) translateZ(30px);padding:26px;color:white;overflow:hidden;border:1px solid rgba(255,255,255,.08)}.tag:before{content:"";position:absolute;inset:-60px auto auto 120px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(58,154,255,.34),transparent 66%)}.tagbrand{font-size:26px;font-weight:900;letter-spacing:-.05em}.tagbrand b{color:var(--blue2)}.tagcopy{position:absolute;left:26px;bottom:24px;font-size:12px;color:#afc3dc}.nfc{position:absolute;right:26px;top:26px;width:44px;height:44px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:grid;place-items:center;font-size:19px}.tapwaves{position:absolute;left:292px;top:145px}.wave{position:absolute;border:1px solid rgba(20,110,245,.35);border-radius:50%;animation:pulse 2.4s infinite}.wave:nth-child(1){width:50px;height:50px}.wave:nth-child(2){width:92px;height:92px;left:-21px;top:-21px;animation-delay:.4s}.wave:nth-child(3){width:136px;height:136px;left:-43px;top:-43px;animation-delay:.8s}@keyframes pulse{0%,100%{opacity:.2;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
+    .section{padding:110px 0}.sectionhead{display:grid;grid-template-columns:.75fr 1.25fr;gap:80px;margin-bottom:54px;align-items:end}.sectionhead h2{font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.055em;margin:0}.sectionhead p{color:var(--muted);font-size:17px;line-height:1.7;margin:0;max-width:600px}
+    .how{background:#fff;border-radius:44px;padding:22px;box-shadow:var(--shadow);position:relative;overflow:hidden}.how:before{content:"";position:absolute;left:22px;right:22px;bottom:22px;height:2px;background:#edf1f5}.how-progress{position:absolute;left:22px;bottom:22px;height:2px;width:calc((100% - 44px)/4);background:var(--blue);transition:transform .55s cubic-bezier(.2,.8,.2,1),width .55s ease;transform-origin:left center;z-index:4}.steps{display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:2}.step{appearance:none;border:0;background:transparent;text-align:left;color:inherit;padding:30px 28px 42px;min-height:300px;border-right:1px solid #e8edf2;position:relative;cursor:pointer;transition:background .35s ease,transform .35s ease,box-shadow .35s ease}.step:last-child{border-right:0}.step:hover{background:#f8fbff}.step.active{background:linear-gradient(180deg,#f8fbff 0%,#fff 100%);box-shadow:inset 0 0 0 1px rgba(20,110,245,.08)}.step:focus-visible{outline:2px solid var(--blue);outline-offset:-3px}.num{font-size:11px;color:#91a0b1;letter-spacing:.14em;font-weight:800;transition:color .25s ease}.step.active .num{color:var(--blue)}.step h3{font-size:21px;letter-spacing:-.03em;margin:24px 0 8px;transition:transform .3s ease}.step:hover h3,.step.active h3{transform:translateY(-2px)}.step p{color:var(--muted);font-size:13px;line-height:1.6;margin:0;max-width:220px}.step .mini{width:40px;height:40px;border-radius:14px;background:#edf5ff;color:var(--blue);display:grid;place-items:center;margin-top:18px;font-weight:900;transition:transform .35s ease,background .35s ease,color .35s ease,box-shadow .35s ease}.step:hover .mini,.step.active .mini{transform:translateY(-3px) scale(1.05);background:var(--blue);color:#fff;box-shadow:0 10px 24px rgba(20,110,245,.22)}
+    .step-visual{height:70px;margin-top:22px;position:relative;display:flex;align-items:center;overflow:hidden}.visual-tag{width:82px;height:48px;border-radius:13px;background:#091421;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;letter-spacing:-.03em;position:relative;box-shadow:0 10px 24px rgba(7,17,31,.12);transition:.45s ease}.visual-tag b{color:#5aa7ff}.step.active[data-how-step="1"] .visual-tag{transform:rotate(-5deg) scale(1.06);background:linear-gradient(135deg,#0b1727,#153f76)}.visual-swatch{width:24px;height:24px;border-radius:8px;background:#e7f1ff;margin-left:-8px;border:2px solid white;transition:.45s ease}.visual-swatch:nth-child(2){background:#dbe9ff}.visual-swatch:nth-child(3){background:#b9d6ff}.step.active[data-how-step="1"] .visual-swatch{transform:translateX(8px) rotate(8deg)}
+    .config-track{display:flex;gap:7px;align-items:center;transform:translateX(0);transition:transform .5s ease}.config-chip{padding:8px 10px;border-radius:999px;background:#eef5ff;color:#49719b;font-size:9px;font-weight:800;white-space:nowrap;border:1px solid #dce9f8}.step.active[data-how-step="2"] .config-track{animation:configSlide 2.4s ease-in-out infinite alternate}@keyframes configSlide{from{transform:translateX(0)}to{transform:translateX(-44px)}}
+    .place-scene{width:100%;height:64px;position:relative}.place-counter{position:absolute;left:5px;right:5px;bottom:8px;height:12px;border-radius:8px;background:#e9eef4}.place-pin{position:absolute;right:18px;bottom:17px;width:14px;height:20px;border:2px solid #94a7bb;border-radius:50% 50% 50% 0;transform:rotate(-45deg)}.place-tag{position:absolute;left:8px;bottom:19px;width:54px;height:34px;border-radius:9px;background:#0a1624;transition:all .55s cubic-bezier(.2,.8,.2,1)}.step.active[data-how-step="3"] .place-tag{left:132px;transform:rotate(-4deg);box-shadow:0 8px 18px rgba(20,110,245,.2)}
+    .tap-scene-mini{width:100%;height:68px;position:relative}.tap-tag-mini{position:absolute;left:4px;top:17px;width:62px;height:38px;border-radius:10px;background:#0a1624;color:#fff;display:grid;place-items:center;font-size:9px;font-weight:900}.tap-phone-mini{position:absolute;right:4px;top:6px;width:36px;height:58px;border-radius:10px;background:#07111f;border:2px solid #07111f;transition:right .55s cubic-bezier(.2,.8,.2,1);box-shadow:0 8px 18px rgba(7,17,31,.14)}.tap-phone-mini:after{content:"";position:absolute;inset:3px;border-radius:7px;background:#eef5ff}.tap-wave-mini{position:absolute;left:60px;top:21px;width:22px;height:22px;border:1px solid rgba(20,110,245,.45);border-radius:50%;opacity:0}.step.active[data-how-step="4"] .tap-phone-mini{right:52px}.step.active[data-how-step="4"] .tap-wave-mini{animation:miniWave 1.2s ease-out infinite}@keyframes miniWave{0%{opacity:.8;transform:scale(.5)}100%{opacity:0;transform:scale(2.4)}}
+    .step-state{position:absolute;left:28px;right:28px;bottom:11px;height:3px;border-radius:999px;background:transparent;overflow:hidden}.step-state:after{content:"";display:block;width:0;height:100%;background:var(--blue);border-radius:inherit}.step.active .step-state:after{animation:stepFill 3.1s linear forwards}@keyframes stepFill{from{width:0}to{width:100%}}
+    .dark{background:var(--deep);color:#fff;border-radius:54px 54px 0 0}.dark .sectionhead p{color:#9eb0c4}.dark .eyebrow{color:#6fb3ff}.uses{display:grid;grid-template-columns:1.25fr .75fr;gap:20px}.biguse,.sideuse{border:1px solid rgba(255,255,255,.1);background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.025));border-radius:34px;overflow:hidden}.biguse{min-height:500px;padding:42px;display:flex;flex-direction:column;justify-content:space-between;position:relative}.biguse h3{font-size:46px;letter-spacing:-.05em;max-width:620px;margin:0}.biguse p{color:#aebfd0;max-width:520px;line-height:1.7}.orb{position:absolute;width:400px;height:400px;border-radius:50%;right:-120px;bottom:-140px;background:radial-gradient(circle at 35% 30%,#429dff,#155dc9 34%,#081a30 70%);box-shadow:inset 20px 20px 70px rgba(255,255,255,.1),0 0 90px rgba(20,110,245,.25)}.chips{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:2}.chip{border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:9px 12px;font-size:11px;color:#cad7e4;background:rgba(255,255,255,.04)}.sidecol{display:grid;gap:20px}.sideuse{padding:30px;min-height:240px}.sideuse small{color:#6fb3ff;text-transform:uppercase;letter-spacing:.12em;font-size:10px;font-weight:800}.sideuse h4{font-size:26px;letter-spacing:-.04em;margin:34px 0 8px}.sideuse p{font-size:13px;line-height:1.6;color:#9fb0c2;margin:0}
+    .experience{background:#fff}.compare{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}.compare h2{font-size:clamp(42px,5vw,72px);line-height:.98;letter-spacing:-.06em;margin:16px 0 22px}.compare p{color:var(--muted);line-height:1.7}.demo{border:1px solid var(--line);border-radius:36px;background:#f7f9fb;padding:24px;box-shadow:var(--shadow)}.demobar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:11px;color:#7c8a99}.democard{background:white;border-radius:28px;padding:28px;border:1px solid #e5ebf0}.route{display:flex;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid #edf1f4}.route:last-child{border-bottom:0}.route .circle{width:42px;height:42px;border-radius:14px;background:#eef5ff;color:var(--blue);display:grid;place-items:center;font-weight:900}.route b{display:block;font-size:14px}.route span{font-size:11px;color:#8390a0}.route em{margin-left:auto;font-style:normal;color:#9aa8b6}
+
+    /* Interactive "Como funciona" demo */
+    .tap-demo{margin-top:26px;background:linear-gradient(145deg,#071321,#0a1a2c);border-radius:38px;color:#fff;overflow:hidden;box-shadow:0 34px 90px rgba(7,17,31,.20);border:1px solid rgba(255,255,255,.06)}
+    .tap-demo-head{padding:34px 36px 22px;display:flex;justify-content:space-between;gap:30px;align-items:end;border-bottom:1px solid rgba(255,255,255,.08)}
+    .tap-demo-head small{color:#6fb3ff;font-weight:850;letter-spacing:.14em;text-transform:uppercase}.tap-demo-head h3{font-size:clamp(30px,4vw,48px);line-height:1;letter-spacing:-.05em;margin:10px 0 0}.tap-demo-head p{max-width:470px;color:#a8bacd;line-height:1.65;margin:0;font-size:14px}
+    .tap-demo-grid{display:grid;grid-template-columns:.76fr 1.24fr;min-height:520px}.demo-controls{padding:26px;border-right:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:9px}.demo-step{appearance:none;border:1px solid transparent;background:transparent;color:#91a4b9;text-align:left;border-radius:20px;padding:18px 18px;display:grid;grid-template-columns:42px 1fr;gap:12px;cursor:pointer;transition:.25s ease}.demo-step:hover{background:rgba(255,255,255,.04)}.demo-step.active{background:rgba(255,255,255,.075);border-color:rgba(111,179,255,.2);color:#fff}.demo-step-num{width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.06);display:grid;place-items:center;font-size:11px;font-weight:900;color:#6fb3ff}.demo-step.active .demo-step-num{background:#146ef5;color:#fff;box-shadow:0 0 28px rgba(20,110,245,.35)}.demo-step b{display:block;font-size:15px;margin:2px 0 5px}.demo-step span{font-size:12px;line-height:1.45;color:#8196ab}.demo-step.active span{color:#b7c7d8}.demo-replay{margin-top:auto;border:1px solid rgba(255,255,255,.12);background:transparent;color:#d7e4f1;border-radius:16px;padding:13px 15px;cursor:pointer;font-weight:800;font-size:12px}.demo-replay:hover{background:rgba(255,255,255,.06)}
+    .demo-scene{position:relative;min-height:520px;overflow:hidden;background:radial-gradient(circle at 64% 44%,rgba(34,116,224,.19),transparent 34%),linear-gradient(160deg,rgba(255,255,255,.025),transparent 45%)}.demo-scene:after{content:"";position:absolute;left:0;right:0;bottom:84px;height:1px;background:linear-gradient(90deg,transparent,rgba(111,179,255,.25),transparent)}
+    .desk-shadow{position:absolute;left:14%;bottom:54px;width:72%;height:58px;border-radius:50%;background:rgba(0,0,0,.36);filter:blur(22px)}
+    .demo-tag{position:absolute;left:10%;bottom:118px;width:260px;height:162px;border-radius:30px;background:linear-gradient(145deg,#101d2d,#050c15);border:1px solid rgba(255,255,255,.12);box-shadow:0 28px 54px rgba(0,0,0,.28);transform:rotate(-7deg);padding:24px;z-index:3}.demo-tag .tagbrand{font-size:23px}.demo-tag .tagcopy{left:24px;bottom:22px}.demo-tag .nfc{right:22px;top:22px}
+    .demo-phone{position:absolute;right:9%;top:56px;width:228px;height:448px;border-radius:42px;background:#02060c;border:7px solid #060c14;box-shadow:0 36px 70px rgba(0,0,0,.4);z-index:5;transition:transform .75s cubic-bezier(.2,.75,.2,1);overflow:hidden;transform:translateX(78px) rotate(5deg)}.demo-phone:before{content:"";position:absolute;left:50%;top:10px;transform:translateX(-50%);width:76px;height:22px;border-radius:20px;background:#000;z-index:8}.demo-wallpaper{position:absolute;inset:5px;border-radius:31px;background:radial-gradient(circle at 68% 20%,#1f5da8,transparent 34%),linear-gradient(160deg,#08182b,#03070d 72%);overflow:hidden}.demo-time{position:absolute;top:65px;left:0;right:0;text-align:center;font-size:41px;font-weight:300;letter-spacing:-.04em}.demo-date{position:absolute;top:112px;left:0;right:0;text-align:center;font-size:11px;color:#b9c8d8}.nfc-notice{position:absolute;left:13px;right:13px;top:152px;background:rgba(247,250,253,.94);color:#07111f;border-radius:18px;padding:13px 13px;display:flex;align-items:center;gap:10px;box-shadow:0 12px 30px rgba(0,0,0,.28);opacity:0;transform:translateY(-8px) scale(.96);transition:.45s ease;z-index:7}.notice-icon{width:37px;height:37px;border-radius:12px;background:#071321;color:#fff;display:grid;place-items:center;font-weight:900}.nfc-notice b{display:block;font-size:12px}.nfc-notice span{font-size:10px;color:#718093}.demo-browser{position:absolute;inset:5px;border-radius:31px;background:#f5f8fb;color:#07111f;padding:48px 14px 16px;opacity:0;transform:translateY(16px);transition:.55s ease;z-index:6}.browser-pill{height:32px;border-radius:12px;background:#fff;border:1px solid #dae3ec;display:flex;align-items:center;justify-content:center;font-size:9px;color:#68788b}.browser-cover{height:125px;border-radius:19px;background:linear-gradient(135deg,#071321,#164c8d);margin-top:12px;padding:18px;color:#fff;position:relative;overflow:hidden}.browser-cover:after{content:"K2";position:absolute;right:-4px;bottom:-24px;font-size:74px;font-weight:950;color:rgba(255,255,255,.08)}.browser-cover small{color:#83bfff}.browser-cover h4{font-size:19px;margin:24px 0 3px}.browser-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.browser-action{height:54px;border-radius:15px;background:#fff;border:1px solid #e0e7ee;display:grid;place-items:center;font-size:9px;font-weight:850}.browser-bottom{height:64px;margin-top:8px;border-radius:15px;background:#e9f3ff;padding:13px;font-size:9px;color:#3e5f83}
+    .demo-rays{position:absolute;left:36%;top:39%;width:112px;height:112px;z-index:4;opacity:.08;transition:.45s ease}.demo-rays span{position:absolute;inset:0;border:2px solid #4aa5ff;border-radius:50%;animation:demoPulse 1.35s infinite}.demo-rays span:nth-child(2){inset:-24px;animation-delay:.2s}.demo-rays span:nth-child(3){inset:-48px;animation-delay:.4s}@keyframes demoPulse{0%{opacity:.2;transform:scale(.84)}70%{opacity:.9}100%{opacity:0;transform:scale(1.08)}}
+    .demo-caption{position:absolute;left:38px;top:35px;font-size:11px;color:#718aa4;letter-spacing:.12em;text-transform:uppercase;font-weight:850}.demo-status{position:absolute;left:38px;top:58px;font-size:19px;font-weight:850;letter-spacing:-.02em;max-width:300px;transition:.25s ease}
+    .tap-demo[data-step="1"] .demo-phone{transform:translateX(78px) rotate(5deg)}.tap-demo[data-step="1"] .demo-status:after{content:"Aproxime o celular da K2 Tap."}
+    .tap-demo[data-step="2"] .demo-phone{transform:translateX(-40px) translateY(34px) rotate(-2deg)}.tap-demo[data-step="2"] .demo-rays{opacity:1}.tap-demo[data-step="2"] .demo-status:after{content:"A NFC faz a conexão em segundos."}
+    .tap-demo[data-step="3"] .demo-phone{transform:translateX(-14px) translateY(6px) rotate(1deg)}.tap-demo[data-step="3"] .demo-rays{opacity:.35}.tap-demo[data-step="3"] .nfc-notice{opacity:1;transform:none}.tap-demo[data-step="3"] .demo-status:after{content:"O celular reconhece a experiência."}
+    .tap-demo[data-step="4"] .demo-phone{transform:translateX(0) rotate(0)}.tap-demo[data-step="4"] .demo-browser{opacity:1;transform:none}.tap-demo[data-step="4"] .demo-status:after{content:"A página da marca abre e o cliente age."}
+
+    .proof{padding:80px 0;background:#eaf0f6}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.metric{background:#f8fafc;border:1px solid #dce4ec;border-radius:28px;padding:30px}.metric strong{font-size:44px;letter-spacing:-.05em}.metric p{color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:0}
+    .cta{padding:120px 0}.ctabox{border-radius:46px;background:linear-gradient(135deg,#0a1625,#0d2b51);color:white;padding:68px;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative;overflow:hidden}.ctabox:after{content:"";position:absolute;right:-100px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(85,167,255,.35),transparent 62%)}.ctabox h2{font-size:clamp(42px,5vw,70px);line-height:.97;letter-spacing:-.06em;margin:0;position:relative;z-index:2}.ctaright{position:relative;z-index:2}.ctaright p{color:#b6c7d8;line-height:1.7;margin:0 0 24px}.ctaright .btn{background:#fff;color:#07111f}
+    footer{padding:68px 0 34px;background:#071321;color:#fff;position:relative;overflow:hidden}
+    footer:before{content:"";position:absolute;left:50%;top:-180px;transform:translateX(-50%);width:620px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(20,110,245,.18),transparent 68%);pointer-events:none}
+    .foot{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center;gap:0}
+    .foot-brand{display:flex;flex-direction:column;align-items:center;gap:14px}
+    .foot-mark{width:54px;height:54px;border-radius:18px;background:linear-gradient(145deg,#0d2038,#0a1727);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;font-weight:950;font-size:17px;letter-spacing:-.05em;box-shadow:0 16px 38px rgba(0,0,0,.24)}
+    .foot-logo{font-size:24px;font-weight:950;letter-spacing:-.05em}.foot-logo b{color:#5aa7ff}
+    .foot-tagline{margin:0;color:#9fb3cb;font-size:13px;line-height:1.7;max-width:430px}
+    .footlinks{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:28px}
+    .footlinks a{padding:10px 14px;border-radius:999px;color:#c7d5e5;font-size:12px;font-weight:750;border:1px solid transparent;transition:.25s ease}
+    .footlinks a:hover{color:#fff;border-color:rgba(85,167,255,.25);background:rgba(85,167,255,.08)}
+    .foot-divider{width:min(620px,100%);height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent);margin:34px auto 24px}
+    .foot-bottom{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;color:#71859e;font-size:11px;line-height:1.5}
+    .foot-bottom .sep{width:3px;height:3px;border-radius:50%;background:#40546b}
+    @media(max-width:640px){footer{padding:54px 0 28px}.footlinks{gap:6px;margin-top:24px}.footlinks a{padding:9px 11px}.foot-divider{margin:28px auto 20px}.foot-bottom{flex-direction:column;gap:5px}.foot-bottom .sep{display:none}}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}.reveal.show{opacity:1;transform:none}
+    @media(max-width:900px){.tap-demo-grid{grid-template-columns:1fr}.demo-controls{border-right:0;border-bottom:1px solid rgba(255,255,255,.08);display:grid;grid-template-columns:1fr 1fr}.demo-replay{grid-column:1/-1}.tap-demo-head{align-items:start}.links{display:none}.hero{padding-top:40px}.herogrid,.sectionhead,.uses,.compare,.ctabox{grid-template-columns:1fr}.stage{height:500px;margin-top:20px}.phone{right:3%;width:230px;height:460px}.tag{left:0;width:270px;height:175px}.tapwaves{left:245px}.steps{grid-template-columns:1fr 1fr}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid #e8edf2}.sectionhead{gap:22px}.metrics{grid-template-columns:1fr}.ctabox{padding:44px}}
+    @media(max-width:600px){.tap-demo{border-radius:28px}.tap-demo-head{padding:28px 22px 18px;display:block}.tap-demo-head p{margin-top:16px}.demo-controls{grid-template-columns:1fr;padding:12px}.demo-step{padding:13px 14px}.demo-scene{min-height:455px}.demo-tag{left:5%;bottom:96px;width:205px;height:132px;padding:18px;border-radius:24px}.demo-tag .tagcopy{left:18px;bottom:16px;font-size:9px}.demo-tag .nfc{right:16px;top:16px;width:36px;height:36px}.demo-phone{width:182px;height:360px;right:4%;top:68px;border-radius:34px}.demo-wallpaper,.demo-browser{border-radius:25px}.demo-time{top:56px;font-size:34px}.demo-date{top:97px}.nfc-notice{top:130px;padding:10px}.demo-caption{left:22px;top:24px}.demo-status{left:22px;top:45px;font-size:15px;max-width:220px}.demo-rays{left:30%;top:42%;transform:scale(.7)}.tap-demo[data-step="2"] .demo-phone{transform:translateX(-24px) translateY(40px) rotate(-2deg)}.wrap{width:min(100% - 26px,1180px)}.navin{height:68px}.navcta{padding:10px 14px}.hero{min-height:auto;padding-bottom:36px}h1{font-size:52px}.lead{font-size:16px}.actions .btn{width:100%}.stage{height:430px;margin-top:14px}.phone{width:200px;height:400px;right:0}.screen{padding:48px 14px 14px}.profiletop{height:128px}.quick{gap:5px}.q{height:45px}.tag{width:235px;height:150px;top:170px;padding:20px;border-radius:26px}.tagcopy{left:20px;bottom:18px}.nfc{right:18px;top:18px}.tapwaves{left:215px;top:145px}.section{padding:78px 0}.how{border-radius:28px;padding:10px}.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid #e8edf2;min-height:170px}.step:last-child{border-bottom:0}.step h3{margin-top:28px}.dark{border-radius:34px 34px 0 0}.biguse{min-height:450px;padding:30px}.biguse h3{font-size:35px}.ctabox{border-radius:32px;padding:34px 26px}.foot{flex-direction:column}.footlinks{flex-wrap:wrap}}
+  
+    @media(max-width:820px){.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid #e8edf2;min-height:auto;padding:24px 22px 30px}.step:last-child{border-bottom:0}.step p{max-width:none}.step-visual{height:58px}.how:before,.how-progress{display:none}.step h3{margin-top:18px}.step-state{left:22px;right:22px}.place-tag{left:8px}.step.active[data-how-step="3"] .place-tag{left:58%}.tap-phone-mini{right:8px}.step.active[data-how-step="4"] .tap-phone-mini{right:38%}}
+
+
+    /* Simulador independente: nao altera a demonstracao NFC acima */
+    .client-sim{margin-top:32px;background:#fff;border:1px solid #e6ebf1;border-radius:40px;box-shadow:var(--shadow);overflow:hidden}
+    .client-sim-head{padding:38px 40px 30px;border-bottom:1px solid #e8edf2;display:grid;grid-template-columns:1fr .9fr;gap:40px;align-items:end}
+    .client-sim-head h3{font-size:clamp(34px,4.2vw,54px);line-height:1.02;letter-spacing:-.055em;margin:10px 0 0;max-width:700px}
+    .client-sim-head p{margin:0;color:var(--muted);font-size:15px;line-height:1.7;max-width:520px}
+    .client-sim-body{display:grid;grid-template-columns:340px 1fr;min-height:690px}
+    .sim-config{padding:30px;border-right:1px solid #e8edf2;background:#fbfcfe;display:flex;flex-direction:column;gap:26px}
+    .sim-block small{display:block;color:#8a98aa;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:850;margin-bottom:10px}
+    .sim-block h4{font-size:18px;letter-spacing:-.03em;margin:0 0 8px}.sim-block p{font-size:12px;color:#6c7786;line-height:1.55;margin:0}
+    .sim-input{width:100%;height:54px;border:1px solid #dce4ed;border-radius:17px;background:#fff;padding:0 16px;color:var(--ink);font-size:15px;font-weight:750;outline:none;transition:.2s ease;box-shadow:0 8px 20px rgba(7,17,31,.03)}
+    .sim-input:focus{border-color:#8bbcff;box-shadow:0 0 0 4px rgba(20,110,245,.08)}
+    .sim-types{display:grid;gap:9px}.sim-type{appearance:none;width:100%;border:1px solid #e0e7ef;background:#fff;border-radius:18px;padding:14px;display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;text-align:left;cursor:pointer;color:var(--ink);transition:.25s ease}
+    .sim-type:hover{transform:translateY(-1px);border-color:#cbd9e8}.sim-type.active{background:#081421;color:#fff;border-color:#081421;box-shadow:0 14px 30px rgba(7,17,31,.14)}
+    .sim-type-icon{width:42px;height:42px;border-radius:13px;background:#eef5ff;color:var(--blue);display:grid;place-items:center;font-size:17px;font-weight:900}.sim-type.active .sim-type-icon{background:rgba(85,167,255,.14);color:#8bc1ff}
+    .sim-type b{display:block;font-size:13px;margin-bottom:3px}.sim-type span{display:block;font-size:10px;color:#7b8898;line-height:1.35}.sim-type.active span{color:#a9bfd8}.sim-check{font-size:15px;color:#9aabba}.sim-type.active .sim-check{color:#6fb3ff}
+    .sim-note{margin-top:auto;border-radius:20px;background:#eef6ff;padding:16px;color:#3d5571;font-size:11px;line-height:1.55}.sim-note b{color:#0c315f}
+
+    .sim-preview-area{padding:28px 30px 30px;background:linear-gradient(145deg,#071321,#0b1d31);color:#fff;position:relative;overflow:hidden}
+    .sim-preview-area:before{content:"";position:absolute;right:-160px;top:-190px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(69,157,255,.23),transparent 66%);pointer-events:none}.sim-preview-area:after{content:"";position:absolute;left:-180px;bottom:-240px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(20,110,245,.12),transparent 68%);pointer-events:none}
+    .sim-preview-top{position:relative;z-index:2;display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:24px}.sim-preview-top small{font-size:10px;letter-spacing:.14em;color:#79b7ff;font-weight:850}.sim-live{display:inline-flex;align-items:center;gap:7px;font-size:10px;color:#aecaeb}.sim-live:before{content:"";width:7px;height:7px;border-radius:50%;background:#49d18b;box-shadow:0 0 0 5px rgba(73,209,139,.1)}
+    .sim-showcase{position:relative;z-index:2;display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:28px;align-items:center;min-height:590px}
+    .client-phone{width:320px;height:610px;justify-self:center;border-radius:48px;background:#03080e;border:7px solid #050b12;padding:8px;box-shadow:0 40px 90px rgba(0,0,0,.35);position:relative;transition:.35s ease}
+    .client-phone:before{content:"";position:absolute;top:15px;left:50%;transform:translateX(-50%);width:94px;height:24px;border-radius:20px;background:#010305;z-index:4}
+    .client-screen{height:100%;border-radius:35px;overflow:hidden;background:#f4f7fa;color:#09111d;position:relative}
+    .client-hero{height:285px;padding:58px 22px 22px;position:relative;overflow:hidden;background:linear-gradient(145deg,#0c223c,#115aa7);color:#fff;transition:background .35s ease}
+    .client-hero:after{content:"";position:absolute;width:220px;height:220px;right:-90px;bottom:-90px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 68%)}
+    .client-logo{width:49px;height:49px;border-radius:16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.13);display:grid;place-items:center;font-size:14px;font-weight:950;margin-bottom:22px;backdrop-filter:blur(10px)}
+    .client-kicker{font-size:9px;letter-spacing:.13em;font-weight:850;color:#add2ff;text-transform:uppercase;margin-bottom:8px}.client-name{font-size:31px;line-height:.98;letter-spacing:-.055em;font-weight:900;margin:0;max-width:240px;word-break:break-word}.client-tagline{font-size:11px;line-height:1.5;color:#d5e7ff;margin:11px 0 16px;max-width:235px}
+    .client-cta-row{display:flex;gap:7px;position:relative;z-index:2}.client-cta{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:9px 12px;background:#fff;color:#07111f;font-size:9px;font-weight:850}.client-cta.secondary{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff}
+    .client-body{padding:14px 14px 20px}.client-section-label{font-size:9px;letter-spacing:.12em;color:#7d8997;font-weight:850;text-transform:uppercase;margin:3px 2px 9px}.client-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.client-action{min-height:72px;border-radius:18px;background:#fff;border:1px solid #e1e8ef;padding:11px;box-shadow:0 6px 16px rgba(13,30,50,.04)}.client-action-icon{width:29px;height:29px;border-radius:10px;background:#eaf3ff;color:#146ef5;display:grid;place-items:center;font-size:12px;margin-bottom:8px}.client-action b{display:block;font-size:11px;margin-bottom:3px}.client-action span{display:block;font-size:8.5px;color:#7c8795;line-height:1.35}.client-feature{margin-top:9px;background:#081421;color:#fff;border-radius:19px;padding:13px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}.client-feature small{display:block;color:#86b9f6;font-size:8px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}.client-feature b{font-size:11px}.client-feature-arrow{width:31px;height:31px;border-radius:50%;background:#146ef5;display:grid;place-items:center;font-size:12px}
+
+    .sim-explain{align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:16px;max-width:430px}.sim-explain .eyebrow{color:#75b4ff}.sim-explain h4{font-size:clamp(32px,4vw,48px);line-height:.98;letter-spacing:-.05em;margin:3px 0 5px}.sim-explain>p{color:#abc0d7;font-size:14px;line-height:1.7;margin:0 0 4px}
+    .sim-understand{display:grid;gap:9px}.understand-item{padding:14px 15px;border-radius:17px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.075);display:grid;grid-template-columns:32px 1fr;gap:11px;align-items:start}.understand-item i{width:30px;height:30px;border-radius:10px;background:rgba(84,164,255,.12);color:#79b7ff;display:grid;place-items:center;font-style:normal;font-size:10px;font-weight:900}.understand-item b{display:block;font-size:12px;margin:1px 0 3px}.understand-item span{display:block;font-size:10px;line-height:1.45;color:#91a8bf}
+    .sim-message{margin-top:4px;border-left:2px solid #2c88ff;padding:10px 0 10px 14px;color:#d8e8fb;font-size:12px;line-height:1.55}.sim-message strong{color:#fff}
+
+    .client-sim[data-kind="barber"] .client-hero{background:linear-gradient(145deg,#11161f,#263343)}
+    .client-sim[data-kind="barber"] .client-action-icon{background:#edf0f4;color:#263343}
+    .client-sim[data-kind="store"] .client-hero{background:linear-gradient(145deg,#281858,#6945b9)}
+    .client-sim[data-kind="store"] .client-action-icon{background:#f0eaff;color:#6846b7}
+    .client-sim[data-kind="service"] .client-hero{background:linear-gradient(145deg,#14342e,#197c68)}
+    .client-sim[data-kind="service"] .client-action-icon{background:#e4f7f2;color:#15725f}
+    .preview-pop{animation:previewPop .32s ease}@keyframes previewPop{0%{opacity:.55;transform:scale(.985)}100%{opacity:1;transform:scale(1)}}
+
+    @media(max-width:980px){.client-sim-head{grid-template-columns:1fr;gap:16px}.client-sim-body{grid-template-columns:1fr}.sim-config{border-right:0;border-bottom:1px solid #e8edf2}.sim-types{grid-template-columns:1fr 1fr}.sim-note{margin-top:0}.sim-showcase{grid-template-columns:1fr 1fr}.client-phone{width:290px;height:570px}.sim-explain{max-width:none}}
+    @media(max-width:700px){.client-sim{border-radius:29px}.client-sim-head{padding:28px 22px 22px}.client-sim-body{min-height:unset}.sim-config{padding:22px}.sim-types{grid-template-columns:1fr}.sim-preview-area{padding:22px 14px 26px}.sim-preview-top{padding:0 4px}.sim-showcase{grid-template-columns:1fr;gap:28px;min-height:unset}.client-phone{width:min(292px,92vw);height:565px}.sim-explain{padding:0 6px}.sim-explain h4{font-size:34px}.client-name{font-size:29px}}
+
+
+    /* ===== Vitrine de projetos ficticios K2 Tap ===== */
+    .biz-lab{margin-top:34px;border-radius:44px;overflow:hidden;background:#07111f;color:#fff;box-shadow:0 34px 90px rgba(7,17,31,.20);border:1px solid rgba(255,255,255,.06)}
+    .biz-lab-head{padding:42px 42px 30px;display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:end;border-bottom:1px solid rgba(255,255,255,.08)}
+    .biz-lab-head .eyebrow{color:#6eafff}.biz-lab-head h3{font-size:clamp(38px,5vw,64px);line-height:.98;letter-spacing:-.06em;margin:12px 0 0;max-width:760px}.biz-lab-head p{margin:0;color:#aebed1;font-size:15px;line-height:1.75;max-width:520px}
+    .biz-tabs{padding:18px 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#0a1625;border-bottom:1px solid rgba(255,255,255,.08)}
+    .biz-tab{appearance:none;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);color:#b7c6d8;border-radius:18px;padding:14px 15px;display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:11px;text-align:left;cursor:pointer;transition:.25s ease}
+    .biz-tab:hover{transform:translateY(-2px);border-color:rgba(116,181,255,.32);background:rgba(255,255,255,.06)}.biz-tab.active{background:#fff;color:#07111f;border-color:#fff;box-shadow:0 15px 36px rgba(0,0,0,.2)}
+    .biz-tab-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(83,164,255,.12);color:#77b6ff;font-weight:900}.biz-tab.active .biz-tab-icon{background:#eaf3ff;color:#146ef5}.biz-tab b{display:block;font-size:12px;margin-bottom:2px}.biz-tab small{display:block;font-size:9px;color:#8194a9;line-height:1.3}.biz-tab.active small{color:#687586}.biz-tab-arrow{font-size:16px;color:#66819d}.biz-tab.active .biz-tab-arrow{color:#146ef5}
+    .biz-stage{padding:26px;background:linear-gradient(180deg,#07111f,#0a1a2d 64%,#081421);position:relative;overflow:hidden}.biz-stage:before{content:"";position:absolute;right:-170px;top:-200px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(57,146,255,.16),transparent 67%)}
+    .biz-stage-toolbar{position:relative;z-index:2;display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:18px}.biz-stage-toolbar small{font-size:10px;letter-spacing:.14em;color:#74b3ff;font-weight:850}.biz-stage-toolbar span{font-size:10px;color:#97abc1;display:inline-flex;align-items:center;gap:7px}.biz-stage-toolbar span:before{content:"";width:7px;height:7px;border-radius:50%;background:#4cd391;box-shadow:0 0 0 5px rgba(76,211,145,.09)}
+    .biz-canvas{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:20px;align-items:start}.browser-shell{background:#e9eef4;border-radius:29px;padding:9px;box-shadow:0 34px 70px rgba(0,0,0,.28);min-width:0}.browser-top{height:43px;border-radius:21px 21px 12px 12px;background:#f7f9fb;display:flex;align-items:center;gap:12px;padding:0 14px}.browser-dots{display:flex;gap:6px}.browser-dots i{width:8px;height:8px;border-radius:50%;background:#c6ced8}.browser-address{height:27px;flex:1;border-radius:999px;background:#e8edf2;color:#7a8796;display:flex;align-items:center;padding:0 12px;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.browser-open{font-size:9px;color:#6b7989;font-weight:800}
+    .site-viewport{height:690px;border-radius:12px 12px 22px 22px;overflow:auto;background:#fff;scrollbar-width:thin;scrollbar-color:#c6d0db transparent;overscroll-behavior:contain}.site-viewport::-webkit-scrollbar{width:6px}.site-viewport::-webkit-scrollbar-thumb{background:#c8d2dc;border-radius:99px}
+    .phone-shell{position:sticky;top:20px;width:292px;height:606px;border-radius:45px;background:#02070d;border:6px solid #030910;padding:8px;box-shadow:0 34px 70px rgba(0,0,0,.34);transform:rotate(1.2deg)}.phone-shell:before{content:"";position:absolute;top:13px;left:50%;transform:translateX(-50%);width:86px;height:22px;border-radius:999px;background:#000;z-index:6}.phone-view{height:100%;border-radius:33px;overflow:auto;background:#fff;scrollbar-width:none}.phone-view::-webkit-scrollbar{display:none}
+    .biz-note{position:relative;z-index:2;margin-top:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.biz-note article{padding:16px 17px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.065)}.biz-note small{display:block;color:#70b0ff;font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:850;margin-bottom:7px}.biz-note b{font-size:12px}.biz-note p{margin:5px 0 0;color:#91a7bd;font-size:10px;line-height:1.5}
+    .biz-fade{animation:bizFade .38s cubic-bezier(.2,.8,.2,1)}@keyframes bizFade{0%{opacity:.35;transform:translateY(8px) scale(.992)}100%{opacity:1;transform:none}}
+
+    /* base para os mini-sites */
+    .demo-site{min-height:100%;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.demo-site *{box-sizing:border-box}.demo-site button{font:inherit}.ds-nav{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 34px;gap:20px;position:sticky;top:0;z-index:5;backdrop-filter:blur(13px)}.ds-brand{font-weight:950;letter-spacing:-.05em;font-size:19px}.ds-links{display:flex;gap:20px;font-size:10px;font-weight:750;align-items:center}.ds-nav-cta{border:0;border-radius:999px;padding:10px 14px;font-size:10px;font-weight:850}.ds-hero{min-height:430px;padding:54px 42px;display:grid;grid-template-columns:1fr .92fr;gap:34px;align-items:center}.ds-kicker{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:850}.ds-hero h2{font-size:clamp(42px,5.5vw,72px);line-height:.91;letter-spacing:-.065em;margin:13px 0 18px}.ds-hero p{font-size:13px;line-height:1.65;max-width:510px;margin:0 0 22px}.ds-actions{display:flex;gap:9px;flex-wrap:wrap}.ds-button{border:0;border-radius:999px;padding:12px 16px;font-size:10px;font-weight:850}.ds-button.ghost{background:transparent;border:1px solid currentColor}.ds-art{height:310px;border-radius:30px;position:relative;overflow:hidden;box-shadow:0 28px 55px rgba(0,0,0,.13)}.ds-art:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.16))}.ds-section{padding:48px 42px}.ds-section-title{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:24px}.ds-section-title small{font-size:9px;letter-spacing:.13em;text-transform:uppercase;font-weight:850}.ds-section-title h3{font-size:30px;letter-spacing:-.045em;line-height:1.02;margin:7px 0 0}.ds-section-title p{font-size:11px;line-height:1.55;max-width:360px;margin:0;opacity:.72}.ds-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.ds-card{border-radius:22px;padding:18px;min-height:150px}.ds-card small{font-size:8px;letter-spacing:.1em;text-transform:uppercase;font-weight:850}.ds-card h4{font-size:16px;letter-spacing:-.03em;margin:12px 0 7px}.ds-card p{font-size:10px;line-height:1.5;margin:0;opacity:.72}.ds-price{font-size:12px;font-weight:900;margin-top:16px}.ds-band{margin:0 42px 48px;border-radius:28px;padding:28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}.ds-band h3{font-size:28px;letter-spacing:-.045em;margin:0 0 8px}.ds-band p{font-size:11px;line-height:1.6;margin:0;opacity:.75;max-width:560px}.ds-mini-cta{border:0;border-radius:999px;padding:12px 16px;font-size:10px;font-weight:850;white-space:nowrap}.ds-footer{padding:28px 42px 34px;display:flex;justify-content:space-between;gap:20px;font-size:9px;opacity:.72}
+
+    /* Restaurante */
+    .site-restaurant{--c:#f1b96b;background:#f7f0e4;color:#241f19}.site-restaurant .ds-nav{background:rgba(247,240,228,.86)}.site-restaurant .ds-brand em{font-style:normal;color:#c75b2c}.site-restaurant .ds-nav-cta,.site-restaurant .ds-button:not(.ghost){background:#2b231d;color:#fff}.site-restaurant .ds-kicker{color:#b34d27}.site-restaurant .ds-hero{background:linear-gradient(145deg,#f7f0e4,#efe0c8)}.site-restaurant .ds-art{background:radial-gradient(circle at 54% 52%,#f0d7ae 0 28%,#f9f4eb 29% 37%,#ba6a3c 38% 41%,transparent 42%),radial-gradient(circle at 46% 49%,#b85231 0 8%,transparent 9%),radial-gradient(circle at 61% 44%,#627a47 0 6%,transparent 7%),linear-gradient(135deg,#6f3e2a,#bb6b3d 52%,#e2a267)}.site-restaurant .ds-art:before{content:"MESA 12";position:absolute;right:20px;top:18px;color:#fff;font-size:9px;letter-spacing:.16em;font-weight:900;z-index:2}.site-restaurant .ds-section{background:#fffaf2}.site-restaurant .ds-card{background:#f1e6d6}.site-restaurant .ds-price{color:#b64e29}.site-restaurant .ds-band{background:#2b231d;color:#fff}.site-restaurant .ds-mini-cta{background:#f1b96b;color:#281d15}
+
+    /* Barbearia */
+    .site-barber{background:#0e1115;color:#f5efe4}.site-barber .ds-nav{background:rgba(14,17,21,.86);border-bottom:1px solid rgba(255,255,255,.07)}.site-barber .ds-brand em{font-style:normal;color:#c9a66b}.site-barber .ds-nav-cta,.site-barber .ds-button:not(.ghost){background:#c9a66b;color:#111317}.site-barber .ds-kicker{color:#c9a66b}.site-barber .ds-hero{background:linear-gradient(145deg,#0e1115,#1c2229)}.site-barber .ds-hero p{color:#b9c0c7}.site-barber .ds-art{background:linear-gradient(105deg,rgba(5,7,9,.25),rgba(5,7,9,.02)),radial-gradient(circle at 55% 30%,#d4b892 0 7%,transparent 7.5%),linear-gradient(115deg,#0b0f13 0 36%,#3b4650 37% 56%,#151a20 57% 100%)}.site-barber .ds-art:before{content:"✂";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-12deg);font-size:88px;color:rgba(201,166,107,.54);z-index:1}.site-barber .ds-section{background:#151a20}.site-barber .ds-card{background:#20262d;border:1px solid #2b333c}.site-barber .ds-card small,.site-barber .ds-price{color:#c9a66b}.site-barber .ds-band{background:#c9a66b;color:#111317}.site-barber .ds-mini-cta{background:#111317;color:#fff}.site-barber .ds-footer{border-top:1px solid rgba(255,255,255,.08)}
+
+    /* Loja */
+    .site-store{background:#fbfafc;color:#201a26}.site-store .ds-nav{background:rgba(251,250,252,.88)}.site-store .ds-brand em{font-style:normal;color:#8c54a9}.site-store .ds-nav-cta,.site-store .ds-button:not(.ghost){background:#25192e;color:#fff}.site-store .ds-kicker{color:#9c5fb5}.site-store .ds-hero{background:linear-gradient(145deg,#fff,#f1e8f5)}.site-store .ds-art{background:linear-gradient(145deg,#efe5f3,#d9bfdf)}.site-store .ds-art:before{content:"";position:absolute;width:140px;height:230px;left:50%;top:38px;transform:translateX(-50%) rotate(4deg);border-radius:70px 70px 30px 30px;background:linear-gradient(180deg,#281c31,#76517f);box-shadow:0 25px 45px rgba(78,46,85,.25)}.site-store .ds-art:after{background:radial-gradient(circle at 25% 24%,rgba(255,255,255,.5),transparent 30%),linear-gradient(180deg,transparent,rgba(69,39,76,.08))}.site-store .ds-section{background:#fff}.site-store .ds-card{background:#f6f0f8}.site-store .ds-card small,.site-store .ds-price{color:#8c54a9}.site-store .ds-band{background:#281c31;color:#fff}.site-store .ds-mini-cta{background:#d8b5e5;color:#24172d}
+
+    /* Servico */
+    .site-service{background:#f2f8f8;color:#102826}.site-service .ds-nav{background:rgba(242,248,248,.88)}.site-service .ds-brand em{font-style:normal;color:#168679}.site-service .ds-nav-cta,.site-service .ds-button:not(.ghost){background:#0e3532;color:#fff}.site-service .ds-kicker{color:#168679}.site-service .ds-hero{background:linear-gradient(145deg,#ecf8f6,#d8efeb)}.site-service .ds-art{background:linear-gradient(150deg,#123d39,#1f8076 55%,#71b9ad)}.site-service .ds-art:before{content:"K2";position:absolute;right:20px;bottom:-24px;font-size:170px;font-weight:950;letter-spacing:-.08em;color:rgba(255,255,255,.12)}.site-service .ds-art:after{background:repeating-linear-gradient(90deg,transparent 0 36px,rgba(255,255,255,.045) 37px 38px),repeating-linear-gradient(0deg,transparent 0 36px,rgba(255,255,255,.045) 37px 38px)}.site-service .ds-section{background:#fff}.site-service .ds-card{background:#e9f5f3}.site-service .ds-card small,.site-service .ds-price{color:#168679}.site-service .ds-band{background:#0e3532;color:#fff}.site-service .ds-mini-cta{background:#6ed0c0;color:#0b2c29}
+
+    /* mini pagina do celular */
+    .tap-mini{min-height:100%;padding:44px 16px 22px;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.tap-mini .tm-logo{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;font-weight:950;font-size:13px;margin-bottom:18px}.tap-mini small{font-size:8px;letter-spacing:.13em;text-transform:uppercase;font-weight:900}.tap-mini h3{font-size:29px;line-height:.98;letter-spacing:-.055em;margin:8px 0 10px}.tap-mini>p{font-size:10px;line-height:1.5;margin:0 0 16px;opacity:.74}.tm-primary{height:44px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;margin-bottom:13px}.tm-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tm-card{min-height:86px;border-radius:18px;padding:12px}.tm-card i{font-style:normal;font-size:15px}.tm-card b{display:block;font-size:10px;margin:8px 0 3px}.tm-card span{font-size:8px;line-height:1.35;opacity:.67}.tm-highlight{margin-top:10px;border-radius:19px;padding:13px}.tm-highlight small{display:block;margin-bottom:5px}.tm-highlight b{font-size:11px}.tm-foot{margin-top:16px;text-align:center;font-size:8px;opacity:.52}
+    .tap-restaurant{background:#f7f0e4;color:#2b231d}.tap-restaurant .tm-logo,.tap-restaurant .tm-primary,.tap-restaurant .tm-highlight{background:#2b231d;color:#fff}.tap-restaurant .tm-card{background:#fffaf2;border:1px solid #eadbc7}.tap-restaurant small{color:#b24d29}
+    .tap-barber{background:#11151a;color:#f4eee4}.tap-barber .tm-logo,.tap-barber .tm-primary{background:#c9a66b;color:#111317}.tap-barber .tm-card{background:#20262d;border:1px solid #2b333c}.tap-barber .tm-highlight{background:#c9a66b;color:#111317}.tap-barber small{color:#c9a66b}
+    .tap-store{background:#fbfafc;color:#25192e}.tap-store .tm-logo,.tap-store .tm-primary,.tap-store .tm-highlight{background:#281c31;color:#fff}.tap-store .tm-card{background:#f4edf7;border:1px solid #eadff0}.tap-store small{color:#8c54a9}
+    .tap-service{background:#f2f8f8;color:#0e3532}.tap-service .tm-logo,.tap-service .tm-primary,.tap-service .tm-highlight{background:#0e3532;color:#fff}.tap-service .tm-card{background:#e8f4f2;border:1px solid #d5ebe7}.tap-service small{color:#168679}
+
+    @media(max-width:1000px){.biz-lab-head{grid-template-columns:1fr;gap:16px}.biz-tabs{grid-template-columns:1fr 1fr}.biz-canvas{grid-template-columns:1fr}.phone-shell{position:relative;top:auto;justify-self:center}.biz-note{grid-template-columns:1fr}.ds-hero{grid-template-columns:1fr}.ds-art{height:260px}}
+    @media(max-width:700px){.biz-lab{border-radius:30px;margin-left:-2px;margin-right:-2px}.biz-lab-head{padding:30px 22px 24px}.biz-lab-head h3{font-size:38px}.biz-tabs{grid-template-columns:1fr;padding:14px}.biz-tab{padding:12px}.biz-stage{padding:14px}.biz-stage-toolbar{padding:0 4px}.biz-canvas{gap:16px}.browser-shell{padding:6px;border-radius:23px}.browser-top{height:38px;padding:0 10px}.browser-open{display:none}.site-viewport{height:610px}.phone-shell{width:min(288px,88vw);height:580px}.ds-nav{height:60px;padding:0 18px}.ds-links a{display:none}.ds-hero{padding:36px 20px;min-height:auto;gap:22px}.ds-hero h2{font-size:46px}.ds-art{height:220px}.ds-section{padding:34px 20px}.ds-section-title{align-items:start;flex-direction:column}.ds-grid3{grid-template-columns:1fr}.ds-band{margin:0 20px 34px;padding:22px;grid-template-columns:1fr}.ds-footer{padding:24px 20px;flex-direction:column}.biz-note{display:none}}
+
+
+    /* Vitrine K2 Tap focada exclusivamente no celular */
+    .mobile-only-stage{padding:24px 26px 34px;background:radial-gradient(circle at 50% 38%,rgba(48,137,246,.16),transparent 29%),linear-gradient(180deg,#07111f,#09192a 72%,#071421)}
+    .mobile-showcase{position:relative;z-index:2;min-height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0 2px}
+    .phone-shell-focus{position:relative;top:auto;width:350px;height:680px;transform:none;border-radius:52px;border-width:7px;padding:9px;box-shadow:0 46px 100px rgba(0,0,0,.42),0 0 0 1px rgba(255,255,255,.035)}
+    .phone-shell-focus:after{content:"";position:absolute;inset:-42px;border-radius:74px;background:radial-gradient(circle,rgba(52,145,255,.16),transparent 64%);z-index:-1;pointer-events:none}
+    .phone-shell-focus .phone-view{border-radius:38px}
+    .phone-shell-focus .tap-mini{padding:50px 19px 26px}
+    .phone-shell-focus .tap-mini h3{font-size:34px;line-height:.96}
+    .phone-shell-focus .tap-mini>p{font-size:11px;line-height:1.55}
+    .phone-shell-focus .tm-primary{height:48px;font-size:11px}
+    .phone-shell-focus .tm-card{min-height:98px;padding:14px}
+    .phone-shell-focus .tm-card b{font-size:11px}.phone-shell-focus .tm-card span{font-size:9px}.phone-shell-focus .tm-highlight{padding:15px}.phone-shell-focus .tm-highlight b{font-size:12px}
+    .mobile-hint{margin-top:18px;color:#8299b1;font-size:10px;letter-spacing:.03em;text-align:center}
+    @media(max-width:700px){.biz-lab-head{padding-bottom:22px}.biz-lab-head h3{font-size:36px}.mobile-only-stage{padding:18px 14px 26px}.biz-stage-toolbar{padding:0 4px 4px}.mobile-showcase{min-height:610px}.phone-shell-focus{width:min(322px,88vw);height:620px;border-radius:47px}.phone-shell-focus .phone-view{border-radius:34px}.phone-shell-focus .tap-mini{padding:47px 16px 22px}.phone-shell-focus .tap-mini h3{font-size:31px}.mobile-hint{max-width:260px;line-height:1.5}}
+
+
+    /* Facilidades dentro da experiência mobile */
+    .tm-facilities{margin-top:12px}.tm-facilities>small{display:block;margin:0 0 8px 2px;font-size:7px;letter-spacing:.14em;opacity:.7}.tm-tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tm-tool{appearance:none;border:1px solid currentColor;background:rgba(255,255,255,.58);color:inherit;border-radius:17px;padding:11px 10px;text-align:left;cursor:pointer;min-height:62px;transition:.2s ease}.tm-tool:hover{transform:translateY(-1px)}.tm-tool i{font-style:normal;font-size:14px;display:block;margin-bottom:6px}.tm-tool b{display:block;font-size:9px}.tm-tool span{display:block;font-size:7px;opacity:.62;margin-top:2px;line-height:1.3}.tap-barber .tm-tool{background:#1a1e23;border-color:#303740}.tap-store .tm-tool{background:#fff;border-color:#eadff0}.tap-service .tm-tool{background:#f3fbfa;border-color:#cfe7e4}
+    .mobile-utility-modal{position:absolute;inset:8px;z-index:30;border-radius:38px;overflow:hidden;opacity:0;visibility:hidden;pointer-events:none;transition:.28s ease}.mobile-utility-modal.open{opacity:1;visibility:visible;pointer-events:auto}.um-backdrop{position:absolute;inset:0;background:rgba(2,7,13,.66);backdrop-filter:blur(7px)}.um-sheet{position:absolute;left:0;right:0;bottom:0;max-height:86%;background:#fbfcfe;color:#07111f;border-radius:28px 28px 0 0;box-shadow:0 -24px 54px rgba(0,0,0,.26);transform:translateY(22px);transition:.3s cubic-bezier(.2,.8,.2,1);overflow:auto;scrollbar-width:none}.mobile-utility-modal.open .um-sheet{transform:none}.um-sheet::-webkit-scrollbar{display:none}.um-grabber{width:42px;height:4px;border-radius:99px;background:#d5dde6;margin:9px auto 2px}.um-head{padding:12px 17px 10px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start;position:sticky;top:0;background:rgba(251,252,254,.96);backdrop-filter:blur(12px);z-index:3;border-bottom:1px solid #edf1f5}.um-head small{display:block;color:#6d7f91;font-size:7px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;margin-bottom:3px}.um-head h4{margin:0;font-size:18px;letter-spacing:-.04em}.um-close{appearance:none;border:0;width:30px;height:30px;border-radius:50%;background:#edf2f7;color:#07111f;display:grid;place-items:center;cursor:pointer;font-weight:900}.um-tabs{padding:10px 14px;display:flex;gap:6px;overflow:auto;scrollbar-width:none;border-bottom:1px solid #edf1f5;background:#fff}.um-tabs::-webkit-scrollbar{display:none}.um-tab{appearance:none;border:1px solid #dde5ed;background:#fff;color:#6a7786;border-radius:999px;padding:8px 10px;font-size:8px;font-weight:850;white-space:nowrap;cursor:pointer}.um-tab.active{background:#07111f;color:#fff;border-color:#07111f}.um-body{padding:16px}.um-panel{display:none}.um-panel.active{display:block;animation:umFade .25s ease}@keyframes umFade{from{opacity:.35;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .um-intro{font-size:9px;line-height:1.5;color:#657283;margin:0 0 13px}.wifi-card{border:1px solid #e1e8ef;border-radius:22px;padding:14px;background:linear-gradient(180deg,#fff,#f6f9fc)}.wifi-qr{width:156px;height:156px;display:block;margin:2px auto 13px;border-radius:16px;background:#fff;padding:7px;border:1px solid #edf1f5}.wifi-row{padding:10px 0;border-top:1px solid #edf1f5}.wifi-row label{display:block;font-size:7px;color:#7b8794;text-transform:uppercase;letter-spacing:.12em;font-weight:900;margin-bottom:4px}.wifi-value{font-size:11px;font-weight:850;display:flex;align-items:center;justify-content:space-between;gap:8px}.copy-btn{appearance:none;border:0;border-radius:999px;background:#07111f;color:#fff;padding:7px 10px;font-size:8px;font-weight:850;cursor:pointer;white-space:nowrap}.copy-btn.copied{background:#16865b}.um-tip{margin-top:10px;padding:10px 11px;border-radius:14px;background:#eaf4ff;color:#305a86;font-size:8px;line-height:1.45}
+    .pay-card{border-radius:22px;padding:15px;background:#07111f;color:#fff}.pay-card small{color:#79b7ff}.pay-title{font-size:21px;letter-spacing:-.04em;margin:5px 0 7px}.pay-card p{font-size:9px;line-height:1.5;color:#b9cce2;margin:0 0 14px}.pix-key{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:15px;padding:10px;margin-bottom:10px}.pix-key label{display:block;color:#8fa8c2;font-size:7px;text-transform:uppercase;letter-spacing:.12em;font-weight:900}.pix-key div{display:flex;justify-content:space-between;gap:7px;align-items:center;margin-top:4px}.pix-key b{font-size:10px;overflow:hidden;text-overflow:ellipsis}.pay-card .copy-btn{background:#fff;color:#07111f}.pay-note{font-size:8px;color:#6d7a89;line-height:1.5;margin-top:10px}
+    .social-list{display:grid;gap:8px}.social-link{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #e2e8ef;border-radius:16px;background:#fff;color:#07111f}.social-icon{width:34px;height:34px;border-radius:11px;background:#edf5ff;color:#146ef5;display:grid;place-items:center;font-weight:950;font-size:11px}.social-link b{display:block;font-size:10px}.social-link span{display:block;font-size:8px;color:#788492;margin-top:2px}.social-link em{margin-left:auto;font-style:normal;color:#9aacbd}
+    .map-card{border:1px solid #e1e8ef;border-radius:20px;overflow:hidden;background:#fff}.map-embed{width:100%;height:170px;border:0;display:block;background:#eef3f7}.map-info{padding:12px}.map-info small{display:block;color:#7a8795;font-size:7px;text-transform:uppercase;letter-spacing:.12em;font-weight:900}.map-info b{display:block;font-size:11px;margin:4px 0 9px}.maps-link{display:flex;align-items:center;justify-content:center;height:36px;border-radius:999px;background:#146ef5;color:#fff;font-size:9px;font-weight:900}
+    @media(max-width:700px){.mobile-utility-modal{border-radius:34px}.um-sheet{max-height:88%}}
+
+
+    /* Web design fictício dentro de cada experiência */
+    .tm-design-art{position:relative;min-height:142px;border-radius:24px;margin:0 0 12px;padding:18px;overflow:hidden;display:flex;align-items:flex-end;isolation:isolate}.tm-design-art .art-copy{position:relative;z-index:3;max-width:72%}.tm-design-art .art-copy small{display:block;font-size:6px;letter-spacing:.16em;margin-bottom:7px}.tm-design-art .art-copy b{display:block;font-size:16px;line-height:1.02;letter-spacing:-.045em}.tm-design-art .art-copy span{display:block;font-size:7px;line-height:1.45;margin-top:6px;opacity:.72}
+    .art-restaurant{background:linear-gradient(135deg,#39281f,#1d1713);color:#fff}.art-restaurant:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 15%,rgba(226,155,91,.25),transparent 37%),linear-gradient(115deg,transparent 54%,rgba(255,255,255,.04) 55%,transparent 56%)}.art-plate{position:absolute;right:-5px;top:15px;width:124px;height:124px;border-radius:50%;background:#eadac7;border:12px solid #fff7ea;box-shadow:0 18px 30px rgba(0,0,0,.25)}.art-plate:before,.art-plate:after,.art-plate i{content:"";position:absolute;border-radius:50%}.art-plate:before{width:58px;height:58px;background:#aa4f2d;left:21px;top:20px}.art-plate:after{width:24px;height:42px;background:#49633f;left:63px;top:43px;transform:rotate(24deg)}.art-plate i{width:16px;height:50px;background:#d5a13e;left:31px;top:57px;transform:rotate(-42deg)}.art-plate em{position:absolute;right:15px;bottom:14px;font-style:normal;color:#2b231d;font-size:9px;font-weight:900}
+    .art-barber{background:linear-gradient(135deg,#20252b,#0c0e11);color:#f5eee5;border:1px solid #30363d}.barber-lines{position:absolute;inset:-20px;background:repeating-linear-gradient(115deg,transparent 0 20px,rgba(201,166,107,.09) 21px 23px,transparent 24px 42px)}.barber-mark{position:absolute;right:16px;top:16px;width:88px;height:88px;border-radius:50%;border:1px solid rgba(201,166,107,.45);display:grid;place-items:center;color:#c9a66b;font:900 34px/1 Georgia,serif}.barber-mark:after{content:"✂";position:absolute;font-size:20px;right:-5px;bottom:-4px;background:#11151a;padding:7px;border-radius:50%}
+    .art-store{background:linear-gradient(145deg,#efe5f4,#fff);color:#25192e;border:1px solid #eadff0}.store-edition{position:absolute;right:12px;top:0;font-size:92px;line-height:1;font-weight:950;letter-spacing:-.09em;color:rgba(91,55,111,.09)}.store-swatch{position:absolute;right:18px;bottom:15px;display:flex;gap:5px}.store-swatch i{width:18px;height:44px;border-radius:10px;background:#5d3c6e;transform:rotate(9deg)}.store-swatch i:nth-child(2){background:#d5b8df;transform:rotate(-4deg)}.store-swatch i:nth-child(3){background:#23182b;transform:rotate(6deg)}
+    .art-service{background:linear-gradient(135deg,#d8efec,#f7ffff);color:#0e3532;border:1px solid #cde8e4}.service-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(14,53,50,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(14,53,50,.06) 1px,transparent 1px);background-size:22px 22px}.service-ui{position:absolute;right:16px;top:18px;width:105px;display:grid;gap:7px;transform:rotate(3deg)}.service-ui i{display:block;height:25px;border-radius:9px;background:#0e3532;box-shadow:0 9px 20px rgba(14,53,50,.12)}.service-ui i:nth-child(2){width:76%;margin-left:auto;background:#61afa5}.service-ui i:nth-child(3){width:54%;background:#b6ded9}
+    .tm-tool-wide{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;column-gap:9px;align-items:center}.tm-tool-wide i{grid-row:1/3;margin:0}.tm-tool-wide b,.tm-tool-wide span{margin:0}
+
+    /* Modal premium */
+    .mobile-utility-modal{inset:7px;border-radius:39px}.um-backdrop{background:rgba(0,8,18,.72);backdrop-filter:blur(12px) saturate(.8)}.um-sheet{max-height:91%;background:linear-gradient(180deg,#f8fbff 0,#fff 24%);border-radius:34px 34px 0 0;box-shadow:0 -26px 80px rgba(0,0,0,.38);border-top:1px solid rgba(255,255,255,.78)}.um-grabber{margin-top:10px;background:#cbd7e3}.um-head{padding:12px 15px 14px;display:grid;grid-template-columns:42px 1fr 32px;gap:11px;align-items:center;background:linear-gradient(135deg,#071523,#0d2b4c);color:#fff;border-bottom:0;position:sticky;top:0}.um-head:after{content:"";position:absolute;inset:auto 0 0;height:1px;background:linear-gradient(90deg,transparent,rgba(85,167,255,.45),transparent)}.um-head-icon{width:42px;height:42px;border-radius:15px;background:linear-gradient(135deg,#146ef5,#61b2ff);display:grid;place-items:center;font-size:17px;font-weight:900;box-shadow:0 10px 24px rgba(20,110,245,.28)}.um-head-copy small{color:#80bcff;margin:0 0 3px}.um-head-copy h4{font-size:18px;color:#fff;margin:0}.um-head-copy>span{display:block;color:#abc7e5;font-size:7px;line-height:1.35;margin-top:4px}.um-close{background:rgba(255,255,255,.11);color:#fff;border:1px solid rgba(255,255,255,.09)}.um-tabs{position:sticky;top:69px;z-index:3;padding:10px 12px;background:rgba(248,251,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid #e6edf4}.um-tab{padding:8px 11px;background:#fff;color:#637386;border-color:#dce6ef;box-shadow:0 4px 12px rgba(7,17,31,.035)}.um-tab.active{background:#0a1b2e;border-color:#0a1b2e;color:#fff;box-shadow:0 8px 18px rgba(7,17,31,.16)}.um-body{padding:15px 15px 20px}.um-intro{font-size:9px;line-height:1.55;color:#68798a;margin-bottom:12px}
+    .wifi-card,.map-card,.review-card{border-radius:24px;border:1px solid #e0e9f1;box-shadow:0 14px 30px rgba(7,17,31,.055);background:#fff}.wifi-card{padding:15px}.wifi-qr{width:160px;height:160px;border-radius:20px;padding:10px;box-shadow:0 10px 28px rgba(7,17,31,.08)}.wifi-value{padding:2px 0}.copy-btn{background:linear-gradient(135deg,#0a1b2e,#153d68);box-shadow:0 7px 16px rgba(7,17,31,.14)}
+    .pay-card{padding:16px;background:radial-gradient(circle at 90% 8%,rgba(75,165,255,.28),transparent 33%),linear-gradient(145deg,#07111f,#0d2848 65%,#0e355f);border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 40px rgba(7,17,31,.2)}.pix-layout{display:grid;grid-template-columns:112px 1fr;gap:12px;align-items:center;margin:13px 0}.pix-qr-wrap{background:#fff;border-radius:19px;padding:8px;box-shadow:0 10px 25px rgba(0,0,0,.18)}.pix-qr{display:block;width:96px;height:96px;border-radius:11px}.pix-copy{min-width:0}.pix-copy small{display:block;color:#81bfff;font-size:7px;letter-spacing:.12em}.pix-copy strong{display:block;font-size:13px;margin:5px 0;color:#fff}.pix-copy span{display:block;color:#a8c3de;font-size:8px;line-height:1.45}.pay-demo-badge{display:inline-flex;margin-top:10px;padding:6px 9px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:#a8c9ec;font-size:7px}.pay-card .pix-key{margin-top:10px}.pay-card .copy-btn{background:#fff;color:#07111f;box-shadow:none}
+    .location-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.location-action{appearance:none;border:0;min-height:38px;border-radius:999px;font-size:8px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}.location-action.primary{background:#146ef5;color:#fff}.location-action.secondary{background:#edf4fb;color:#173a5e;border:1px solid #d6e5f3}.share-feedback{display:none;margin-top:8px;padding:9px 10px;border-radius:12px;background:#eaf8f2;color:#18734f;font-size:8px}.share-feedback.show{display:block}
+    .review-card{padding:15px}.review-score{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border-radius:20px;background:linear-gradient(135deg,#f2f7ff,#fff)}.review-score strong{font-size:28px;letter-spacing:-.06em}.review-score span{display:block;color:#768696;font-size:8px;margin-top:3px}.review-stars{display:flex;gap:5px}.review-star{appearance:none;border:0;background:transparent;color:#c9d4df;font-size:24px;line-height:1;cursor:pointer;padding:0}.review-star.active{color:#f0ad2e;transform:scale(1.06)}.review-field{margin-top:12px}.review-field label{display:block;font-size:7px;text-transform:uppercase;letter-spacing:.12em;color:#7c8996;font-weight:900;margin-bottom:6px}.review-field textarea{width:100%;min-height:80px;resize:none;border:1px solid #dce6ef;border-radius:16px;padding:11px;font:inherit;font-size:9px;line-height:1.5;outline:0;background:#fbfdff}.review-field textarea:focus{border-color:#78b5ff;box-shadow:0 0 0 3px rgba(20,110,245,.08)}.review-send{width:100%;height:40px;margin-top:10px;border:0;border-radius:999px;background:#07111f;color:#fff;font-size:9px;font-weight:900;cursor:pointer}.review-success{display:none;text-align:center;padding:18px 10px;color:#176f50}.review-success.show{display:block}.review-success b{display:block;font-size:14px;margin-bottom:4px}.review-success span{font-size:8px}
+    @media(max-width:370px){.pix-layout{grid-template-columns:96px 1fr}.pix-qr{width:80px;height:80px}.location-actions{grid-template-columns:1fr}}
+
+
+    /* Modal mobile v2 — tela inteira, sem cortes */
+    .mobile-utility-modal{
+      inset:8px;
+      border-radius:32px;
+      overflow:hidden;
+    }
+    .mobile-utility-modal .um-backdrop{
+      background:rgba(2,7,13,.56);
+      backdrop-filter:blur(10px);
+    }
+    .mobile-utility-modal .um-sheet{
+      position:absolute;
+      inset:0;
+      max-height:none;
+      height:100%;
+      display:grid;
+      grid-template-rows:auto auto minmax(0,1fr);
+      overflow:hidden;
+      border-radius:31px;
+      background:#f7f9fc;
+      box-shadow:none;
+      border:0;
+      transform:translateY(14px) scale(.985);
+    }
+    .mobile-utility-modal.open .um-sheet{transform:none}
+    .mobile-utility-modal .um-grabber{display:none}
+    .mobile-utility-modal .um-head{
+      position:relative;
+      top:auto;
+      z-index:4;
+      min-height:88px;
+      padding:20px 16px 14px;
+      grid-template-columns:42px minmax(0,1fr) 34px;
+      gap:10px;
+      align-items:center;
+      border-radius:0;
+      background:
+        radial-gradient(circle at 12% 0%,rgba(69,158,255,.25),transparent 34%),
+        linear-gradient(135deg,#071626,#0b3158);
+    }
+    .mobile-utility-modal .um-head-icon{
+      width:42px;height:42px;border-radius:14px;
+      font-size:16px;
+    }
+    .mobile-utility-modal .um-head-copy{min-width:0}
+    .mobile-utility-modal .um-head-copy small{
+      font-size:6px;letter-spacing:.13em;margin-bottom:3px;
+    }
+    .mobile-utility-modal .um-head-copy h4{
+      font-size:17px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .mobile-utility-modal .um-head-copy>span{
+      font-size:6.5px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .mobile-utility-modal .um-close{
+      width:34px;height:34px;font-size:17px;
+    }
+    .mobile-utility-modal .um-tabs{
+      position:relative;
+      top:auto;
+      z-index:3;
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:5px;
+      overflow:visible;
+      padding:8px;
+      background:#fff;
+      border-bottom:1px solid #e4ebf2;
+      backdrop-filter:none;
+    }
+    .mobile-utility-modal .um-tab{
+      min-width:0;
+      min-height:46px;
+      padding:6px 2px 5px;
+      border-radius:13px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:3px;
+      font-size:6.4px;
+      line-height:1.05;
+      white-space:normal;
+      text-align:center;
+      box-shadow:none;
+      overflow:hidden;
+    }
+    .mobile-utility-modal .um-tab::before{
+      display:block;
+      font-size:13px;
+      line-height:1;
+      font-weight:900;
+      color:#7190ae;
+    }
+    .mobile-utility-modal .um-tab[data-utility-tab="wifi"]::before{content:"⌁"}
+    .mobile-utility-modal .um-tab[data-utility-tab="pay"]::before{content:"◇"}
+    .mobile-utility-modal .um-tab[data-utility-tab="social"]::before{content:"♡"}
+    .mobile-utility-modal .um-tab[data-utility-tab="location"]::before{content:"⌖"}
+    .mobile-utility-modal .um-tab[data-utility-tab="review"]::before{content:"★"}
+    .mobile-utility-modal .um-tab.active::before{color:#fff}
+    .mobile-utility-modal .um-body{
+      min-height:0;
+      overflow-y:auto;
+      overflow-x:hidden;
+      overscroll-behavior:contain;
+      padding:13px 12px 18px;
+      scrollbar-width:none;
+      background:linear-gradient(180deg,#f7f9fc,#f2f6fa);
+    }
+    .mobile-utility-modal .um-body::-webkit-scrollbar{display:none}
+    .mobile-utility-modal .um-intro{
+      margin:0 2px 10px;
+      font-size:8px;
+      line-height:1.45;
+      color:#68798a;
+    }
+    .mobile-utility-modal .wifi-card,
+    .mobile-utility-modal .map-card,
+    .mobile-utility-modal .review-card{
+      border-radius:20px;
+      box-shadow:0 8px 24px rgba(7,17,31,.045);
+    }
+    .mobile-utility-modal .wifi-card{padding:12px}
+    .mobile-utility-modal .wifi-qr{
+      width:126px;height:126px;
+      padding:7px;
+      border-radius:18px;
+      margin:0 auto 10px;
+      box-shadow:0 8px 20px rgba(7,17,31,.06);
+    }
+    .mobile-utility-modal .wifi-row{padding:8px 0}
+    .mobile-utility-modal .wifi-row label{font-size:6px;margin-bottom:3px}
+    .mobile-utility-modal .wifi-value{font-size:10px;gap:6px;min-width:0}
+    .mobile-utility-modal .wifi-value span{min-width:0;overflow-wrap:anywhere}
+    .mobile-utility-modal .copy-btn{
+      flex:0 0 auto;
+      padding:7px 9px;
+      font-size:7px;
+      min-width:48px;
+    }
+    .mobile-utility-modal .um-tip{
+      margin-top:8px;padding:9px 10px;border-radius:13px;font-size:7px;line-height:1.4;
+    }
+    .mobile-utility-modal .pay-card{
+      padding:13px;
+      border-radius:20px;
+      box-shadow:0 12px 30px rgba(7,17,31,.16);
+    }
+    .mobile-utility-modal .pay-title{font-size:18px;margin:4px 0 6px}
+    .mobile-utility-modal .pix-layout{
+      grid-template-columns:88px minmax(0,1fr);
+      gap:10px;
+      margin:10px 0;
+    }
+    .mobile-utility-modal .pix-qr-wrap{padding:6px;border-radius:15px}
+    .mobile-utility-modal .pix-qr{width:76px;height:76px;border-radius:9px}
+    .mobile-utility-modal .pix-copy strong{font-size:11px;margin:4px 0}
+    .mobile-utility-modal .pix-copy span{font-size:7px;line-height:1.35}
+    .mobile-utility-modal .pay-demo-badge{margin-top:7px;padding:5px 7px;font-size:6px}
+    .mobile-utility-modal .pix-key{padding:8px;border-radius:13px;margin:8px 0 0}
+    .mobile-utility-modal .pix-key label{font-size:6px}
+    .mobile-utility-modal .pix-key b{font-size:8px;overflow-wrap:anywhere}
+    .mobile-utility-modal .pay-note{font-size:6.5px;line-height:1.4;margin:8px 2px 0}
+    .mobile-utility-modal .social-list{gap:7px}
+    .mobile-utility-modal .social-link{
+      padding:10px;
+      border-radius:15px;
+      gap:9px;
+      box-shadow:0 5px 14px rgba(7,17,31,.025);
+    }
+    .mobile-utility-modal .social-icon{width:32px;height:32px;border-radius:10px;font-size:9px}
+    .mobile-utility-modal .social-link b{font-size:9px}
+    .mobile-utility-modal .social-link span{font-size:7px}
+    .mobile-utility-modal .map-card{overflow:hidden}
+    .mobile-utility-modal .map-embed{height:132px}
+    .mobile-utility-modal .map-info{padding:10px}
+    .mobile-utility-modal .map-info b{font-size:9px;line-height:1.35;margin:4px 0 7px}
+    .mobile-utility-modal .location-actions{gap:6px;margin-top:8px}
+    .mobile-utility-modal .location-action{min-height:34px;font-size:7px}
+    .mobile-utility-modal .share-feedback{font-size:7px;padding:8px}
+    .mobile-utility-modal .review-card{padding:11px}
+    .mobile-utility-modal .review-score{padding:10px;border-radius:16px;gap:8px}
+    .mobile-utility-modal .review-score strong{font-size:23px}
+    .mobile-utility-modal .review-score span{font-size:7px}
+    .mobile-utility-modal .review-stars{gap:2px}
+    .mobile-utility-modal .review-star{font-size:20px}
+    .mobile-utility-modal .review-field{margin-top:10px}
+    .mobile-utility-modal .review-field textarea{min-height:64px;padding:9px;font-size:8px;border-radius:14px}
+    .mobile-utility-modal .review-send{height:36px;margin-top:8px;font-size:8px}
+
+    @media(max-width:700px){
+      .mobile-utility-modal{inset:7px;border-radius:30px}
+      .mobile-utility-modal .um-sheet{border-radius:29px}
+    }
+    @media(max-width:340px){
+      .mobile-utility-modal .um-tabs{gap:3px;padding:7px 5px}
+      .mobile-utility-modal .um-tab{font-size:5.8px;padding-inline:1px}
+      .mobile-utility-modal .um-tab::before{font-size:12px}
+      .mobile-utility-modal .pix-layout{grid-template-columns:78px minmax(0,1fr)}
+      .mobile-utility-modal .pix-qr{width:66px;height:66px}
+    }
+
+
+
+    /* Horários + redes do K2 Restaurante — layout mobile refinado */
+    .tm-hours{
+      margin-top:12px;
+      border:1px solid #eadbc7;
+      background:rgba(255,250,242,.96);
+      border-radius:20px;
+      padding:14px 14px 10px;
+      box-shadow:0 8px 22px rgba(56,38,20,.05);
+      overflow:hidden;
+    }
+    .tm-hours-head{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:5px 10px;
+      align-items:end;
+      padding-bottom:11px;
+      border-bottom:1px solid #eadfce;
+    }
+    .tm-hours-head small{
+      grid-column:1 / -1;
+      display:block;
+      margin:0;
+      font-size:6.8px !important;
+      line-height:1.2;
+      letter-spacing:.15em !important;
+      color:#b24d29 !important;
+      white-space:normal;
+    }
+    .tm-hours-head b{
+      min-width:0;
+      font-size:11px;
+      line-height:1.2;
+      letter-spacing:-.02em;
+      color:#2b231d;
+    }
+    .tm-hours-head>span{
+      justify-self:end;
+      display:inline-flex;
+      align-items:center;
+      min-height:25px;
+      padding:0 9px;
+      border-radius:999px;
+      background:#2b231d;
+      color:#fff;
+      font-size:7.5px;
+      line-height:1;
+      font-weight:850;
+      white-space:nowrap;
+    }
+    .tm-hours-list{display:grid;margin-top:3px}
+    .tm-hours-list>div{
+      min-width:0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:7px 1px;
+      border-bottom:1px solid #eee2d1;
+    }
+    .tm-hours-list>div:last-child{border-bottom:0}
+    .tm-hours-list span{
+      min-width:0;
+      font-size:8px;
+      line-height:1.25;
+      color:#675d54;
+      white-space:nowrap;
+    }
+    .tm-hours-list b{
+      flex:0 0 auto;
+      font-size:8px;
+      line-height:1.2;
+      font-weight:850;
+      color:#2b231d;
+      white-space:nowrap;
+      font-variant-numeric:tabular-nums;
+    }
+    .tm-social-inline{
+      appearance:none;
+      width:100%;
+      margin-top:10px;
+      border:1px solid #eadbc7;
+      background:#fffaf2;
+      color:#2b231d;
+      border-radius:18px;
+      padding:11px 12px;
+      display:grid;
+      grid-template-columns:auto minmax(0,1fr) auto;
+      gap:9px;
+      align-items:center;
+      text-align:left;
+      cursor:pointer;
+      box-shadow:0 7px 18px rgba(56,38,20,.04);
+    }
+    .tm-social-inline>span{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      min-width:0;
+    }
+    .tm-social-inline i{
+      width:27px;
+      height:27px;
+      border-radius:9px;
+      display:grid;
+      place-items:center;
+      background:#2b231d;
+      color:#fff;
+      font-style:normal;
+      font-size:11px;
+      flex:0 0 auto;
+    }
+    .tm-social-inline b{font-size:8.5px;white-space:nowrap}
+    .tm-social-inline em{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      font-style:normal;
+      font-size:7px;
+      color:#746a61;
+    }
+    .tm-social-inline strong{font-size:12px;font-weight:700;color:#b24d29}
+    .tm-social-inline:hover{background:#fff6e9}
+    .tm-social-inline:focus-visible{outline:2px solid #b24d29;outline-offset:2px}
+
+    @media(max-width:370px){
+      .tm-hours{padding:12px 11px 8px}
+      .tm-hours-head{grid-template-columns:1fr;align-items:start}
+      .tm-hours-head>span{justify-self:start}
+      .tm-hours-list>div{gap:8px}
+      .tm-hours-list span,.tm-hours-list b{font-size:7.5px}
+      .tm-social-inline{grid-template-columns:1fr auto}
+      .tm-social-inline em{grid-column:1 / -1;grid-row:2;margin-left:34px}
+    }
+
+
+    /* K2 Tap modal v3 — premium escuro, responsivo e autoral */
+    .mobile-utility-modal{inset:7px;border-radius:39px;overflow:hidden}
+    .mobile-utility-modal .um-backdrop{
+      background:rgba(1,7,14,.82);
+      backdrop-filter:blur(13px) saturate(.75);
+    }
+    .mobile-utility-modal .um-sheet{
+      position:absolute;
+      inset:18px 11px 14px;
+      height:auto;
+      max-height:none;
+      display:grid;
+      grid-template-rows:auto auto minmax(0,1fr);
+      overflow:hidden;
+      border-radius:29px;
+      background:
+        radial-gradient(circle at 16% -4%,rgba(20,110,245,.18),transparent 28%),
+        linear-gradient(180deg,#09111c 0%,#080d15 100%);
+      color:#f6f9ff;
+      border:1px solid rgba(82,166,255,.2);
+      box-shadow:0 26px 70px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.035);
+      transform:translateY(15px) scale(.985);
+    }
+    .mobile-utility-modal.open .um-sheet{transform:none}
+    .mobile-utility-modal .um-grabber{display:none}
+    .mobile-utility-modal .um-head{
+      position:relative;top:auto;z-index:4;
+      min-height:86px;
+      padding:18px 17px 14px;
+      display:grid;
+      grid-template-columns:44px minmax(0,1fr) 34px;
+      gap:11px;align-items:center;
+      background:transparent;
+      border:0;
+    }
+    .mobile-utility-modal .um-head:after{
+      content:"";position:absolute;left:17px;right:17px;bottom:0;height:1px;
+      background:linear-gradient(90deg,rgba(68,156,255,.55),rgba(255,255,255,.06),transparent);
+    }
+    .mobile-utility-modal .um-head-icon{
+      width:44px;height:44px;border-radius:15px;
+      background:linear-gradient(145deg,#0d4da7,#1685ff);
+      color:#fff;display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 10px 26px rgba(20,110,245,.28);
+      font-size:17px;font-weight:950;
+    }
+    .mobile-utility-modal .um-head-copy{min-width:0}
+    .mobile-utility-modal .um-head-copy small{
+      display:block;color:#67adff;font-size:6.3px;letter-spacing:.18em;
+      font-weight:900;margin:0 0 4px;text-transform:uppercase;
+    }
+    .mobile-utility-modal .um-head-copy h4{
+      margin:0;color:#fff;font-size:18px;line-height:1.02;letter-spacing:-.045em;
+      white-space:normal;overflow:visible;
+    }
+    .mobile-utility-modal .um-head-copy>span{
+      display:block;margin-top:5px;color:#8fa8c4;font-size:6.6px;line-height:1.35;
+      white-space:normal;overflow:visible;
+    }
+    .mobile-utility-modal .um-close{
+      width:34px;height:34px;border-radius:50%;
+      background:rgba(255,255,255,.07);color:#e9f3ff;
+      border:1px solid rgba(255,255,255,.1);font-size:17px;
+      display:grid;place-items:center;cursor:pointer;
+    }
+    .mobile-utility-modal .um-tabs{
+      position:relative;top:auto;z-index:3;
+      display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:5px;padding:10px 12px 11px;
+      background:transparent;border:0;overflow:visible;
+    }
+    .mobile-utility-modal .um-tab{
+      min-width:0;min-height:40px;padding:5px 2px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.075);
+      background:rgba(255,255,255,.035);color:#8298b1;
+      box-shadow:none;font-size:6.2px;font-weight:850;line-height:1.05;
+      white-space:normal;text-align:center;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:2px;cursor:pointer;
+    }
+    .mobile-utility-modal .um-tab::before{font-size:12px;color:#6e8aab}
+    .mobile-utility-modal .um-tab.active{
+      background:linear-gradient(145deg,#0e3158,#0d4b86);color:#fff;
+      border-color:rgba(73,159,255,.38);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 8px 18px rgba(0,0,0,.14);
+    }
+    .mobile-utility-modal .um-tab.active::before{color:#7db9ff}
+    .mobile-utility-modal .um-body{
+      min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;
+      padding:10px 13px 18px;background:transparent;color:#f6f9ff;
+      scrollbar-width:none;
+    }
+    .mobile-utility-modal .um-body::-webkit-scrollbar{display:none}
+    .mobile-utility-modal .um-intro{
+      margin:2px 2px 12px;color:#8da0b7;font-size:7.7px;line-height:1.5;
+    }
+
+    .mobile-utility-modal .wifi-card,
+    .mobile-utility-modal .map-card,
+    .mobile-utility-modal .review-card{
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.09);border-radius:22px;
+      color:#fff;box-shadow:none;
+    }
+    .mobile-utility-modal .wifi-card{padding:14px}
+    .mobile-utility-modal .wifi-qr{
+      width:146px;height:146px;display:block;margin:2px auto 14px;
+      padding:9px;border-radius:20px;background:#fff;border:0;
+      box-shadow:0 16px 36px rgba(0,0,0,.25);
+    }
+    .mobile-utility-modal .wifi-row{padding:10px 0;border-top:1px solid rgba(255,255,255,.075)}
+    .mobile-utility-modal .wifi-row label,
+    .mobile-utility-modal .pix-key label{
+      display:block;color:#6887aa;font-size:6px;text-transform:uppercase;
+      letter-spacing:.15em;font-weight:900;margin-bottom:5px;
+    }
+    .mobile-utility-modal .wifi-value{font-size:10px;color:#fff;gap:8px}
+    .mobile-utility-modal .copy-btn{
+      appearance:none;border:1px solid rgba(88,171,255,.35);border-radius:12px;
+      background:linear-gradient(145deg,#1267d7,#1986ff);color:#fff;
+      min-width:54px;padding:8px 10px;font-size:7px;font-weight:900;cursor:pointer;
+      box-shadow:0 8px 18px rgba(20,110,245,.2);transition:.2s ease;
+    }
+    .mobile-utility-modal .copy-btn:active{transform:scale(.96)}
+    .mobile-utility-modal .copy-btn.copied{background:#146ef5;color:#fff}
+    .mobile-utility-modal .um-tip{
+      margin-top:9px;padding:10px 11px;border-radius:14px;
+      background:rgba(20,110,245,.1);color:#90b8e5;border:1px solid rgba(71,157,255,.14);
+      font-size:6.9px;line-height:1.45;
+    }
+
+    .mobile-utility-modal .pay-card{
+      padding:15px;border-radius:22px;
+      background:
+        radial-gradient(circle at 92% 2%,rgba(27,133,255,.24),transparent 31%),
+        linear-gradient(155deg,#0d2745,#07111f 68%);
+      border:1px solid rgba(86,171,255,.2);box-shadow:none;color:#fff;
+    }
+    .mobile-utility-modal .pay-card>small{color:#63aaff;font-size:6.5px;letter-spacing:.15em;font-weight:900}
+    .mobile-utility-modal .pay-title{font-size:20px;color:#fff;margin:6px 0 7px;letter-spacing:-.045em}
+    .mobile-utility-modal .pay-card p{color:#91a8c1}
+    .mobile-utility-modal .pix-layout{
+      display:grid;grid-template-columns:116px minmax(0,1fr);gap:12px;align-items:center;margin:13px 0;
+    }
+    .mobile-utility-modal .pix-qr-wrap{
+      background:#fff;border-radius:19px;padding:8px;border:0;
+      box-shadow:0 14px 30px rgba(0,0,0,.24);
+    }
+    .mobile-utility-modal .pix-qr{width:100px;height:100px;display:block;border-radius:10px}
+    .mobile-utility-modal .pix-copy small{color:#5fa8fa;font-size:5.8px;letter-spacing:.13em}
+    .mobile-utility-modal .pix-copy strong{display:block;color:#fff;font-size:12px;margin:5px 0}
+    .mobile-utility-modal .pix-copy span{display:block;color:#91a9c3;font-size:6.7px;line-height:1.45}
+    .mobile-utility-modal .pay-demo-badge{
+      display:inline-flex;margin-top:8px;padding:5px 7px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.09);color:#8099b5;font-size:5.8px;
+    }
+    .mobile-utility-modal .pix-key{
+      margin:10px 0 0;padding:10px 10px;border-radius:15px;
+      background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.075);
+    }
+    .mobile-utility-modal .pix-key div{display:flex;align-items:center;gap:8px;justify-content:space-between}
+    .mobile-utility-modal .pix-key b{min-width:0;color:#fff;font-size:8.5px;overflow-wrap:anywhere}
+    .mobile-utility-modal .pay-card .copy-btn{background:linear-gradient(145deg,#1267d7,#1986ff);color:#fff}
+    .mobile-utility-modal .pay-note{margin:9px 2px 0;color:#71869d;font-size:6.2px;line-height:1.45}
+
+    .mobile-utility-modal .social-list{display:grid;gap:8px}
+    .mobile-utility-modal .social-link{
+      padding:11px 12px;border-radius:17px;display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;
+      background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);color:#fff;
+    }
+    .mobile-utility-modal .social-icon{
+      width:36px;height:36px;border-radius:12px;background:rgba(20,110,245,.15);color:#6fb2ff;
+      display:grid;place-items:center;font-size:9px;font-weight:950;
+    }
+    .mobile-utility-modal .social-link b{display:block;color:#fff;font-size:9px}
+    .mobile-utility-modal .social-link span{display:block;color:#869ab0;font-size:6.6px;margin-top:2px}
+    .mobile-utility-modal .social-link em{color:#6faeff;font-style:normal}
+
+    .mobile-utility-modal .map-card{overflow:hidden}
+    .mobile-utility-modal .map-embed{height:146px;width:100%;border:0;display:block;filter:saturate(.78) contrast(.95)}
+    .mobile-utility-modal .map-info{padding:11px}
+    .mobile-utility-modal .map-info small{display:block;color:#6886a5;font-size:6px;letter-spacing:.13em;text-transform:uppercase;font-weight:900}
+    .mobile-utility-modal .map-info b{display:block;color:#fff;font-size:9px;line-height:1.35;margin:5px 0 9px}
+    .mobile-utility-modal .location-actions{grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+    .mobile-utility-modal .location-action{min-height:36px;border-radius:12px;font-size:7px}
+    .mobile-utility-modal .location-action.primary{background:linear-gradient(145deg,#1267d7,#1986ff);color:#fff}
+    .mobile-utility-modal .location-action.secondary{background:rgba(255,255,255,.055);color:#dcecff;border:1px solid rgba(255,255,255,.09)}
+    .mobile-utility-modal .share-feedback{background:rgba(33,181,121,.12);color:#7fe2b6;border:1px solid rgba(33,181,121,.15)}
+
+    .mobile-utility-modal .review-card{padding:12px}
+    .mobile-utility-modal .review-score{
+      padding:11px;border-radius:17px;background:rgba(255,255,255,.045);color:#fff;
+    }
+    .mobile-utility-modal .review-score strong{color:#fff}
+    .mobile-utility-modal .review-score span{color:#879bb2}
+    .mobile-utility-modal .review-star{color:#45576b}
+    .mobile-utility-modal .review-star.active{color:#ffbd45}
+    .mobile-utility-modal .review-field label{color:#6886a5}
+    .mobile-utility-modal .review-field textarea{
+      background:rgba(255,255,255,.045);color:#fff;border:1px solid rgba(255,255,255,.09);
+    }
+    .mobile-utility-modal .review-field textarea::placeholder{color:#667b91}
+    .mobile-utility-modal .review-send{background:linear-gradient(145deg,#1267d7,#1986ff);color:#fff}
+    .mobile-utility-modal .review-success{color:#79dfb1}
+
+    .k2-toast{
+      position:absolute;z-index:60;left:50%;top:16px;
+      transform:translate(-50%,-14px) scale(.96);
+      width:max-content;max-width:calc(100% - 32px);
+      min-height:42px;padding:8px 13px 8px 9px;
+      border-radius:15px;background:rgba(8,21,35,.94);color:#fff;
+      border:1px solid rgba(93,180,255,.28);
+      box-shadow:0 18px 40px rgba(0,0,0,.36);
+      backdrop-filter:blur(16px);
+      display:flex;align-items:center;gap:9px;
+      opacity:0;visibility:hidden;pointer-events:none;
+      transition:.28s cubic-bezier(.2,.8,.2,1);
+    }
+    .k2-toast.show{opacity:1;visibility:visible;transform:translate(-50%,0) scale(1)}
+    .k2-toast-icon{
+      width:27px;height:27px;border-radius:9px;
+      display:grid;place-items:center;flex:0 0 auto;
+      background:linear-gradient(145deg,#1171e7,#22a0ff);color:#fff;font-size:13px;font-weight:950;
+      box-shadow:0 7px 16px rgba(20,110,245,.28);
+    }
+    .k2-toast-copy b{display:block;font-size:8.7px;line-height:1.05;color:#fff}
+    .k2-toast-copy span{display:block;margin-top:3px;font-size:6.3px;line-height:1.2;color:#94aac2}
+
+    @media(max-width:370px){
+      .mobile-utility-modal .um-sheet{inset:14px 8px 10px;border-radius:25px}
+      .mobile-utility-modal .um-head{padding:15px 13px 11px;grid-template-columns:39px minmax(0,1fr) 31px}
+      .mobile-utility-modal .um-head-icon{width:39px;height:39px;border-radius:13px}
+      .mobile-utility-modal .um-head-copy h4{font-size:16px}
+      .mobile-utility-modal .um-tabs{padding:8px 8px 9px;gap:4px}
+      .mobile-utility-modal .um-tab{min-height:36px;font-size:5.7px}
+      .mobile-utility-modal .um-body{padding:8px 10px 14px}
+      .mobile-utility-modal .wifi-qr{width:132px;height:132px}
+      .mobile-utility-modal .pix-layout{grid-template-columns:100px minmax(0,1fr);gap:9px}
+      .mobile-utility-modal .pix-qr{width:84px;height:84px}
+      .mobile-utility-modal .location-actions{grid-template-columns:1fr}
+    }
+
+  </style>
+</head>
+<body>
+<nav class="nav">
+<div class="wrap navin">
+<a class="brand" href="#top"><span class="brandmark">K2</span><span>K2 TAP<small>by K2 Tech</small></span></a>
+<div class="links"><a href="#como">Como funciona</a><a href="#possibilidades">Possibilidades</a><a href="#contato">Comercial</a></div>
+<a class="navcta" href="#contato">Quero minha K2 Tap <span>↗</span></a>
+</div>
+</nav>
+<main id="top">
+<section class="hero">
+<div class="wrap herogrid">
+<div class="reveal show">
+<span class="eyebrow">K2 Tap • NFC inteligente</span>
+<h1>Encoste.<br/><span class="stroke">Conecte.</span><br/>Continue.</h1>
+<p class="lead">Uma peça física personalizada que leva seu cliente, em segundos, para a experiência digital certa — sem digitar endereço e sem complicação.</p>
+<div class="actions"><a class="btn primary" href="#contato">Quero criar minha K2 Tap <span>→</span></a><a class="btn ghost" href="#como">Entender em 30 segundos</a></div>
+<div class="trust"><span><i class="dot"></i> NFC + experiência web</span><span><i class="dot"></i> Personalizável</span><span><i class="dot"></i> Sem app para quem toca</span></div>
+</div>
+<div aria-label="Representação visual da K2 Tap e celular" class="stage reveal show">
+<div class="halo"></div>
+<div class="phone"><div class="screen"><div class="profiletop"><div class="avatar">K2</div><h3>K2 Coffee</h3><p>Seu café, do seu jeito.</p></div><div class="quick"><div class="q">WhatsApp</div><div class="q">Cardápio</div><div class="q">Mapa</div></div><div class="linkcard"><div class="ico">★</div><div>Avalie sua experiência<br/><span style="color:#8b98a7;font-weight:500">Google Reviews</span></div></div><div class="linkcard"><div class="ico">↗</div><div>Veja as novidades<br/><span style="color:#8b98a7;font-weight:500">Instagram</span></div></div></div></div>
+<div class="tag"><div class="tagbrand">K2 <b>TAP</b></div><div class="nfc">)))</div><div class="tagcopy">APROXIME SEU CELULAR<br/><b style="color:#fff">E DESCUBRA.</b></div></div>
+<div class="tapwaves"><span class="wave"></span><span class="wave"></span><span class="wave"></span></div>
+</div>
+</div>
+</section>
+<section class="section" id="como">
+<div class="wrap">
+<div aria-label="Demonstração interativa de como a K2 Tap funciona" class="tap-demo reveal" data-step="1" id="tapDemo">
+<div class="tap-demo-head">
+<div><small>Veja acontecendo</small><h3>Do toque à ação,<br/>em poucos segundos.</h3></div>
+<p>Não precisa imaginar. A demonstração abaixo simula o que o cliente vê quando usa uma K2 Tap no mundo real.</p>
+</div>
+<div class="tap-demo-grid">
+<div aria-label="Etapas da demonstração" class="demo-controls" role="tablist">
+<button class="demo-step active" data-demo-step="1"><span class="demo-step-num">01</span><span><b>Aproxime</b><span>O cliente aproxima o celular da peça física.</span></span></button>
+<button class="demo-step" data-demo-step="2"><span class="demo-step-num">02</span><span><b>Conecte</b><span>A K2 Tap transmite o destino usando NFC.</span></span></button>
+<button class="demo-step" data-demo-step="3"><span class="demo-step-num">03</span><span><b>Confirme</b><span>O celular identifica e exibe a experiência.</span></span></button>
+<button class="demo-step" data-demo-step="4"><span class="demo-step-num">04</span><span><b>Interaja</b><span>A página abre para pedir, avaliar, chamar ou comprar.</span></span></button>
+<button class="demo-replay" id="demoReplay">↻ Reproduzir demonstração</button>
+</div>
+<div class="demo-scene">
+<div class="demo-caption">SIMULAÇÃO / K2 TAP</div><div class="demo-status"></div>
+<div class="desk-shadow"></div>
+<div class="demo-tag"><div class="tagbrand">K2 <b>TAP</b></div><div class="nfc">)))</div><div class="tagcopy">APROXIME SEU CELULAR<br/><b style="color:#fff">PARA ACESSAR.</b></div></div>
+<div class="demo-rays"><span></span><span></span><span></span></div>
+<div class="demo-phone">
+<div class="demo-wallpaper"><div class="demo-time">10:24</div><div class="demo-date">Quinta-feira, 27 de agosto</div></div>
+<div class="nfc-notice"><div class="notice-icon">K2</div><div><b>K2 Tap encontrada</b><span>Toque para abrir a experiência</span></div></div>
+<div class="demo-browser"><div class="browser-pill">k2tap.com/k2-coffee</div><div class="browser-cover"><small>BEM-VINDO</small><h4>K2 Coffee</h4><span style="font-size:9px;color:#bdd7ff">Escolha o que quer fazer agora.</span></div><div class="browser-actions"><div class="browser-action">☕ Cardápio</div><div class="browser-action">◉ WhatsApp</div><div class="browser-action">★ Avaliar</div><div class="browser-action">⌖ Localização</div></div><div class="browser-bottom"><b>Uma experiência feita para a marca.</b><br/>Sem procurar link, número ou perfil.</div></div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="biz-lab reveal" id="bizLab" data-business="restaurant">
+  <div class="biz-lab-head">
+    <div><span class="eyebrow">Experiência pós-Tap</span><h3>É isso que abre no celular do cliente.</h3></div>
+    <p>Depois de encostar o celular na K2 Tap, o cliente entra direto em uma experiência mobile feita para aquele negócio. Escolha um exemplo abaixo e veja como pode ficar.</p>
+  </div>
+
+  <div class="biz-tabs" role="tablist" aria-label="Projetos fictícios K2 Tap">
+    <button class="biz-tab active" type="button" data-business-tab="restaurant" aria-selected="true"><span class="biz-tab-icon">🍽</span><span><b>K2 Restaurante</b><small>Cardápio • reserva • pedido</small></span><span class="biz-tab-arrow">→</span></button>
+    <button class="biz-tab" type="button" data-business-tab="barber" aria-selected="false"><span class="biz-tab-icon">✂</span><span><b>K2 Barbearia</b><small>Serviços • agenda • equipe</small></span><span class="biz-tab-arrow">→</span></button>
+    <button class="biz-tab" type="button" data-business-tab="store" aria-selected="false"><span class="biz-tab-icon">▣</span><span><b>K2 Loja</b><small>Catálogo • coleção • compra</small></span><span class="biz-tab-arrow">→</span></button>
+    <button class="biz-tab" type="button" data-business-tab="service" aria-selected="false"><span class="biz-tab-icon">★</span><span><b>K2 Serviço</b><small>Serviços • prova social • orçamento</small></span><span class="biz-tab-arrow">→</span></button>
+  </div>
+
+  <div class="biz-stage mobile-only-stage">
+    <div class="biz-stage-toolbar"><small>EXPERIÊNCIA MOBILE / PÓS-TAP</small><span>projeto demonstrativo ativo</span></div>
+    <div class="mobile-showcase">
+      <div class="phone-shell phone-shell-focus" aria-label="Prévia mobile da experiência do cliente">
+        <div class="phone-view" id="bizMobile" aria-live="polite"></div>
+        <div class="mobile-utility-modal" id="mobileUtilityModal" aria-hidden="true">
+          <div class="um-backdrop" data-modal-close></div>
+          <div class="um-sheet" role="dialog" aria-modal="true" aria-labelledby="utilityModalTitle">
+            <div class="um-grabber"></div>
+            <div class="um-head"><div class="um-head-icon" id="utilityModalIcon">⌁</div><div class="um-head-copy"><small>FACILIDADES K2 TAP</small><h4 id="utilityModalTitle">Conecte-se ao Wi-Fi</h4><span id="utilityModalSubtitle">Tudo que o cliente precisa, sem sair da experiência.</span></div><button class="um-close" type="button" data-modal-close aria-label="Fechar">×</button></div>
+            <div class="um-tabs" role="tablist">
+              <button class="um-tab active" type="button" data-utility-tab="wifi">Wi-Fi</button>
+              <button class="um-tab" type="button" data-utility-tab="pay">Pix</button>
+              <button class="um-tab" type="button" data-utility-tab="social">Redes</button>
+              <button class="um-tab" type="button" data-utility-tab="location">Mapa</button><button class="um-tab" type="button" data-utility-tab="review">Opinião</button>
+            </div>
+            <div class="um-body" id="utilityModalBody"></div>
+          </div>
+          <div class="k2-toast" id="k2Toast" role="status" aria-live="polite" aria-atomic="true"><div class="k2-toast-icon">✓</div><div class="k2-toast-copy"><b id="k2ToastTitle">Copiado com sucesso</b><span id="k2ToastText">Pronto para colar onde quiser.</span></div></div>
+        </div>
+      </div>
+      <div class="mobile-hint">Deslize dentro do celular para explorar a experiência completa.</div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+</section>
+<section class="section dark" id="possibilidades">
+<div class="wrap">
+<div class="sectionhead reveal"><div><span class="eyebrow">Uma K2 Tap. Muitos caminhos.</span><h2>O toque pode levar<br/>aonde o negócio precisa.</h2></div><p>Não limitamos a K2 Tap a um cartão digital. Ela pode ser o ponto de partida para diferentes experiências, de acordo com o contexto do cliente.</p></div>
+<div class="uses reveal">
+<article class="biguse"><div><span class="eyebrow">Experiência personalizada</span><h3>Uma página feita para a marca — não um perfil igual para todo mundo.</h3><p>Combine links, ações, informações, campanhas e identidade visual em uma experiência própria.</p></div><div class="chips"><span class="chip">WhatsApp</span><span class="chip">Instagram</span><span class="chip">Cardápio</span><span class="chip">Catálogo</span><span class="chip">Avaliações</span><span class="chip">Localização</span><span class="chip">Portfólio</span><span class="chip">Campanhas</span></div><div class="orb"></div></article>
+<div class="sidecol">
+<article class="sideuse"><small>Para vender melhor</small><h4>Do balcão para o catálogo.</h4><p>Use o toque para reduzir passos entre curiosidade, informação e ação.</p></article>
+<article class="sideuse"><small>Para atender melhor</small><h4>Do atendimento para o WhatsApp.</h4><p>Entregue o canal certo sem pedir para o cliente procurar usuário, número ou link.</p></article>
+</div>
+</div>
+</div>
+</section>
+<section class="proof"><div class="wrap"><div class="metrics reveal">
+<article class="metric"><strong>01</strong><p><b>Objeto físico.</b><br/>Uma presença real no ponto de contato com o cliente.</p></article>
+<article class="metric"><strong>∞</strong><p><b>Possibilidades digitais.</b><br/>O destino pode acompanhar diferentes necessidades do negócio.</p></article>
+<article class="metric"><strong>1 tap</strong><p><b>Menos atrito.</b><br/>O cliente não precisa memorizar, digitar ou procurar o endereço.</p></article>
+</div></div></section>
+<section class="cta" id="contato"><div class="wrap"><div class="ctabox reveal"><h2>Seu próximo contato com o cliente pode começar com um toque.</h2><div class="ctaright"><p>Conte onde você pretende usar a K2 Tap. A K2 Tech pode montar a combinação de peça física, identidade e experiência digital para o seu negócio.</p><a class="btn" href="https://wa.me/" rel="noopener" target="_blank">Conversar com o comercial <span>↗</span></a></div></div></div></section>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <div class="foot-mark">K2</div>
+      <div class="foot-logo">K2 <b>TAP</b></div>
+      <p class="foot-tagline">Uma solução K2 Tech para transformar um toque físico em uma experiência digital simples, bonita e útil.</p>
+    </div>
+    <nav class="footlinks" aria-label="Navegação do rodapé">
+      <a href="#como">Como funciona</a>
+      <a href="#bizLab">Experiências</a>
+      <a href="#possibilidades">Possibilidades</a>
+      <a href="#contato">Comercial</a>
+    </nav>
+    <div class="foot-divider"></div>
+    <div class="foot-bottom">
+      <span>© 2026 K2 Tech</span><span class="sep"></span><span>K2 Tap</span><span class="sep"></span><span>Conexões físicas. Experiências digitais.</span>
+    </div>
+  </div>
+</footer>
+<script>
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.14});
+    document.querySelectorAll('.reveal:not(.show)').forEach(el=>io.observe(el));
+
+    const tapDemo=document.getElementById('tapDemo');
+    const demoButtons=[...document.querySelectorAll('[data-demo-step]')];
+    let demoStep=1, demoTimer;
+    function setDemoStep(step){
+      demoStep=step; tapDemo.dataset.step=String(step);
+      demoButtons.forEach(btn=>btn.classList.toggle('active',Number(btn.dataset.demoStep)===step));
+    }
+    function startDemo(){
+      clearInterval(demoTimer); setDemoStep(1);
+      demoTimer=setInterval(()=>setDemoStep(demoStep===4?1:demoStep+1),2600);
+    }
+    demoButtons.forEach(btn=>btn.addEventListener('click',()=>{clearInterval(demoTimer);setDemoStep(Number(btn.dataset.demoStep));}));
+    document.getElementById('demoReplay').addEventListener('click',startDemo);
+    const demoObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){startDemo();demoObserver.disconnect();}}),{threshold:.35});
+    demoObserver.observe(tapDemo);
+
+
+    // Quatro projetos ficticios completos. Separado da demonstracao NFC acima.
+    const bizLab=document.getElementById('bizLab');
+    const bizTabs=[...document.querySelectorAll('[data-business-tab]')];
+    const bizMobile=document.getElementById('bizMobile');
+
+    const businessSites={
+      restaurant:{
+        url:'k2tap.com/k2-restaurante',
+        desktop:`<div class="demo-site site-restaurant">
+          <nav class="ds-nav"><div class="ds-brand">K2 <em>RESTAURANTE</em></div><div class="ds-links"><a>Menu</a><a>A casa</a><a>Localização</a><button class="ds-nav-cta">Reservar mesa</button></div></nav>
+          <section class="ds-hero"><div><div class="ds-kicker">COZINHA AUTORAL • TODOS OS DIAS</div><h2>Comida que chega à mesa com história.</h2><p>Receitas afetivas, ingredientes frescos e uma experiência feita para reunir gente em volta da mesa.</p><div class="ds-actions"><button class="ds-button">Ver cardápio</button><button class="ds-button ghost">Fazer reserva</button></div></div><div class="ds-art"></div></section>
+          <section class="ds-section"><div class="ds-section-title"><div><small>Favoritos da casa</small><h3>Um pouco do que sai da cozinha.</h3></div><p>Uma seleção fictícia para mostrar como pratos, preços e destaques podem aparecer na experiência.</p></div><div class="ds-grid3"><article class="ds-card"><small>Principal</small><h4>Arroz cremoso da casa</h4><p>Carne de panela, ervas frescas e crocante de cebola.</p><div class="ds-price">R$ 34</div></article><article class="ds-card"><small>Compartilhar</small><h4>Frango da brasa</h4><p>Molho cítrico, legumes assados e farofa da casa.</p><div class="ds-price">R$ 42</div></article><article class="ds-card"><small>Sobremesa</small><h4>Pudim de leite queimado</h4><p>Textura cremosa, caramelo intenso e flor de sal.</p><div class="ds-price">R$ 16</div></article></div></section>
+          <div class="ds-band"><div><h3>Chegou na mesa? Encoste e escolha.</h3><p>A K2 Tap pode ficar no balcão ou na mesa e abrir cardápio, reserva, pedido e localização em uma experiência com a cara do restaurante.</p></div><button class="ds-mini-cta">Pedir agora →</button></div>
+          <footer class="ds-footer"><b>K2 Restaurante • Rua das Palmeiras, 120</b><span>Ter–Dom • 11h30 às 23h</span></footer>
+        </div>`,
+        mobile:`<div class="tap-mini tap-restaurant"><div class="tm-logo">K2</div><small>K2 RESTAURANTE • BEM-VINDO</small><h3>O sabor da casa, a um toque.</h3><p>Cardápio, pedido, Wi-Fi, pagamento e tudo o que você precisa sem procurar link nenhum.</p><div class="tm-primary">Ver cardápio completo</div><div class="tm-design-art art-restaurant"><div class="art-copy"><small>WEB DESIGN • MENU DA CASA</small><b>Sabores que começam pelo olhar.</b><span>Uma composição editorial para dar personalidade ao projeto.</span></div><div class="art-plate"><i></i><em>12</em></div></div><div class="tm-grid tm-grid-actions"><div class="tm-card"><i>🍽</i><b>Cardápio</b><span>Pratos, bebidas e sobremesas.</span></div><div class="tm-card"><i>◉</i><b>Pedir</b><span>Comece seu pedido agora.</span></div><button class="tm-card tm-card-action" type="button" data-mobile-tool="location"><i>⌖</i><b>Como chegar</b><span>Mapa, rota e compartilhamento.</span></button><button class="tm-card tm-card-action" type="button" data-mobile-tool="review"><i>★</i><b>Avaliar</b><span>Conte como foi sua experiência.</span></button><button class="tm-card tm-card-action" type="button" data-mobile-tool="wifi"><i>⌁</i><b>Wi-Fi</b><span>Conecte pelo QR Code.</span></button><button class="tm-card tm-card-action" type="button" data-mobile-tool="pay"><i>◇</i><b>Pague Fácil</b><span>Pagamento via Pix.</span></button></div><div class="tm-highlight"><small>DESTAQUE DE HOJE</small><b>Frango da brasa + acompanhamentos</b></div><div class="tm-hours"><div class="tm-hours-head"><small>HORÁRIOS DE FUNCIONAMENTO</small><b>Aberto todos os dias</b><span>08:00 às 22:00</span></div><div class="tm-hours-list"><div><span>Segunda-feira</span><b>08:00 — 22:00</b></div><div><span>Terça-feira</span><b>08:00 — 22:00</b></div><div><span>Quarta-feira</span><b>08:00 — 22:00</b></div><div><span>Quinta-feira</span><b>08:00 — 22:00</b></div><div><span>Sexta-feira</span><b>08:00 — 22:00</b></div><div><span>Sábado</span><b>08:00 — 22:00</b></div><div><span>Domingo</span><b>08:00 — 22:00</b></div></div></div><button class="tm-social-inline" type="button" data-mobile-tool="social"><span><i>♡</i><b>Redes sociais</b></span><em>Instagram • WhatsApp • TikTok</em><strong>→</strong></button><div class="tm-foot">Experiência demonstrativa • K2 Tap</div></div>`
+      },
+      barber:{
+        url:'k2tap.com/k2-barbearia',
+        desktop:`<div class="demo-site site-barber">
+          <nav class="ds-nav"><div class="ds-brand">K2 <em>BARBER</em></div><div class="ds-links"><a>Serviços</a><a>Equipe</a><a>Unidade</a><button class="ds-nav-cta">Agendar</button></div></nav>
+          <section class="ds-hero"><div><div class="ds-kicker">BARBEARIA • ESTILO E PRESENÇA</div><h2>Seu estilo começa no detalhe.</h2><p>Corte, barba e cuidado em um espaço pensado para quem valoriza atendimento, pontualidade e personalidade.</p><div class="ds-actions"><button class="ds-button">Agendar horário</button><button class="ds-button ghost">Ver serviços</button></div></div><div class="ds-art"></div></section>
+          <section class="ds-section"><div class="ds-section-title"><div><small>Serviços</small><h3>Escolha o cuidado certo.</h3></div><p>O cliente entende rapidamente opções, valores e tempo médio antes de marcar o horário.</p></div><div class="ds-grid3"><article class="ds-card"><small>45 min</small><h4>Corte assinatura</h4><p>Consultoria rápida de estilo, corte e finalização.</p><div class="ds-price">R$ 45</div></article><article class="ds-card"><small>30 min</small><h4>Barba completa</h4><p>Toalha quente, desenho, acabamento e balm.</p><div class="ds-price">R$ 35</div></article><article class="ds-card"><small>70 min</small><h4>Combo K2</h4><p>Corte + barba com atendimento completo.</p><div class="ds-price">R$ 69</div></article></div></section>
+          <div class="ds-band"><div><h3>Agenda aberta hoje.</h3><p>Depois do toque, o cliente pode escolher serviço, profissional e horário sem precisar perguntar disponibilidade no direct.</p></div><button class="ds-mini-cta">Ver horários →</button></div>
+          <footer class="ds-footer"><b>K2 Barber • Centro</b><span>Seg–Sáb • 09h às 20h</span></footer>
+        </div>`,
+        mobile:`<div class="tap-mini tap-barber"><div class="tm-logo">K2</div><small>K2 BARBER • AGENDE ONLINE</small><h3>Seu próximo corte começa aqui.</h3><p>Escolha serviço, veja a equipe e marque o melhor horário.</p><div class="tm-primary">Agendar horário</div><div class="tm-design-art art-barber"><div class="barber-lines"></div><div class="art-copy"><small>WEB DESIGN • SIGNATURE CUT</small><b>Estilo forte antes do primeiro corte.</b><span>Contraste, tipografia e ritmo visual próprios da barbearia.</span></div><div class="barber-mark">K2</div></div><div class="tm-grid"><div class="tm-card"><i>◷</i><b>Agenda</b><span>Veja horários disponíveis.</span></div><div class="tm-card"><i>✂</i><b>Serviços</b><span>Corte, barba e combos.</span></div><div class="tm-card"><i>●</i><b>Equipe</b><span>Escolha seu profissional.</span></div><div class="tm-card"><i>◉</i><b>WhatsApp</b><span>Fale com a barbearia.</span></div></div><div class="tm-highlight"><small>PRÓXIMO HORÁRIO</small><b>Hoje • 18:30 com Lucas</b></div><div class="tm-facilities"><small>FACILIDADES</small><div class="tm-tools-grid"><button class="tm-tool" type="button" data-mobile-tool="wifi"><i>⌁</i><b>Wi-Fi</b><span>Conecte pelo QR Code.</span></button><button class="tm-tool" type="button" data-mobile-tool="pay"><i>◇</i><b>Pague Fácil</b><span>Pagamento via Pix.</span></button><button class="tm-tool" type="button" data-mobile-tool="social"><i>♡</i><b>Redes sociais</b><span>Siga e acompanhe.</span></button><button class="tm-tool" type="button" data-mobile-tool="location"><i>⌖</i><b>Localização</b><span>Mapa e compartilhar.</span></button><button class="tm-tool tm-tool-wide" type="button" data-mobile-tool="review"><i>★</i><b>Sua opinião</b><span>Avalie a experiência e deixe um comentário.</span></button></div></div><div class="tm-foot">Experiência demonstrativa • K2 Tap</div></div>`
+      },
+      store:{
+        url:'k2tap.com/k2-loja',
+        desktop:`<div class="demo-site site-store">
+          <nav class="ds-nav"><div class="ds-brand">K2 <em>STORE</em></div><div class="ds-links"><a>Novidades</a><a>Coleções</a><a>Atendimento</a><button class="ds-nav-cta">Ver catálogo</button></div></nav>
+          <section class="ds-hero"><div><div class="ds-kicker">NOVA COLEÇÃO • EDIÇÃO 26</div><h2>Peças que entram na rotina sem passar despercebidas.</h2><p>Uma vitrine digital leve, editorial e direta para apresentar novidades, produtos e atendimento da loja física.</p><div class="ds-actions"><button class="ds-button">Explorar coleção</button><button class="ds-button ghost">Falar com a loja</button></div></div><div class="ds-art"></div></section>
+          <section class="ds-section"><div class="ds-section-title"><div><small>Seleção da semana</small><h3>Novidades em destaque.</h3></div><p>Produtos podem aparecer em coleções, campanhas ou vitrines sazonais sem trocar a peça física da K2 Tap.</p></div><div class="ds-grid3"><article class="ds-card"><small>Essenciais</small><h4>Camisa Flow</h4><p>Modelagem ampla, tecido leve e acabamento minimalista.</p><div class="ds-price">R$ 129</div></article><article class="ds-card"><small>Nova cor</small><h4>Calça Lina</h4><p>Cintura alta, caimento reto e toque confortável.</p><div class="ds-price">R$ 189</div></article><article class="ds-card"><small>Últimas unidades</small><h4>Bolsa Mini K2</h4><p>Formato compacto com alça regulável.</p><div class="ds-price">R$ 149</div></article></div></section>
+          <div class="ds-band"><div><h3>Da arara para a vitrine digital.</h3><p>O cliente encosta o celular na K2 Tap e encontra coleção, tamanhos, novidades e atendimento na hora.</p></div><button class="ds-mini-cta">Abrir catálogo →</button></div>
+          <footer class="ds-footer"><b>K2 Store • Moda contemporânea</b><span>Retirada na loja • Atendimento pelo WhatsApp</span></footer>
+        </div>`,
+        mobile:`<div class="tap-mini tap-store"><div class="tm-logo">K2</div><small>K2 STORE • NOVA COLEÇÃO</small><h3>Sua vitrine continua no celular.</h3><p>Veja lançamentos, catálogo, promoções e fale com a loja.</p><div class="tm-primary">Ver catálogo</div><div class="tm-design-art art-store"><div class="store-edition">26</div><div class="art-copy"><small>WEB DESIGN • NOVA COLEÇÃO</small><b>Editorial, leve e feito para vender.</b><span>Uma vitrine digital com linguagem de campanha.</span></div><div class="store-swatch"><i></i><i></i><i></i></div></div><div class="tm-grid"><div class="tm-card"><i>▦</i><b>Catálogo</b><span>Produtos e categorias.</span></div><div class="tm-card"><i>✦</i><b>Novidades</b><span>O que acabou de chegar.</span></div><div class="tm-card"><i>%</i><b>Ofertas</b><span>Condições especiais.</span></div><div class="tm-card"><i>◉</i><b>Atendimento</b><span>Fale com a equipe.</span></div></div><div class="tm-highlight"><small>COLEÇÃO EM DESTAQUE</small><b>Essenciais • edição 26</b></div><div class="tm-facilities"><small>FACILIDADES</small><div class="tm-tools-grid"><button class="tm-tool" type="button" data-mobile-tool="wifi"><i>⌁</i><b>Wi-Fi</b><span>Conecte pelo QR Code.</span></button><button class="tm-tool" type="button" data-mobile-tool="pay"><i>◇</i><b>Pague Fácil</b><span>Pagamento via Pix.</span></button><button class="tm-tool" type="button" data-mobile-tool="social"><i>♡</i><b>Redes sociais</b><span>Siga e acompanhe.</span></button><button class="tm-tool" type="button" data-mobile-tool="location"><i>⌖</i><b>Localização</b><span>Mapa e compartilhar.</span></button><button class="tm-tool tm-tool-wide" type="button" data-mobile-tool="review"><i>★</i><b>Sua opinião</b><span>Avalie a experiência e deixe um comentário.</span></button></div></div><div class="tm-foot">Experiência demonstrativa • K2 Tap</div></div>`
+      },
+      service:{
+        url:'k2tap.com/k2-servicos',
+        desktop:`<div class="demo-site site-service">
+          <nav class="ds-nav"><div class="ds-brand">K2 <em>SERVIÇOS</em></div><div class="ds-links"><a>Soluções</a><a>Projetos</a><a>Avaliações</a><button class="ds-nav-cta">Pedir orçamento</button></div></nav>
+          <section class="ds-hero"><div><div class="ds-kicker">ATENDIMENTO PROFISSIONAL • SOB MEDIDA</div><h2>Resolver bem é o nosso serviço.</h2><p>Uma apresentação clara para transformar confiança em orçamento: serviços, diferenciais, projetos e contato em uma única experiência.</p><div class="ds-actions"><button class="ds-button">Pedir orçamento</button><button class="ds-button ghost">Conhecer serviços</button></div></div><div class="ds-art"></div></section>
+          <section class="ds-section"><div class="ds-section-title"><div><small>O que fazemos</small><h3>Soluções com começo, meio e entrega.</h3></div><p>O site organiza o que o profissional oferece e mostra provas de confiança antes da primeira conversa.</p></div><div class="ds-grid3"><article class="ds-card"><small>01</small><h4>Visita técnica</h4><p>Avaliação do cenário e orientação sobre a melhor solução.</p><div class="ds-price">Agendar</div></article><article class="ds-card"><small>02</small><h4>Execução completa</h4><p>Serviço planejado, acompanhado e documentado.</p><div class="ds-price">Solicitar proposta</div></article><article class="ds-card"><small>03</small><h4>Suporte pós-serviço</h4><p>Canal direto para acompanhamento e novas demandas.</p><div class="ds-price">Falar com equipe</div></article></div></section>
+          <div class="ds-band"><div><h3>O orçamento começa com contexto.</h3><p>Depois do toque, o cliente conhece o serviço, vê diferenciais e já envia a solicitação com mais segurança.</p></div><button class="ds-mini-cta">Solicitar orçamento →</button></div>
+          <footer class="ds-footer"><b>K2 Serviços • Atendimento regional</b><span>Seg–Sex • 08h às 18h</span></footer>
+        </div>`,
+        mobile:`<div class="tap-mini tap-service"><div class="tm-logo">K2</div><small>K2 SERVIÇOS • ATENDIMENTO</small><h3>Explique o que precisa. A gente cuida do caminho.</h3><p>Serviços, projetos, avaliações e orçamento em poucos toques.</p><div class="tm-primary">Pedir orçamento</div><div class="tm-design-art art-service"><div class="service-grid"></div><div class="art-copy"><small>WEB DESIGN • SOLUÇÃO PROFISSIONAL</small><b>Clareza visual que transmite confiança.</b><span>Geometria, organização e hierarquia para serviços.</span></div><div class="service-ui"><i></i><i></i><i></i></div></div><div class="tm-grid"><div class="tm-card"><i>✓</i><b>Serviços</b><span>Veja o que atendemos.</span></div><div class="tm-card"><i>▣</i><b>Projetos</b><span>Conheça trabalhos recentes.</span></div><div class="tm-card"><i>★</i><b>Avaliações</b><span>Leia experiências de clientes.</span></div><div class="tm-card"><i>◉</i><b>WhatsApp</b><span>Comece a conversa.</span></div></div><div class="tm-highlight"><small>ATENDIMENTO RÁPIDO</small><b>Solicite uma visita técnica</b></div><div class="tm-facilities"><small>FACILIDADES</small><div class="tm-tools-grid"><button class="tm-tool" type="button" data-mobile-tool="wifi"><i>⌁</i><b>Wi-Fi</b><span>Conecte pelo QR Code.</span></button><button class="tm-tool" type="button" data-mobile-tool="pay"><i>◇</i><b>Pague Fácil</b><span>Pagamento via Pix.</span></button><button class="tm-tool" type="button" data-mobile-tool="social"><i>♡</i><b>Redes sociais</b><span>Siga e acompanhe.</span></button><button class="tm-tool" type="button" data-mobile-tool="location"><i>⌖</i><b>Localização</b><span>Mapa e compartilhar.</span></button><button class="tm-tool tm-tool-wide" type="button" data-mobile-tool="review"><i>★</i><b>Sua opinião</b><span>Avalie a experiência e deixe um comentário.</span></button></div></div><div class="tm-foot">Experiência demonstrativa • K2 Tap</div></div>`
+      }
+    };
+
+
+    const utilityData={"restaurant":{"name":"K2 Restaurante","wifi":"K2 Restaurante","password":"SaboresK2@2026","wifiQr":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZoAAAGaAQAAAAAefbjOAAAC6UlEQVR4nO2bQY6jMBBFXw1IvTQ3yFHMzaK5GRwlN8DLloxqFi7TJFn1dAR0KBZWx/gpttr6VfXtiPLtZ/zzfQYccsghhxxyyKH3hMSeFsYOpMcaSCKQ6oB+l+k5tCGEqqoSVVV1apSoGaBRHYIqBFXi1Ohq3HDwNTn0CigtApBaIHwKpBYdkggARUH2mp5Dm0HtY8fYNVnigBJrYaqkF3yTQ78T0iF8iv7t5qIRxGnJKF78TQ4dE6oaERSKFKQPFUKjEoeMEBQBWDtZB1+TQy+ARhER6UCuExBvLaYRtxZgLqXGXtNzaGuNuLOyZ1HIWJNm0YcBR1+TQz+HpAdqmaFqBkSHfRylLTKy0/Qc2tyP0AFzHFSn2qea0SFkGxhrr/sRp4BC5suUkJ5ZpE8fizmVXSPOBiURCxglarRFHqRPYnsDGpV+p+k5tBl0FyEAYvmr0fWQqdH61qPGm0OrPAKCbYbyMZaDjFz3QfA84gzQ00lXySiCFlEoby2cZHxHvD9U/+dVFKoUZKzqmOBhg/iOeGtolUcQp5ozmDKsA4ZrxEmgJY8AyyMWjbC+qhvDl4wcfE0OvQIKGR1KkQnFrowldMx2h6pfvKrfsiaH/geqUWN6ujRV3g4ldJhkeNR4f2gVNSyFKA0lhahD8irB8B1xAkiumoGQEblkGC9mXJYbM9ItzvYu03NoLyiJECcAZjvDGC9LEAlLtvmb1uTQdx9zqCbLGe7OPu2xCsNrjVNAa4eq3Mmn+lLx/jQcd7FPAT3rQak6zLCypgqFa8T7Q4tGANRDrq/iwozLpRh1jTgLFIspYZ0iXU0l19tiv+k5tEtmafelpmZtTxTXCvA84qzQ2M3lNpXIJSPXm0j1uFuk33t6Dm0OFbW4tXdhIn2oXKfZ71meAHr+TVdQGHsEUgeE3JawMXZNLUQPviaHfgI91hr1NOMusyxq4fcjTgE9/qZL7xrbFnVAHXbwNTnkkEMOOeSQQ9tA/wAAsqpUOgU61gAAAABJRU5ErkJggg==","pix":"financeiro@k2restaurante.demo","pixQr":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQMAAAEDAQAAAAAZqlxmAAACbklEQVR4nO2aQY6cMBBFX2Ei2NE38NzEfTPoo+QmcBP6BmYRCRTgZ2F6Jqtk0ZMeZMU7w1/8ElXfVd+Y+PO6F38BwH/EWRGbmZkVWz29DWZWw9CpZDJLu/MwfR6B1kqSTNIIJkWCJEUvaa00noXpZyEmsw6WC7RsdoGblcBgxWt5vBCx1Xh1W0kzpt0X8XgZ4m5maxUBaf5CHv8O8V63axW9OtyM77F863YxMwNgkC1NhJat5m5m5St5vACBjrVWkSDT3IyAezzO69umTO5bAC/t0KjH1vd3WUVbpKMn6dLQFQCh26oZglTNp2L6NILUSHSmuVEPTtFLu5vxfZtjJtOMQSmh2VPBWhLq3WUXrRQJ3e+VGgRVBCy3uk3Rwu6OhFaEVpohdDuZRVuw2YWgYjM/XFGZNLkE31O4zFSqgErj0Gmt7m+wb3Yh2L7VQKv1XEyfRiBJY+hspZGklWaE1Ecqu0xGKxwTbarUSEhiHLLU5BlocYq+Z3fp2KVKu8yiLR6Bsfjh2hZbPdmV3U0XSA3kiZh+BmLxQ9u5pcbLJEWfuuZjFDoT06cRaAWvw4nqju7CHtKVmUqVOHE37GeJB1iMcNvKH7X/ft2/redh+omdo3an6Pv2sGiOdjk7lUIrjfrWNDeSSJqcuuYcZ6CHdwHQ7tAola96Mow2DT+WnJqd6rDfou/b7DK5gEqScJMfATc3w5WC1EAumZ1ABcddwVZP4Wa2HLb5YnbNcgZKyyner23h5ultsDTtmnJzWD8Qy8X3ty3NtwXAoAwnvo87PqnbAa9kWmR5Aj00GQiyleaYdg9rLqto7f+fCNkifgE9xPA3RNOCswAAAABJRU5ErkJggg==","instagram":"@k2restaurante","whatsapp":"(81) 99999-1200","tiktok":"@k2restaurante","address":"Av. Boa Viagem, Recife - PE","mapQuery":"Boa Viagem Recife PE"},"barber":{"name":"K2 Barbearia","wifi":"K2 Barber","password":"CorteK2@2026","wifiQr":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACfUlEQVR4nO2bTW7bMBCF35QCtKSAHsBHoW7QI+VMvYF4FB8ggLg0QOF1waHCpD9pUFk1g+HKNr/FAwYzQ76hhfjIil8+hAPGG2+88cYbb/zveNE1AHECgDQAcdoESHVvPlGP8QfzgSS51l81tCMBOJIkX/P31mP8wXzSDJU5iSCQROBNAAAlsc/VY/y9eJ8hMm0iMxxl/u96jP8Xfnj7Q/g+UrQ0bz/tPpx+4/+8agQ9ASQA8XITwD8Lkb5SAKC1QB5Nv/F/xUcREZkAhOtIhOu4l+atHJ/P1WP8QXzJ31cm5SYANiESoIl9nh7jj+VRLj9hBQA4coEj4LN+5b5BklweTb/x7yzuC/AZ5ApwgSMXn4GwuhJ9i2+XvJ6v4rfngUgjBXC5nq9GIk4QxstepB9Nv/HvrLY++/oprFqaS7kOzGpxWf72yjtySQNKkOFvIrOvJlaUkVzO1WP8IXzTf0lqw+Xidzu6NGHrv53yNb4rUAPKkqt6yAJArnZ+7pRHMxwKTSfOIJk1tCWdLb798oEZQBJBnBzJ6wDEyVHkcit2h8xn6jH+IL7mr9f+q5WaWbfD6urF2PK3Q77ej8h6Qq4XIi5ePQ+d/lt8O+bTsD/iqE83wgpwKZNCQOZT9Rh/DN/kr7oazLU++/1VjvnPvfKv77/UB1fL/uqqDbzFt1f+5f1kmSo0U980/IK/tx7jD+ZDNTnk6aomZeNfxUuGzGfqMf4gvp0vNHeh6mooZP7G5+HTAJn9TeRpBeohy/yNz8KX+ULtulySNmGbH3XNN1OF/a7bjAvzW/7eeow/hm/nC3h5euVzOUlXE8v6b6e82P+7jTfeeOONN/50/gfLH/iKPEouYQAAAABJRU5ErkJggg==","pix":"pagamentos@k2barber.demo","pixQr":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOcAAADnAQAAAADNj3yNAAAB8UlEQVR4nO2ZQY6jMBBFX0Ek9865gXMT+maQkw25iXMDZweS4c/CJLOajCY9mmCpa2PE23zLRdV3YeL3oeYJhG/6fyjKAFh2ivSSEvQF9es+Nf+ROkmC+RhGGvAaMUkad6z5WSi7BL1p8hpZy/4sQxjrPKPD/WH54BRlzMd0+fFuVf+EtpOPl2FtJ66f+1H1IvXSANxOnNvsEkArxTer+gKdzcxYfIKe5ePWjcjM7HPHmp+FtshAJ9oJ6Ld3VVaGUuu6gVaJbgAIkmnysdJ+hDQRNKwAnVac4h1VuyOlMFL6UV9aa68ModqskxKwthOhmIXYDbSSKu2wSFLsZNuS8VtZqPc7yhA0SBPQr+AlmSbo6sy6hlbpampwksw0cTVbDvh4GXar+WlIk4+wAkEqtVwqyVflGaGSYNt3RKsUNKy4VKv3bsClMJ6Xw3zkMqzg40W0k4/vVfUyRdlJ4/1+BG7rR9VmXUO5PyzmE2B5NutNbrqd3qrqdXp3QVasA0BZfNUdVqXIhbHfcrBuF/RrFiRpGwlZuVtUuaPmMQsCOFPs3YqTzrV22McsCDpthhVctb7uQZcPwgiLVwTl+RjGHaj6GvUXM8uznTrJ6Xrah6q/pqXDqrggeig5mPGx3sqwzYLsGIr33oeql6l9/23ZPf0JqAmBfsQX388AAAAASUVORK5CYII=","instagram":"@k2barber","whatsapp":"(81) 99999-2200","tiktok":"@k2barber","address":"Casa Forte, Recife - PE","mapQuery":"Casa Forte Recife PE"},"store":{"name":"K2 Loja","wifi":"K2 Store","password":"VitrineK2@2026","wifiQr":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAACgklEQVR4nO2bTW6kMBBGXw2Wegk36KPAzUa5GRylDzASXrYE+mZhm6YTZZJIhMCoasGi/RafVCq7/trEV2z49SUcnHfeeeedd97593jLFrAuBsya2YDZIJazbkc9zm/Mt5KkEfRyvZt0uwhiAKgkSXrmv1uP8xvzcYlQKkF9N7PrlH4ws7C3Hue/h7fft4BZA9II1v2wHuc35ocStQxN9bY4Prx+55+sXLy1gAgQwyRAEA0RYe3lo+l3/gNbJ09Uoh1ffcpZK0n90fQ7/29L8fvqHhZM5aaun8+Opt/5z/DWAdZFW6reAO04G4OZmTVLpnVM/c6/a6m61VgpF8GaoNWUD/pULmXK7+eT8kPz6FVdxNCAdTEAdSmCuz31OL8RX+JXE+prpYRKGgHqCfX1RDr1+D0zHwO0t5CcbB2V1BfGuv31OL8Nn+ujVAatAlYit55TEu3v7zn51f2cnJzK3Dp7NX3aJfty/56MX6XJyavtWOV0GkiZdHay+/eEfOpvWKvZRAxoaDCgAuoRAxAxlKb00fQ7/4E93tocq+T8eVX/ppj2+D0tn9OoGFJ+ZdYAQ5n6pt+6HfU4vxW/DO7noOE6BaCSpas5ff6YYGlRH02/85/h84ZGvCwDo9nUl060dcy2qx7nt+KX+khlzap+PMc5a06Fsb+/5+Uf+5O5k6X7Kn5pbxdZt6Me5zfmH/uTqRMdAwwNpPnCcL37/XxuvuxPplmvLatXg5nR3i6+H/t/8HmqUN/Nunh5Wn3+ET3Ofwff3srod2hAL43nzyfna5WBYAwwXCX10dLM/zHkP65+59+x1/uTQJok5XG/lpm/10cn5M3/3+28884777zzu/N/AYj/rqNV39zKAAAAAElFTkSuQmCC","pix":"pagamentos@k2store.demo","pixQr":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOcAAADnAQAAAADNj3yNAAAB4klEQVR4nO2ZTY7iMBCFv8IthZ25gbmJ+2Y2Nws3CTdIdkEyebNICN2LZiRGGmKpa+Mob/NK9erPNvGzafcEhF/0/6CoAGAFQotKI2mJW5q2yfmv6OyDGwFwg5llk6R2w5yfmUrTQzKpJ2oCiJojVm2MZrvtvU55R9OHU94MqxfQj/XragBupDu/ndW/qk6SrOC7mE1SFzXnUZ2qe9S6pg9tWo4ZqtWjxQp+DdX9X6UelUZqEzR9aFHBqwXwtapuhxuHY7SJ6wFQMw7HKGj697J6HUVSD+DmfuTUB2Ur+K7SPNpx20PM020P52xXO0C6TxBb5fwcdUNQi9NwCDJrRn82m2CI7XY5P7V5CkJr9Va35FGstdZJ/Red0UhtUtUdVlrLtvLkRt9F4caKq/dt7zuwj+ZyPGdue+CkwnB8K6vXUVQgKC/pBE0fpOWoMkZ31eFG35EmNxLaVLfqAEi6+ssxZlfg8gnMx6Y5/2QqwH1/ADcSWgBqVt0ye3Pfykma21KlHn27C8Kph2Sl3tl73WE1+i7O/Yi0bEvVetSvUWH2aLZ6VbfebgXlZTGaXL1T0AO9hrMJNxyI2crV7HMLrF5DvR7BAd+dpQ9892ZWr6Jf74IAafRqE07VVm/7fW3ZPPoH0LFyw4sB4kQAAAAASUVORK5CYII=","instagram":"@k2store","whatsapp":"(81) 99999-3200","tiktok":"@k2store","address":"Shopping Recife, Recife - PE","mapQuery":"Shopping Recife PE"},"service":{"name":"K2 Serviço","wifi":"K2 Servicos","password":"ConectaK2@2026","wifiQr":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZoAAAGaAQAAAAAefbjOAAADAklEQVR4nO2bTW7bMBBG31QCsqSBHKBHoW5W9Ei5gXSUHCAAtQwg4+uCpH6SbgK3kmMNFwZN8cEkNB7OfCRNfLkMP77OgEMOOeSQQw459JiQldLCYG1+Yt1oZnYBGGuH7pDhObQ/FCVJCYh6N+BqQJPDTutoJEnaQvsNz6H9obE4AOvGFhifBGFC/WgGQPYgRw3PoQOhMGHdYgxh+m+/5NA9Qu3HhsEaMRgQe2Hx9UkwHjU8h3aHqkUEkV98fHnGoJkYDATvRnyBtZJ153Ny6B9Ag815BUBMYL9SI+vGJwHXnGocNTyH9oPQtixtRE1/7aL+zufk0O1Q0R6sRUolr9DvC0iaqHqE5xpngIoD6CGLErmtD1V7iAkgVA8S3Uc8OpT/90Z4azUYQEjAaHOtmYBr7qe9h+fQQZD68Un2KwuXV8tOoR/NrAvvVbuuEuY3mZNDt6waixAlpWbWsyWgyWsFMc1LzJ3PyaFboDmRmHL0ICVQHybU02iJKIqpuEU8OrSyiFyippphhDmUDJs81C3ikaF51agvPiZms9gYQw94rvH40OrFq6cknuVrKDJVqSX3EWeASvaZN7RCwgiUj5iuLcMlCbi2Gi5gsd93eA7tDtU4IjWrvCL7CKUSWea4U8tKcudzcugWqO5hLG8/NeVrzj+A8hQ8jjgBNO+GT1h8LcelijwxPgvCWyuYsJieaz5y53Ny6BZoo1CFujjkrEPSpp+vGmeA1quG0rptlXrMVuIW8fjQyiKWA9mlTcVvFHki4XHE2aDtgex8c6PWzH766fwzQJ/PUGWF6oOEKS0f7iNOAC13utSPLcRXW93gqY7CLKeg32NODt0EzSGEdcuzsSVvdzF7i4OG59ABkSWU8DLXWJ+PyMVzjVNAnywiOwWYz0eUffEiZrpFPDr06U5XfGknDR0YgMWEyv5WmPyc5Qmgj3e6BBNVuwYNBhouby3QuIp9Aqiq2LnMq0ZVsevGF/j5iJNAm1P3taZVU14rtOl153NyyCGHHHLIIYf2gf4AStykQr7ALF8AAAAASUVORK5CYII=","pix":"financeiro@k2servicos.demo","pixQr":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOcAAADnAQAAAADNj3yNAAACAUlEQVR4nO2ZQY6jMBBFX8WR3NIsnBuYm5Cb2TnZkJuQ5exgRyTg98Kkd5Oe6R5NY6lrBX4g/VKVq0xh4vemwxMI3/T/UDQDYDPQ5hWvnlRQWvep+V3qJQkgXrLTROwwSep2rPkdOpplnIayMjZtZjFrvljVR+nxcbH8+AWsyzEM159freqfUDeebkk6wu28H1UfpEHKAPGSTbo1gJP6L1b1CXo3M2MJA3BYXogdMjM771jzEzviSo9dANCRE+e0td1KO+zyMtr5Yn4KPaxAVD5wP90s71bzU5OmIOUVP0RJs1f/QHV2WKQJWpkmomSzl7pUQqV6PYpd0kyQsiT1bYbi2D41/8m5rhUl60xTULG+4qwLfZs1+wEe6WYlFSv16BEjiMqmCWB1U6g3RrOXlDUTetKKH4At+ar06IAbrbnK/DQ2sMVosXBrrvX2I2i1uonYsbopqEurU821zg9lA4WetDoNUVkVZx1bodbsB1o9vtFLv63SowPcT4D5Maq7bA/LXkJf7z4qNrOdggZI212lMVrMzOyAH7hm3BT68s7tvF/NT630I9lM6GF1GmKXtsUqY8R2/LGtQGgK6qCM7ar06I0uZm2HHf1wO7NyP8VuB6o+R8M1mc13a0i4MkDZgaq/pm/7SFPoW5VhatJM6Ks+e7/NvUv1pmaP7Ptvy+7pKy6Ha7OB2aX1AAAAAElFTkSuQmCC","instagram":"@k2servicos","whatsapp":"(81) 99999-4200","tiktok":"@k2servicos","address":"Ilha do Leite, Recife - PE","mapQuery":"Ilha do Leite Recife PE"}};
+    const utilityModal=document.getElementById('mobileUtilityModal');
+    const utilityBody=document.getElementById('utilityModalBody');
+    const utilityTitle=document.getElementById('utilityModalTitle');
+    const utilityIcon=document.getElementById('utilityModalIcon');
+    const utilitySubtitle=document.getElementById('utilityModalSubtitle');
+    const utilityTabs=[...document.querySelectorAll('[data-utility-tab]')];
+    let activeUtility='wifi';
+    let activeBusiness='restaurant';
+
+    const utilityTitles={wifi:'Conecte-se ao Wi-Fi',pay:'Pagamento rápido',social:'Redes sociais',location:'Como chegar',review:'Sua opinião'};
+    const utilityIcons={wifi:'⌁',pay:'◇',social:'♡',location:'⌖',review:'★'};
+    const utilitySubtitles={wifi:'Escaneie, copie ou conecte sem digitar.',pay:'QR Code Pix e chave em um só lugar.',social:'Canais oficiais reunidos para o cliente.',location:'Mapa, rota e compartilhamento do endereço.',review:'Uma forma simples de ouvir quem acabou de usar.'};
+    function escapeHtml(value){return String(value).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[c]));}
+    function renderUtility(kind){
+      activeUtility=kind;
+      const d=utilityData[activeBusiness] || utilityData.restaurant;
+      utilityTitle.textContent=utilityTitles[kind];
+      utilityIcon.textContent=utilityIcons[kind]||'K2';
+      utilitySubtitle.textContent=utilitySubtitles[kind]||'';
+      utilityTabs.forEach(tab=>tab.classList.toggle('active',tab.dataset.utilityTab===kind));
+      if(kind==='wifi'){
+        utilityBody.innerHTML=`<p class="um-intro">Aponte a câmera para o QR Code ou copie os dados abaixo. O QR já contém o nome e a senha da rede.</p><div class="wifi-card"><img class="wifi-qr" src="${d.wifiQr}" alt="QR Code da rede Wi-Fi ${escapeHtml(d.wifi)}"><div class="wifi-row"><label>Nome do Wi-Fi</label><div class="wifi-value"><span>${escapeHtml(d.wifi)}</span></div></div><div class="wifi-row"><label>Senha</label><div class="wifi-value"><span>${escapeHtml(d.password)}</span><button class="copy-btn" type="button" data-copy-value="${escapeHtml(d.password)}">Copiar</button></div></div></div><div class="um-tip">Em celulares compatíveis, basta escanear o QR Code para receber os dados da rede sem digitar a senha manualmente.</div>`;
+      }else if(kind==='pay'){
+        utilityBody.innerHTML=`<p class="um-intro">Pagamento sem procurar chave, número ou mensagem antiga. O QR Code abaixo é demonstrativo e mostra como o recurso pode aparecer no projeto real.</p><div class="pay-card"><small>PAGAMENTO K2 TAP</small><div class="pay-title">Aponte a câmera e pague.</div><div class="pix-layout"><div class="pix-qr-wrap"><img class="pix-qr" src="${d.pixQr}" alt="QR Code Pix demonstrativo de ${escapeHtml(d.name)}"></div><div class="pix-copy"><small>PIX • DEMONSTRAÇÃO</small><strong>${escapeHtml(d.name)}</strong><span>Escaneie o QR ou use a chave abaixo no app do banco.</span><div class="pay-demo-badge">QR demonstrativo • sem cobrança real</div></div></div><div class="pix-key"><label>Chave Pix</label><div><b>${escapeHtml(d.pix)}</b><button class="copy-btn" type="button" data-copy-value="${escapeHtml(d.pix)}">Copiar</button></div></div></div><div class="pay-note">Os dados são fictícios. Em produção, o estabelecimento poderá usar a chave e o QR Code definidos no projeto.</div>`;
+      }else if(kind==='social'){
+        utilityBody.innerHTML=`<p class="um-intro">As redes ficam reunidas em um só lugar, sem obrigar o cliente a procurar o perfil correto.</p><div class="social-list"><div class="social-link"><div class="social-icon">IG</div><div><b>Instagram</b><span>${escapeHtml(d.instagram)}</span></div><em>↗</em></div><div class="social-link"><div class="social-icon">WA</div><div><b>WhatsApp</b><span>${escapeHtml(d.whatsapp)}</span></div><em>↗</em></div><div class="social-link"><div class="social-icon">TT</div><div><b>TikTok</b><span>${escapeHtml(d.tiktok)}</span></div><em>↗</em></div></div>`;
+      }else if(kind==='location'){
+        const q=encodeURIComponent(d.mapQuery);
+        const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${q}`;
+        utilityBody.innerHTML=`<p class="um-intro">O cliente pode visualizar o endereço, abrir a rota ou compartilhar a localização com outra pessoa.</p><div class="map-card"><iframe class="map-embed" title="Mapa de ${escapeHtml(d.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${q}&output=embed"></iframe><div class="map-info"><small>Endereço</small><b>${escapeHtml(d.address)}</b><div class="location-actions"><a class="location-action primary" target="_blank" rel="noopener" href="${mapsUrl}">Abrir rota ↗</a><button class="location-action secondary" type="button" data-share-location data-share-url="${mapsUrl}" data-share-address="${escapeHtml(d.address)}">Compartilhar ⤴</button></div><div class="share-feedback" id="shareFeedback">Localização pronta para compartilhar ✓</div></div></div>`;
+      }else if(kind==='review'){
+        utilityBody.innerHTML=`<p class="um-intro">Uma área rápida para captar a opinião do cliente logo após a experiência. Nesta demonstração, o envio não é armazenado.</p><div class="review-card"><div id="reviewForm"><div class="review-score"><div><strong id="reviewScore">5.0</strong><span>Como foi sua experiência?</span></div><div class="review-stars" role="radiogroup" aria-label="Nota"><button class="review-star active" type="button" data-star="1">★</button><button class="review-star active" type="button" data-star="2">★</button><button class="review-star active" type="button" data-star="3">★</button><button class="review-star active" type="button" data-star="4">★</button><button class="review-star active" type="button" data-star="5">★</button></div></div><div class="review-field"><label>Sua opinião</label><textarea id="reviewText" placeholder="Conte em poucas palavras como foi sua experiência..."></textarea></div><button class="review-send" type="button" data-review-send>Enviar opinião</button></div><div class="review-success" id="reviewSuccess"><b>Obrigado pela opinião ✦</b><span>Em um projeto real, essa resposta pode seguir para o fluxo definido pela empresa.</span></div></div>`;
+      }
+    }
+    function openUtility(kind){renderUtility(kind);utilityModal.classList.add('open');utilityModal.setAttribute('aria-hidden','false');}
+    function closeUtility(){utilityModal.classList.remove('open');utilityModal.setAttribute('aria-hidden','true');}
+    bizMobile.addEventListener('click',e=>{const btn=e.target.closest('[data-mobile-tool]');if(btn)openUtility(btn.dataset.mobileTool);});
+    utilityTabs.forEach(tab=>tab.addEventListener('click',()=>renderUtility(tab.dataset.utilityTab)));
+    let k2ToastTimer;
+    function showK2Toast(title='Copiado com sucesso',text='Pronto para colar onde quiser.'){
+      const toast=document.getElementById('k2Toast');
+      const titleEl=document.getElementById('k2ToastTitle');
+      const textEl=document.getElementById('k2ToastText');
+      if(!toast)return;
+      if(titleEl)titleEl.textContent=title;
+      if(textEl)textEl.textContent=text;
+      clearTimeout(k2ToastTimer);
+      toast.classList.remove('show');
+      void toast.offsetWidth;
+      toast.classList.add('show');
+      k2ToastTimer=setTimeout(()=>toast.classList.remove('show'),2200);
+    }
+    utilityModal.addEventListener('click',e=>{
+      if(e.target.closest('[data-modal-close]'))closeUtility();
+      const copy=e.target.closest('[data-copy-value]');
+      if(copy){const value=copy.dataset.copyValue;const done=()=>{copy.textContent='✓';copy.classList.add('copied');showK2Toast('Copiado com sucesso','O conteúdo já está na sua área de transferência.');setTimeout(()=>{copy.textContent='Copiar';copy.classList.remove('copied')},900)};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(value).then(done).catch(()=>showK2Toast('Não foi possível copiar','Toque e segure o conteúdo para copiar manualmente.'));}else{const ta=document.createElement('textarea');ta.value=value;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(_){showK2Toast('Não foi possível copiar','Toque e segure o conteúdo para copiar manualmente.')}ta.remove();}}
+      const share=e.target.closest('[data-share-location]');
+      if(share){const url=share.dataset.shareUrl,address=share.dataset.shareAddress;const feedback=document.getElementById('shareFeedback');if(navigator.share){navigator.share({title:`Localização • ${utilityData[activeBusiness].name}`,text:address,url}).then(()=>{if(feedback)feedback.classList.add('show');showK2Toast('Localização pronta','Agora é só escolher com quem compartilhar.')}).catch(()=>{});}else{const value=`${address} — ${url}`;if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(value).then(()=>{if(feedback)feedback.classList.add('show');showK2Toast('Localização copiada','O endereço e o link do mapa foram copiados.')});}else{if(feedback){feedback.textContent='Copie o endereço e abra a rota pelo botão ao lado.';feedback.classList.add('show')}}}}
+      const star=e.target.closest('[data-star]');
+      if(star){const n=Number(star.dataset.star);utilityModal.querySelectorAll('[data-star]').forEach(s=>s.classList.toggle('active',Number(s.dataset.star)<=n));const score=document.getElementById('reviewScore');if(score)score.textContent=n.toFixed(1);}
+      if(e.target.closest('[data-review-send]')){const form=document.getElementById('reviewForm'),success=document.getElementById('reviewSuccess');if(form)form.style.display='none';if(success)success.classList.add('show');}
+    });
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&utilityModal.classList.contains('open'))closeUtility();});
+
+
+    function renderBusiness(kind){
+      const d=businessSites[kind];
+      activeBusiness=kind;
+      closeUtility();
+      bizLab.dataset.business=kind;
+      bizMobile.innerHTML=d.mobile;
+      bizTabs.forEach(tab=>{const active=tab.dataset.businessTab===kind;tab.classList.toggle('active',active);tab.setAttribute('aria-selected',String(active));});
+      bizMobile.scrollTop=0;
+      bizMobile.classList.remove('biz-fade');void bizMobile.offsetWidth;bizMobile.classList.add('biz-fade');
+    }
+    bizTabs.forEach(tab=>tab.addEventListener('click',()=>renderBusiness(tab.dataset.businessTab)));
+    renderBusiness('restaurant');
+
+
+  </script>
+</body>
+</html>
