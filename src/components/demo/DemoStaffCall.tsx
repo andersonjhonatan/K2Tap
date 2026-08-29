@@ -57,10 +57,13 @@ export function DemoStaffCall({ staffCall, table }: DemoStaffCallProps) {
   return (
     <section className={styles.staffSection} id="chamar" aria-labelledby="staff-title">
       <div className={styles.staffCard}>
-        <div className={styles.staffSpot}>
-          <span className={styles.staffPulse} aria-hidden="true" />
-          {spot}
-        </div>
+        {/* Na rota de mesa o topo da página já anuncia onde o cliente está. */}
+        {!table && (
+          <div className={styles.staffSpot}>
+            <span className={styles.staffPulse} aria-hidden="true" />
+            {spot}
+          </div>
+        )}
         <h2 id="staff-title">{staffCall.headline}</h2>
         <p>{staffCall.description}</p>
 

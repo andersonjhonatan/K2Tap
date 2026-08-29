@@ -74,7 +74,7 @@ test('fluxo completo da demonstração K2 Tap', async ({ page }) => {
   await expect(page.getByRole('img', { name: /QR Code/ })).toBeHidden()
   await page.screenshot({ path: 'artifacts/final/demo-restaurante-390x844.png' })
 
-  await page.getByRole('button', { name: /Wi-Fi Escaneie/ }).click()
+  await page.getByRole('button', { name: /Wi-Fi Conecte pelo QR Code/ }).click()
   const facilityDialog = page.getByRole('dialog')
   await expect(facilityDialog).toBeVisible()
   await expect(facilityDialog.getByRole('img', { name: /QR Code da rede Wi-Fi/ })).toBeVisible()

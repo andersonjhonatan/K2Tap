@@ -12,6 +12,29 @@ beforeEach(() => {
 })
 
 describe('DemoExperience', () => {
+  it('não oferece a mesma facilidade em dois lugares', () => {
+    render(<DemoExperience project={restaurant} />)
+
+    // As ações da casa já levam a Wi-Fi, Pix, mapa e avaliação com o nome que o
+    // negócio dá. A linha de facilidades só mostra o que sobrou — aqui, redes.
+    expect(screen.getAllByRole('button', { name: /Wi-Fi/ })).toHaveLength(1)
+    expect(screen.getAllByRole('button', { name: /Pague Fácil/ })).toHaveLength(1)
+    expect(screen.queryByRole('button', { name: /^Pix/ })).not.toBeInTheDocument()
+    expect(screen.getAllByRole('button', { name: /Redes/ })).toHaveLength(1)
+
+    // E o chamado do garçom aparece uma vez só, no cartão dedicado.
+    expect(screen.getAllByRole('button', { name: 'Chamar garçom' })).toHaveLength(1)
+  })
+
+  it('mostra a grade de facilidades inteira quando as ações não cobrem nenhuma', () => {
+    const barber = getProjectBySlug('k2-barbearia')!
+    render(<DemoExperience project={barber} />)
+
+    for (const label of ['Wi-Fi', 'Pix', 'Redes', 'Mapa', 'Opinião']) {
+      expect(screen.getByRole('button', { name: new RegExp(label) })).toBeInTheDocument()
+    }
+  })
+
   it('roda a experiência completa em tela cheia, com as facilidades fechadas', () => {
     render(<DemoExperience project={restaurant} />)
 
@@ -30,7 +53,7 @@ describe('DemoExperience', () => {
     const user = userEvent.setup()
     render(<DemoExperience project={restaurant} />)
 
-    const opener = screen.getByRole('button', { name: /Wi-Fi Escaneie/ })
+    const opener = screen.getByRole('button', { name: /Wi-Fi Conecte pelo QR Code/ })
     await user.click(opener)
 
     const dialog = screen.getByRole('dialog')
@@ -54,17 +77,17 @@ describe('DemoExperience', () => {
     const user = userEvent.setup()
     render(<DemoExperience project={restaurant} />)
 
-    await user.click(screen.getByRole('button', { name: /Opinião Um minuto/ }))
+    await user.click(screen.getByRole('button', { name: /Avaliar Conte como foi/ }))
     expect(screen.getByRole('dialog')).toBeInTheDocument()
 
     fireEvent.keyDown(document, { key: 'Escape' })
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
   })
 
-  it('anuncia a mesa quando a rota vem de uma peça de mesa', () => {
+  it('anuncia a mesa uma única vez quando a rota vem de uma peça de mesa', () => {
     render(<DemoExperience project={restaurant} table="7" />)
 
-    expect(screen.getAllByText('Mesa 7').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Mesa 7')).toHaveLength(1)
   })
 
   it('coloca o chamado na fila e entrega o link do painel da equipe', async () => {

@@ -223,8 +223,13 @@ mesa e do painel da equipe são operacionais: ficam com `robots: noindex` e são
 ### Facilidades em modal
 
 A página não abre com Wi-Fi, Pix, redes, mapa e opinião expostos: cada um é uma facilidade que o
-cliente pede. Os cartões de atalho e a linha _Facilidades da casa_ abrem o `DemoModal`, um painel de
-vidro — fundo escurecido com desfoque e um brilho da cor do negócio — que herda o tema do projeto.
+cliente pede. O toque abre o `DemoModal`, um painel de vidro — fundo escurecido com desfoque e um
+brilho da cor do negócio — que herda o tema do projeto.
+
+Cada facilidade tem **um** ponto de entrada. As ações do projeto vêm primeiro, com o nome que o
+negócio dá a elas ("Pague Fácil", "Como chegar"); a linha _Facilidades da casa_ mostra apenas o que
+essas ações não cobrem. No restaurante sobra só Redes; na barbearia, cujas ações não apontam para
+nenhuma facilidade, aparecem as cinco. Se todas estiverem cobertas, a linha não é renderizada.
 
 No desktop ele aparece centralizado; no celular sobe como folha inferior, com alça e cantos
 arredondados só em cima. Fecha no botão, no Escape ou tocando fora, devolve o foco ao atalho que o
@@ -305,6 +310,7 @@ Os testes de componente cobrem:
 - chamado do garçom e exibição dos links do cliente e da equipe;
 - destino do botão "Veja como fica na sua empresa" a cada troca de projeto;
 - experiência em tela cheia com as facilidades fechadas;
+- ausência de pontos de entrada repetidos para a mesma facilidade;
 - abertura do modal, troca de abas, Escape, fechamento e retorno de foco;
 - chamado entrando na fila e link com mesa e motivo;
 - painel da equipe: semeadura pela URL, atender, concluir e fila vazia;

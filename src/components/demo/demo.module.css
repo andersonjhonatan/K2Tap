@@ -150,8 +150,7 @@
   margin-top: 24px;
 }
 
-.heroCta,
-.heroGhost {
+.heroCta {
   display: inline-flex;
   flex: 1 1 220px;
   min-height: 54px;
@@ -160,23 +159,10 @@
   gap: 8px;
   padding: 14px 22px;
   border-radius: 16px;
-  font-size: 1rem;
-  font-weight: 850;
-}
-
-.heroCta {
   background: var(--experience-fg);
   color: var(--experience-bg);
-}
-
-.heroGhost {
-  border: 1px solid var(--experience-accent);
-  color: var(--experience-accent);
-  transition: background 200ms ease;
-}
-
-.heroGhost:hover {
-  background: color-mix(in srgb, var(--experience-accent) 12%, transparent);
+  font-size: 1rem;
+  font-weight: 850;
 }
 
 .actionGrid {
