@@ -1,35 +1,21 @@
 'use client'
 
-import { useState } from 'react'
-import {
-  ArrowUpRight,
-  Camera,
-  Copy,
-  ExternalLink,
-  MapPin,
-  MessageCircle,
-  Music2,
-  Share2,
-  ShieldCheck,
-  Wifi,
-} from 'lucide-react'
+import { ArrowUpRight, Copy, ExternalLink, MapPin, Share2, ShieldCheck, Wifi } from 'lucide-react'
 import { QRCodeSVG } from 'qrcode.react'
-import type { FacilityKind, ProjectConfig } from '@/types/project'
+import type { ProjectConfig } from '@/types/project'
+import type { CustomerFacility } from '@/data/facilities'
 import { getPixPresentation } from '@/lib/pix'
 import { createWifiPayload } from '@/lib/wifi'
+import type { CopyHandler } from '@/hooks/useCopyToast'
+import { useShareLocation } from '@/hooks/useShareLocation'
+import { SocialIcon } from '@/components/ui/SocialIcon'
 import { DemoReview } from './DemoReview'
 import styles from './demo.module.css'
 
-const socialIcons = {
-  Instagram: Camera,
-  WhatsApp: MessageCircle,
-  TikTok: Music2,
-} as const
-
 type DemoFacilityPanelProps = {
-  facility: FacilityKind
+  facility: CustomerFacility
   project: ProjectConfig
-  onCopy: (value: string, title?: string, description?: string) => Promise<boolean>
+  onCopy: CopyHandler
   onNotify: (title: string, description: string) => void
 }
 
@@ -124,55 +110,25 @@ function PixPanel({ project, onCopy }: Omit<DemoFacilityPanelProps, 'facility' |
 function SocialPanel({ project }: { project: ProjectConfig }) {
   return (
     <div className={styles.socialList}>
-      {project.socials.map((social) => {
-        const Icon = socialIcons[social.network]
-        return (
-          <a key={social.network} href={social.href} target="_blank" rel="noopener noreferrer">
-            <span className={styles.socialIcon}>
-              <Icon size={18} aria-hidden="true" />
-            </span>
-            <span>
-              <b>{social.network}</b>
-              <small>{social.handle}</small>
-            </span>
-            <ArrowUpRight size={16} aria-hidden="true" />
-            <span className="srOnly">Abre em nova aba</span>
-          </a>
-        )
-      })}
+      {project.socials.map((social) => (
+        <a key={social.network} href={social.href} target="_blank" rel="noopener noreferrer">
+          <span className={styles.socialIcon}>
+            <SocialIcon network={social.network} size={18} />
+          </span>
+          <span>
+            <b>{social.network}</b>
+            <small>{social.handle}</small>
+          </span>
+          <ArrowUpRight size={16} aria-hidden="true" />
+          <span className="srOnly">Abre em nova aba</span>
+        </a>
+      ))}
     </div>
   )
 }
 
 function LocationPanel({ project, onCopy, onNotify }: Omit<DemoFacilityPanelProps, 'facility'>) {
-  const [shared, setShared] = useState(false)
-  const encodedQuery = encodeURIComponent(project.location.mapQuery)
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`
-  const mapEmbedUrl = `https://www.google.com/maps?q=${encodedQuery}&output=embed`
-
-  const shareLocation = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `Localização • ${project.name}`,
-          text: project.location.address,
-          url: mapsUrl,
-        })
-        setShared(true)
-        onNotify('Localização pronta', 'Agora é só escolher com quem compartilhar.')
-        return
-      } catch (error) {
-        if (error instanceof DOMException && error.name === 'AbortError') return
-      }
-    }
-
-    const copied = await onCopy(
-      `${project.location.address} — ${mapsUrl}`,
-      'Localização copiada',
-      'O endereço e o link do mapa foram copiados.',
-    )
-    if (copied) setShared(true)
-  }
+  const { shared, share, mapsUrl, mapEmbedUrl } = useShareLocation({ project, onCopy, onNotify })
 
   return (
     <div className={styles.mapCard}>
@@ -189,7 +145,7 @@ function LocationPanel({ project, onCopy, onNotify }: Omit<DemoFacilityPanelProp
           Abrir rota
           <ExternalLink size={13} aria-hidden="true" />
         </a>
-        <button type="button" onClick={shareLocation}>
+        <button type="button" onClick={share}>
           <Share2 size={14} aria-hidden="true" />
           Compartilhar
         </button>
@@ -211,7 +167,5 @@ export function DemoFacilityPanel({ facility, project, onCopy, onNotify }: DemoF
       return <LocationPanel project={project} onCopy={onCopy} onNotify={onNotify} />
     case 'review':
       return <DemoReview projectName={project.name} />
-    default:
-      return null
   }
 }

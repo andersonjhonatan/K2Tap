@@ -1,9 +1,16 @@
 import type { CSSProperties } from 'react'
 import type { FacilityKind, ProjectConfig } from '@/types/project'
-import { BarberExperience } from './experiences/BarberExperience'
-import { RestaurantExperience } from './experiences/RestaurantExperience'
-import { ServiceExperience } from './experiences/ServiceExperience'
-import { StoreExperience } from './experiences/StoreExperience'
+import { ExperienceArtwork } from './experiences/ExperienceArtwork'
+import {
+  ActionGrid,
+  ExperienceFooter,
+  ExperienceHeader,
+  FacilityGrid,
+  Highlight,
+  OpeningHours,
+  SocialShortcut,
+  StaffCallShortcut,
+} from './experiences/ExperienceParts'
 import styles from './showcase.module.css'
 
 type MobileExperienceProps = {
@@ -11,15 +18,7 @@ type MobileExperienceProps = {
   onOpenFacility: (kind: FacilityKind, trigger: HTMLButtonElement) => void
 }
 
-const experienceComponents = {
-  restaurant: RestaurantExperience,
-  barber: BarberExperience,
-  store: StoreExperience,
-  service: ServiceExperience,
-} as const
-
 export function MobileExperience({ project, onOpenFacility }: MobileExperienceProps) {
-  const Experience = experienceComponents[project.id]
   const theme = {
     '--experience-bg': project.theme.background,
     '--experience-fg': project.theme.foreground,
@@ -29,9 +28,34 @@ export function MobileExperience({ project, onOpenFacility }: MobileExperiencePr
     '--experience-border': project.theme.border,
   } as CSSProperties
 
+  // Quando as ações do projeto já levam às facilidades, a grade completa seria
+  // repetição: nesse caso basta o atalho das redes, que fica de fora delas.
+  const actionsCoverFacilities = project.actions.some((action) => action.facility)
+
   return (
     <div className={styles.phoneView} style={theme} data-testid="mobile-experience">
-      <Experience project={project} onOpenFacility={onOpenFacility} />
+      <div className={styles.experience}>
+        <ExperienceHeader project={project} />
+        <ExperienceArtwork
+          projectId={project.id}
+          eyebrow={project.experience.artworkEyebrow}
+          title={project.experience.artworkTitle}
+          description={project.experience.artworkDescription}
+        />
+
+        <ActionGrid project={project} onOpenFacility={onOpenFacility} />
+        <StaffCallShortcut project={project} onOpenFacility={onOpenFacility} />
+        <Highlight project={project} />
+        <OpeningHours openingHours={project.openingHours} />
+
+        {actionsCoverFacilities ? (
+          <SocialShortcut onOpenFacility={onOpenFacility} />
+        ) : (
+          <FacilityGrid onOpenFacility={onOpenFacility} />
+        )}
+
+        <ExperienceFooter />
+      </div>
     </div>
   )
 }

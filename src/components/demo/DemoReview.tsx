@@ -1,13 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import { Send, Star } from 'lucide-react'
+import { useReviewForm } from '@/hooks/useReviewForm'
 import styles from './demo.module.css'
 
 export function DemoReview({ projectName }: { projectName: string }) {
-  const [score, setScore] = useState(5)
-  const [comment, setComment] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+  const { score, setScore, comment, setComment, submitted, submit } = useReviewForm()
 
   if (submitted) {
     return (
@@ -25,13 +23,7 @@ export function DemoReview({ projectName }: { projectName: string }) {
   }
 
   return (
-    <form
-      className={styles.reviewForm}
-      onSubmit={(event) => {
-        event.preventDefault()
-        setSubmitted(true)
-      }}
-    >
+    <form className={styles.reviewForm} onSubmit={submit}>
       <div className={styles.reviewStars} role="radiogroup" aria-label="Nota da experiência">
         {[1, 2, 3, 4, 5].map((star) => (
           <button

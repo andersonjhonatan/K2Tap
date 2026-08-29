@@ -1,58 +1,49 @@
 'use client'
 
 import { useCallback, useEffect, useRef } from 'react'
-import { Heart, MapPin, QrCode, Star, Wifi, X } from 'lucide-react'
-import type { FacilityKind, ProjectConfig } from '@/types/project'
+import { X } from 'lucide-react'
+import type { ProjectConfig } from '@/types/project'
+import {
+  customerFacilities,
+  facilityIcons,
+  facilityLabels,
+  type CustomerFacility,
+} from '@/data/facilities'
+import type { CopyHandler } from '@/hooks/useCopyToast'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { DemoFacilityPanel } from './DemoFacilityPanel'
 import styles from './demo.module.css'
 
-export const facilityMeta = {
+/** Só o texto muda aqui: ícone e rótulo curto vêm de `data/facilities`. */
+export const facilityCopy = {
   wifi: {
-    label: 'Wi-Fi',
     title: 'Conecte sem pedir a senha.',
     subtitle: 'Escaneie o QR Code ou copie os dados da rede.',
-    Icon: Wifi,
   },
   pix: {
-    label: 'Pix',
     title: 'Aponte a câmera e pague.',
     subtitle: 'QR Code e chave prontos, sem erro de digitação.',
-    Icon: QrCode,
   },
   social: {
-    label: 'Redes',
     title: 'Todos os canais em um lugar só.',
     subtitle: 'Instagram, WhatsApp e TikTok da casa.',
-    Icon: Heart,
   },
   location: {
-    label: 'Mapa',
     title: 'Como chegar.',
     subtitle: 'Veja no mapa, abra a rota ou mande para alguém.',
-    Icon: MapPin,
   },
   review: {
-    label: 'Opinião',
     title: 'Como foi sua experiência?',
     subtitle: 'Um minuto para contar o que você achou.',
-    Icon: Star,
   },
-} satisfies Record<
-  Exclude<FacilityKind, 'staff'>,
-  { label: string; title: string; subtitle: string; Icon: typeof Wifi }
->
-
-export type DemoFacility = keyof typeof facilityMeta
-
-export const demoFacilities = Object.keys(facilityMeta) as DemoFacility[]
+} satisfies Record<CustomerFacility, { title: string; subtitle: string }>
 
 type DemoModalProps = {
-  facility: DemoFacility
+  facility: CustomerFacility
   project: ProjectConfig
-  onSelect: (facility: DemoFacility) => void
+  onSelect: (facility: CustomerFacility) => void
   onClose: () => void
-  onCopy: (value: string, title?: string, description?: string) => Promise<boolean>
+  onCopy: CopyHandler
   onNotify: (title: string, description: string) => void
 }
 
@@ -66,8 +57,8 @@ export function DemoModal({
 }: DemoModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null)
   const bodyRef = useRef<HTMLDivElement>(null)
-  const meta = facilityMeta[facility]
-  const ActiveIcon = meta.Icon
+  const meta = facilityCopy[facility]
+  const ActiveIcon = facilityIcons[facility]
 
   useFocusTrap(dialogRef, true, onClose)
 
@@ -81,7 +72,7 @@ export function DemoModal({
   }, [])
 
   const select = useCallback(
-    (next: DemoFacility) => {
+    (next: CustomerFacility) => {
       onSelect(next)
       const body = bodyRef.current
       if (body && typeof body.scrollTo === 'function') body.scrollTo({ top: 0 })
@@ -128,8 +119,8 @@ export function DemoModal({
         </header>
 
         <div className={styles.dialogTabs} role="tablist" aria-label="Facilidades">
-          {demoFacilities.map((item) => {
-            const { label, Icon } = facilityMeta[item]
+          {customerFacilities.map((item) => {
+            const Icon = facilityIcons[item]
             const active = item === facility
             return (
               <button
@@ -142,7 +133,7 @@ export function DemoModal({
                 onClick={() => select(item)}
               >
                 <Icon size={15} strokeWidth={1.8} aria-hidden="true" />
-                <span>{label}</span>
+                <span>{facilityLabels[item]}</span>
               </button>
             )
           })}

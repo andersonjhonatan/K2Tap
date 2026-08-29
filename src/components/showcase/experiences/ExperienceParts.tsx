@@ -1,5 +1,6 @@
-import { ArrowRight, ConciergeBell, Heart, MapPin, QrCode, Star, Wifi } from 'lucide-react'
-import type { FacilityKind, ProjectConfig } from '@/types/project'
+import { ArrowRight, ConciergeBell } from 'lucide-react'
+import type { FacilityKind, OpeningHour, ProjectConfig } from '@/types/project'
+import { customerFacilities, facilityIcons, facilityLabels } from '@/data/facilities'
 import { ExperienceIcon } from '../ExperienceIcon'
 import type { ExperienceProps } from './types'
 import styles from '../showcase.module.css'
@@ -53,36 +54,34 @@ export function ActionGrid({
   )
 }
 
-const facilities: Array<{
-  kind: FacilityKind
-  label: string
-  description: string
-  Icon: typeof Wifi
-}> = [
-  { kind: 'wifi', label: 'Wi-Fi', description: 'Conecte pelo QR Code.', Icon: Wifi },
-  { kind: 'pix', label: 'Pague Fácil', description: 'Pagamento via Pix.', Icon: QrCode },
-  { kind: 'social', label: 'Redes sociais', description: 'Siga e acompanhe.', Icon: Heart },
-  { kind: 'location', label: 'Localização', description: 'Mapa e compartilhar.', Icon: MapPin },
-  { kind: 'review', label: 'Sua opinião', description: 'Avalie a experiência.', Icon: Star },
-]
+const facilityHints: Record<(typeof customerFacilities)[number], string> = {
+  wifi: 'Conecte pelo QR Code.',
+  pix: 'Pagamento via Pix.',
+  social: 'Siga e acompanhe.',
+  location: 'Mapa e compartilhar.',
+  review: 'Avalie a experiência.',
+}
 
 export function FacilityGrid({ onOpenFacility }: Pick<ExperienceProps, 'onOpenFacility'>) {
   return (
     <div className={styles.facilities}>
       <small>FACILIDADES</small>
       <div className={styles.facilityGrid}>
-        {facilities.map(({ kind, label, description, Icon }) => (
-          <button
-            className={styles.facilityTool}
-            key={kind}
-            type="button"
-            onClick={(event) => onOpenFacility(kind, event.currentTarget)}
-          >
-            <Icon size={14} aria-hidden="true" />
-            <b>{label}</b>
-            <span>{description}</span>
-          </button>
-        ))}
+        {customerFacilities.map((facility) => {
+          const Icon = facilityIcons[facility]
+          return (
+            <button
+              className={styles.facilityTool}
+              key={facility}
+              type="button"
+              onClick={(event) => onOpenFacility(facility, event.currentTarget)}
+            >
+              <Icon size={14} aria-hidden="true" />
+              <b>{facilityLabels[facility]}</b>
+              <span>{facilityHints[facility]}</span>
+            </button>
+          )
+        })}
       </div>
     </div>
   )
@@ -146,5 +145,27 @@ export function StaffCallShortcut({
       </span>
       <ArrowRight size={15} aria-hidden="true" />
     </button>
+  )
+}
+
+export function OpeningHours({ openingHours }: { openingHours?: ProjectConfig['openingHours'] }) {
+  if (!openingHours) return null
+
+  return (
+    <section className={styles.hours} aria-label="Horários de funcionamento">
+      <div className={styles.hoursHeader}>
+        <small>HORÁRIOS DE FUNCIONAMENTO</small>
+        <b>{openingHours.summary}</b>
+        <span>{openingHours.period}</span>
+      </div>
+      <div className={styles.hoursList}>
+        {openingHours.days.map((item: OpeningHour) => (
+          <div className={styles.hoursRow} key={item.day}>
+            <span>{item.day}</span>
+            <b>{item.hours}</b>
+          </div>
+        ))}
+      </div>
+    </section>
   )
 }

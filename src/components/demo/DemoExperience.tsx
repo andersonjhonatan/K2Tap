@@ -6,12 +6,17 @@ import Link from 'next/link'
 import { ArrowRight, ConciergeBell } from 'lucide-react'
 import type { FacilityKind, ProjectConfig } from '@/types/project'
 import { siteConfig } from '@/config/site'
-import { useClipboard } from '@/hooks/useClipboard'
-import { useToast } from '@/hooks/useToast'
+import { useCopyToast } from '@/hooks/useCopyToast'
 import { Toast } from '@/components/feedback/Toast'
 import { ExperienceIcon } from '@/components/showcase/ExperienceIcon'
 import { DemoBar } from './DemoBar'
-import { DemoModal, demoFacilities, facilityMeta, type DemoFacility } from './DemoModal'
+import {
+  customerFacilities,
+  facilityIcons,
+  facilityLabels,
+  type CustomerFacility,
+} from '@/data/facilities'
+import { DemoModal, facilityCopy } from './DemoModal'
 import { DemoStaffCall } from './DemoStaffCall'
 import styles from './demo.module.css'
 
@@ -21,14 +26,13 @@ type DemoExperienceProps = {
   table?: string
 }
 
-const isDemoFacility = (facility?: FacilityKind): facility is DemoFacility =>
+const isCustomerFacility = (facility?: FacilityKind): facility is CustomerFacility =>
   facility !== undefined && facility !== 'staff'
 
 export function DemoExperience({ project, table }: DemoExperienceProps) {
-  const [activeFacility, setActiveFacility] = useState<DemoFacility | null>(null)
+  const [activeFacility, setActiveFacility] = useState<CustomerFacility | null>(null)
   const openerRef = useRef<HTMLButtonElement | null>(null)
-  const copy = useClipboard()
-  const { toast, showToast, dismiss } = useToast()
+  const { toast, dismiss, copy, notify } = useCopyToast()
 
   const theme = {
     '--experience-bg': project.theme.background,
@@ -39,7 +43,7 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
     '--experience-border': project.theme.border,
   } as CSSProperties
 
-  const openFacility = (facility: DemoFacility, trigger: HTMLButtonElement) => {
+  const openFacility = (facility: CustomerFacility, trigger: HTMLButtonElement) => {
     openerRef.current = trigger
     setActiveFacility(facility)
   }
@@ -48,32 +52,6 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
     setActiveFacility(null)
     requestAnimationFrame(() => openerRef.current?.focus())
   }, [])
-
-  const handleCopy = useCallback(
-    async (value: string, title?: string, description?: string) => {
-      const copied = await copy(value)
-      showToast(
-        copied
-          ? {
-              title: title ?? 'Copiado com sucesso',
-              description: description ?? 'O conteúdo já está na sua área de transferência.',
-              variant: 'success',
-            }
-          : {
-              title: 'Não foi possível copiar',
-              description: 'Toque e segure o conteúdo para copiar manualmente.',
-              variant: 'error',
-            },
-      )
-      return copied
-    },
-    [copy, showToast],
-  )
-
-  const notify = useCallback(
-    (title: string, description: string) => showToast({ title, description, variant: 'success' }),
-    [showToast],
-  )
 
   return (
     <div className={styles.page} style={theme}>
@@ -108,6 +86,7 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
 
         <nav className={styles.actionGrid} aria-label="Atalhos da experiência">
           {project.actions.map((action) => {
+            const facility = action.facility
             const inner = (
               <>
                 <span className={styles.actionIcon}>
@@ -118,14 +97,12 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
               </>
             )
 
-            return isDemoFacility(action.facility) ? (
+            return isCustomerFacility(facility) ? (
               <button
                 className={styles.actionCard}
                 key={action.id}
                 type="button"
-                onClick={(event) =>
-                  openFacility(action.facility as DemoFacility, event.currentTarget)
-                }
+                onClick={(event) => openFacility(facility, event.currentTarget)}
               >
                 {inner}
               </button>
@@ -147,8 +124,8 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
         <section className={styles.facilities} aria-labelledby="facilities-title">
           <h2 id="facilities-title">Facilidades da casa</h2>
           <div className={styles.facilityRow}>
-            {demoFacilities.map((facility) => {
-              const { label, subtitle, Icon } = facilityMeta[facility]
+            {customerFacilities.map((facility) => {
+              const Icon = facilityIcons[facility]
               return (
                 <button
                   className={styles.facilityChip}
@@ -160,8 +137,8 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
                     <Icon size={17} strokeWidth={1.8} aria-hidden="true" />
                   </span>
                   <span>
-                    <b>{label}</b>
-                    <small>{subtitle}</small>
+                    <b>{facilityLabels[facility]}</b>
+                    <small>{facilityCopy[facility].subtitle}</small>
                   </span>
                 </button>
               )
@@ -209,7 +186,7 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
           project={project}
           onSelect={setActiveFacility}
           onClose={closeFacility}
-          onCopy={handleCopy}
+          onCopy={copy}
           onNotify={notify}
         />
       )}

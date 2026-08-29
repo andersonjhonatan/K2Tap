@@ -2,7 +2,7 @@ import { Copy, Wifi } from 'lucide-react'
 import { QRCodeSVG } from 'qrcode.react'
 import type { ProjectConfig } from '@/types/project'
 import { createWifiPayload } from '@/lib/wifi'
-import type { CopyHandler } from './types'
+import type { CopyHandler } from '@/hooks/useCopyToast'
 import styles from './facilities.module.css'
 
 type WifiPanelProps = {

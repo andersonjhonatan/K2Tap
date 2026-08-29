@@ -2,7 +2,7 @@ import { Copy, ShieldCheck } from 'lucide-react'
 import { QRCodeSVG } from 'qrcode.react'
 import type { ProjectConfig } from '@/types/project'
 import { getPixPresentation } from '@/lib/pix'
-import type { CopyHandler } from './types'
+import type { CopyHandler } from '@/hooks/useCopyToast'
 import styles from './facilities.module.css'
 
 type PixPanelProps = {

@@ -1,11 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Check, Clock3, ConciergeBell, ExternalLink, Smartphone } from 'lucide-react'
 import { QRCodeSVG } from 'qrcode.react'
 import type { StaffCall, StaffCallReason } from '@/types/project'
 import { buildStaffUrl } from '@/lib/staff-call'
 import { createWaiterCall } from '@/lib/waiter-queue'
+import { useStaffCall } from '@/hooks/useStaffCall'
 import { useWaiterQueue } from '@/hooks/useWaiterQueue'
 import { ReasonIcon } from '@/components/ui/ReasonIcon'
 import styles from './demo.module.css'
@@ -17,29 +18,32 @@ type DemoStaffCallProps = {
 }
 
 export function DemoStaffCall({ staffCall, table }: DemoStaffCallProps) {
-  const [reason, setReason] = useState<StaffCallReason>(staffCall.reasons[0])
-  const [sending, setSending] = useState(false)
   const [callId, setCallId] = useState<string | null>(null)
   const [staffUrl, setStaffUrl] = useState('')
 
   const spot = table ? `Mesa ${table}` : staffCall.spot
   const spotTable = table ?? staffCall.table
 
+  // Confirmar não só encena: o chamado entra na fila e a equipe pode aceitá-lo.
+  const enqueue = (chosen: StaffCallReason) => {
+    setStaffUrl(buildStaffUrl({ ...staffCall, table: spotTable }, chosen))
+    setCallId(createWaiterCall(spotTable, chosen).id)
+  }
+
+  const {
+    reason,
+    setReason,
+    status: sendStatus,
+    send,
+    reset,
+  } = useStaffCall({
+    staffCall,
+    onSent: enqueue,
+  })
+
   const calls = useWaiterQueue()
   const call = callId ? (calls.find((item) => item.id === callId) ?? null) : null
-
-  useEffect(() => {
-    if (!sending) return
-    const timer = window.setTimeout(() => {
-      const created = createWaiterCall(spotTable, reason)
-      setStaffUrl(buildStaffUrl({ ...staffCall, table: spotTable }, reason))
-      setCallId(created.id)
-      setSending(false)
-    }, 700)
-    return () => window.clearTimeout(timer)
-    // O chamado é criado uma vez, no momento em que o envio começa.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sending])
+  const sending = sendStatus === 'sending'
 
   const status = call?.status ?? null
   const busy = sending || status === 'pending' || status === 'accepted'
@@ -47,6 +51,7 @@ export function DemoStaffCall({ staffCall, table }: DemoStaffCallProps) {
   const callAgain = () => {
     setCallId(null)
     setStaffUrl('')
+    reset()
   }
 
   return (
@@ -68,6 +73,7 @@ export function DemoStaffCall({ staffCall, table }: DemoStaffCallProps) {
                 key={item.id}
               >
                 <input
+                  className="srOnly"
                   type="radio"
                   name="demo-staff-reason"
                   value={item.id}
@@ -87,12 +93,7 @@ export function DemoStaffCall({ staffCall, table }: DemoStaffCallProps) {
             Chamar de novo
           </button>
         ) : (
-          <button
-            className={styles.staffButton}
-            type="button"
-            disabled={busy}
-            onClick={() => setSending(true)}
-          >
+          <button className={styles.staffButton} type="button" disabled={busy} onClick={send}>
             <ConciergeBell size={18} aria-hidden="true" />
             {!sending && !status && staffCall.actionLabel}
             {sending && 'Enviando chamado...'}

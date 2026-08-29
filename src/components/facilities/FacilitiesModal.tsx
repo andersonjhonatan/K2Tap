@@ -1,11 +1,11 @@
 'use client'
 
 import { useCallback, useRef, useState } from 'react'
-import { ConciergeBell, Heart, MapPin, QrCode, Star, Wifi, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import type { FacilityKind, ProjectConfig } from '@/types/project'
-import { useClipboard } from '@/hooks/useClipboard'
+import { customerFacilities, facilityIcons } from '@/data/facilities'
+import { useCopyToast } from '@/hooks/useCopyToast'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
-import { useToast } from '@/hooks/useToast'
 import { Toast } from '@/components/feedback/Toast'
 import { FacilitiesNavigation } from './FacilitiesNavigation'
 import { LocationPanel } from './LocationPanel'
@@ -14,41 +14,35 @@ import { ReviewPanel } from './ReviewPanel'
 import { SocialPanel } from './SocialPanel'
 import { StaffCallPanel } from './StaffCallPanel'
 import { WifiPanel } from './WifiPanel'
-import type { CopyFeedback } from './types'
 import styles from './facilities.module.css'
 
-const facilityMeta = {
+/** Só o texto muda por facilidade: ícone e rótulo vêm de `data/facilities`. */
+const facilityCopy = {
   wifi: {
     title: 'Conecte-se ao Wi-Fi',
     subtitle: 'Escaneie, copie ou conecte sem digitar.',
-    Icon: Wifi,
   },
   pix: {
     title: 'Pagamento rápido',
     subtitle: 'QR Code demonstrativo e chave fictícia em um só lugar.',
-    Icon: QrCode,
   },
   staff: {
     title: 'Chamar atendimento',
     subtitle: 'O chamado sai da mesa e chega no celular da equipe.',
-    Icon: ConciergeBell,
   },
   social: {
     title: 'Redes sociais',
     subtitle: 'Canais oficiais reunidos para o cliente.',
-    Icon: Heart,
   },
   location: {
     title: 'Como chegar',
     subtitle: 'Mapa, rota e compartilhamento do endereço.',
-    Icon: MapPin,
   },
   review: {
     title: 'Sua opinião',
     subtitle: 'Uma forma simples de ouvir quem acabou de usar.',
-    Icon: Star,
   },
-} satisfies Record<FacilityKind, { title: string; subtitle: string; Icon: typeof Wifi }>
+} satisfies Record<FacilityKind, { title: string; subtitle: string }>
 
 type FacilitiesModalProps = {
   project: ProjectConfig
@@ -56,10 +50,10 @@ type FacilitiesModalProps = {
   onClose: () => void
 }
 
-const baseFacilities: FacilityKind[] = ['wifi', 'pix', 'social', 'location', 'review']
-
 function listFacilities(project: ProjectConfig): FacilityKind[] {
-  return project.staffCall ? [...baseFacilities, 'staff'] : baseFacilities
+  if (!project.staffCall) return customerFacilities
+  // O atendimento entra logo depois do Pix, onde o cliente procura por ele.
+  return ['wifi', 'pix', 'staff', 'social', 'location', 'review']
 }
 
 export function FacilitiesModal({ project, initialFacility, onClose }: FacilitiesModalProps) {
@@ -68,41 +62,11 @@ export function FacilitiesModal({ project, initialFacility, onClose }: Facilitie
     available.includes(initialFacility) ? initialFacility : 'wifi',
   )
   const modalRef = useRef<HTMLDivElement>(null)
-  const copy = useClipboard()
-  const { toast, showToast, dismiss } = useToast()
-  const meta = facilityMeta[activeFacility]
-  const ActiveIcon = meta.Icon
+  const { toast, dismiss, copy, notify } = useCopyToast()
+  const meta = facilityCopy[activeFacility]
+  const ActiveIcon = facilityIcons[activeFacility]
 
   useFocusTrap(modalRef, true, onClose)
-
-  const handleCopy = useCallback(
-    async (value: string, feedback?: CopyFeedback) => {
-      const copied = await copy(value)
-      showToast(
-        copied
-          ? {
-              title: feedback?.title ?? 'Copiado com sucesso',
-              description:
-                feedback?.description ?? 'O conteúdo já está na sua área de transferência.',
-              variant: 'success',
-            }
-          : {
-              title: 'Não foi possível copiar',
-              description: 'Toque e segure o conteúdo para copiar manualmente.',
-              variant: 'error',
-            },
-      )
-      return copied
-    },
-    [copy, showToast],
-  )
-
-  const notify = useCallback(
-    (title: string, description: string) => {
-      showToast({ title, description, variant: 'success' })
-    },
-    [showToast],
-  )
 
   const changeFacility = useCallback((facility: FacilityKind) => {
     setActiveFacility(facility)
@@ -155,14 +119,14 @@ export function FacilitiesModal({ project, initialFacility, onClose }: Facilitie
         />
 
         <div className={styles.modalBody} id="facility-panel" role="tabpanel">
-          {activeFacility === 'wifi' && <WifiPanel project={project} onCopy={handleCopy} />}
-          {activeFacility === 'pix' && <PixPanel project={project} onCopy={handleCopy} />}
+          {activeFacility === 'wifi' && <WifiPanel project={project} onCopy={copy} />}
+          {activeFacility === 'pix' && <PixPanel project={project} onCopy={copy} />}
           {activeFacility === 'staff' && project.staffCall && (
-            <StaffCallPanel staffCall={project.staffCall} onCopy={handleCopy} />
+            <StaffCallPanel staffCall={project.staffCall} onCopy={copy} />
           )}
           {activeFacility === 'social' && <SocialPanel project={project} />}
           {activeFacility === 'location' && (
-            <LocationPanel project={project} onCopy={handleCopy} onNotify={notify} />
+            <LocationPanel project={project} onCopy={copy} onNotify={notify} />
           )}
           {activeFacility === 'review' && <ReviewPanel />}
         </div>

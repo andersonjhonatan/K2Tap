@@ -1,13 +1,11 @@
 'use client'
 
 import { Send, Star } from 'lucide-react'
-import { useState } from 'react'
+import { useReviewForm } from '@/hooks/useReviewForm'
 import styles from './facilities.module.css'
 
 export function ReviewPanel() {
-  const [score, setScore] = useState(5)
-  const [comment, setComment] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+  const { score, setScore, comment, setComment, submitted, submit } = useReviewForm()
 
   if (submitted) {
     return (
@@ -30,13 +28,7 @@ export function ReviewPanel() {
         Uma área rápida para ouvir o cliente logo após a experiência. O envio desta demonstração não
         é armazenado.
       </p>
-      <form
-        className={styles.reviewCard}
-        onSubmit={(event) => {
-          event.preventDefault()
-          setSubmitted(true)
-        }}
-      >
+      <form className={styles.reviewCard} onSubmit={submit}>
         <div className={styles.reviewScore}>
           <div>
             <strong>{score.toFixed(1)}</strong>

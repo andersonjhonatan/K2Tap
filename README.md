@@ -61,12 +61,12 @@ src/
     feedback/             # toast interno
     landing/              # Hero, demo NFC, possibilidades, métricas e CTA
     layout/               # Header e Footer
-    showcase/             # seletor, telefone, quatro experiências e chamada da demonstração
+    showcase/             # seletor, telefone, experiência mobile e chamada da demonstração
     waiter/               # painel da equipe (PWA) em /garcom
     ui/                   # elementos compartilhados
   config/                 # dados institucionais
-  data/                   # navegação e projetos fictícios
-  hooks/                  # clipboard, foco, motion, toast e fila de chamados
+  data/                   # navegação, facilidades e projetos fictícios
+  hooks/                  # clipboard+toast, foco, motion, chamado, avaliação, mapa e fila
   lib/                    # Wi-Fi, Pix, URLs do chamado, fila e alertas da equipe
   types/                  # contratos TypeScript
 public/
@@ -96,10 +96,15 @@ artifacts/
 
 1. Adicione um novo identificador em `ProjectId`, em `src/types/project.ts`.
 2. Inclua a configuração completa em `src/data/projects.ts`.
-3. Crie a composição visual em `src/components/showcase/experiences/`.
-4. Registre o componente em `experienceComponents`, no arquivo `MobileExperience.tsx`.
-5. Associe um ícone em `ProjectSelector.tsx`.
-6. Adicione ou atualize os testes de troca de projeto.
+3. Registre a arte do projeto em `decorations`, dentro de
+   `src/components/showcase/experiences/ExperienceArtwork.tsx`.
+4. Associe um ícone em `ProjectSelector.tsx`.
+5. Adicione ou atualize os testes de troca de projeto.
+
+Não existe um componente por projeto: `MobileExperience` monta a mesma composição para todos e
+decide o que mostrar pela configuração. Se as ações do projeto já apontam para facilidades, a
+experiência mostra o atalho das redes; se não apontam, mostra a grade completa de facilidades.
+Chamado da equipe e horários aparecem apenas quando `staffCall` e `openingHours` existem.
 
 Os dados de cliente não devem ser espalhados no JSX. Nome, slug, cores, conteúdo, ações, Wi-Fi, Pix, redes, localização e horários pertencem à configuração do projeto.
 
@@ -329,6 +334,28 @@ npm run start
 ```
 
 O servidor usa a porta `3000` por padrão.
+
+## Onde mora cada regra
+
+A aplicação tem duas superfícies para a mesma experiência: a prévia dentro do mockup de telefone e a
+demonstração em tela cheia. Elas têm escalas visuais muito diferentes, então cada uma mantém o seu
+próprio CSS e a sua própria marcação — mas nenhuma regra de negócio é escrita duas vezes.
+
+| O que                          | Onde mora                                         |
+| ------------------------------ | ------------------------------------------------- |
+| Copiar e avisar                | `hooks/useCopyToast.ts`                           |
+| Compartilhar localização       | `hooks/useShareLocation.ts`                       |
+| Envio do chamado               | `hooks/useStaffCall.ts`                           |
+| Fila de chamados               | `hooks/useWaiterQueue.ts` e `lib/waiter-queue.ts` |
+| Avaliação                      | `hooks/useReviewForm.ts`                          |
+| URLs do Google Maps            | `lib/maps.ts`                                     |
+| URLs do chamado                | `lib/staff-call.ts`                               |
+| Ícone e rótulo das facilidades | `data/facilities.ts`                              |
+| Ícone das redes sociais        | `components/ui/SocialIcon.tsx`                    |
+| Ícone do motivo do chamado     | `components/ui/ReasonIcon.tsx`                    |
+
+Ao criar uma terceira superfície, importe daqui em vez de copiar. O texto pode mudar por superfície
+— e muda, porque o tom dentro do telefone é mais curto que o da página inteira. O comportamento, não.
 
 ## Evolução futura
 

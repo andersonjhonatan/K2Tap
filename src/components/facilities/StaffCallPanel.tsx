@@ -1,22 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { Check, ConciergeBell, Copy, ExternalLink, Smartphone, UserRound } from 'lucide-react'
 import { QRCodeSVG } from 'qrcode.react'
-import type { StaffCall, StaffCallReason } from '@/types/project'
+import type { StaffCall } from '@/types/project'
 import { buildCustomerUrl, buildStaffUrl } from '@/lib/staff-call'
+import type { CopyHandler } from '@/hooks/useCopyToast'
+import { useStaffCall } from '@/hooks/useStaffCall'
 import { ReasonIcon } from '@/components/ui/ReasonIcon'
-import type { CopyHandler } from './types'
 import styles from './facilities.module.css'
 
 type StaffCallPanelProps = {
   staffCall: StaffCall
   onCopy: CopyHandler
 }
-
-type CallStatus = 'idle' | 'sending' | 'sent'
-
-const SENDING_MS = 900
 
 const shortUrl = (url: string) => {
   try {
@@ -28,14 +24,7 @@ const shortUrl = (url: string) => {
 }
 
 export function StaffCallPanel({ staffCall, onCopy }: StaffCallPanelProps) {
-  const [status, setStatus] = useState<CallStatus>('idle')
-  const [reason, setReason] = useState<StaffCallReason>(staffCall.reasons[0])
-
-  useEffect(() => {
-    if (status !== 'sending') return
-    const timer = window.setTimeout(() => setStatus('sent'), SENDING_MS)
-    return () => window.clearTimeout(timer)
-  }, [status])
+  const { reason, setReason, status, send } = useStaffCall({ staffCall })
 
   // Os links só aparecem depois da confirmação, já no cliente, então a origem
   // resolvida aqui acompanha localhost, preview e domínio final.
@@ -80,6 +69,7 @@ export function StaffCallPanel({ staffCall, onCopy }: StaffCallPanelProps) {
               key={item.id}
             >
               <input
+                className="srOnly"
                 type="radio"
                 name="staff-call-reason"
                 value={item.id}
@@ -96,7 +86,7 @@ export function StaffCallPanel({ staffCall, onCopy }: StaffCallPanelProps) {
           className={styles.callButton}
           type="button"
           disabled={status !== 'idle'}
-          onClick={() => setStatus('sending')}
+          onClick={send}
         >
           <ConciergeBell size={15} aria-hidden="true" />
           {status === 'idle' && staffCall.actionLabel}
