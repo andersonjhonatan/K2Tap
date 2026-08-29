@@ -16,8 +16,7 @@
 }
 
 .brandLink {
-  display: inline-flex;
-  border-radius: 15px;
+  border-radius: 14px;
 }
 
 .desktopNav {
@@ -142,18 +141,16 @@
   align-items: center;
 }
 
-.footerBrandImage {
+.footerLogo {
   display: block;
-  width: 220px;
-  height: auto;
-  border: 1px solid rgb(255 255 255 / 9%);
-  border-radius: 24px;
-  box-shadow: 0 24px 60px rgb(0 0 0 / 28%);
+  width: auto;
+  height: 158px;
+  margin-bottom: 22px;
 }
 
 .footerTagline {
   max-width: 520px;
-  margin: 18px auto 0;
+  margin: 14px auto 0;
   color: #93a8bf;
   font-size: 0.78rem;
   line-height: 1.65;
@@ -225,11 +222,6 @@
 
   .footer {
     padding: 58px 0 30px;
-  }
-
-  .footerBrandImage {
-    width: 188px;
-    border-radius: 20px;
   }
 
   .footerNav {

@@ -57,6 +57,7 @@ src/
     garcom/               # painel de chamados de quem atende
   components/
     artwork/              # a arte de cada negócio, usada pelas duas superfícies
+    brand/                # a logomarca K2 Tap em vetor
     demo/                 # experiência em tela cheia e modal das rotas /demo
     facilities/           # modal e seis painéis de facilidades
     feedback/             # toast interno
@@ -346,6 +347,24 @@ npm run start
 ```
 
 O servidor usa a porta `3000` por padrão.
+
+## A logomarca
+
+`components/brand/K2TapLogo.tsx` desenha a marca em vetor — o cartão sobre o leitor com as ondas do
+NFC, o K prateado, o 2 azul, o TAP entre filetes e a assinatura. É SVG, sem imagem e sem fundo: pode
+ser posta sobre qualquer cor.
+
+Três variantes, para não espremer a marca onde ela não cabe:
+
+| Variante      | Onde                      | O que mostra                                                |
+| ------------- | ------------------------- | ----------------------------------------------------------- |
+| `K2TapLogo`   | rodapé, peças grandes     | tudo, com `showTagline` para ligar ou desligar a assinatura |
+| `K2TapLockup` | cabeçalho                 | marca ao lado de K2 TAP, na horizontal                      |
+| `K2TapMark`   | ícones, espaços apertados | só o cartão                                                 |
+
+O K prateado desaparece em fundo claro, então a prop `tone` troca o gradiente: `dark` usa prata e
+`light` usa a tinta da marca. O leitor sai nas versões pequenas — abaixo de uns 50px ele vira um
+borrão — e por isso o favicon em `app/icon.svg` mostra só o cartão com as ondas.
 
 ## A arte de cada negócio
 

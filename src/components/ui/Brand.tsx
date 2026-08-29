@@ -1,23 +1,19 @@
-import Image from 'next/image'
-import { k2TapLogoData } from './k2TapLogo'
+import { K2TapLockup, K2TapMark } from '@/components/brand/K2TapLogo'
 import styles from './ui.module.css'
 
 type BrandProps = {
+  /** Só a marca, sem as letras — para espaços apertados. */
   compact?: boolean
+  tone?: 'light' | 'dark'
 }
 
-export function Brand({ compact = false }: BrandProps) {
+export function Brand({ compact = false, tone = 'light' }: BrandProps) {
+  if (compact) return <K2TapMark className={styles.brandMark} />
+
   return (
-    <span className={`${styles.brand} ${compact ? styles.brandCompact : ''}`}>
-      <Image
-        className={styles.brandImage}
-        src={k2TapLogoData}
-        alt="K2 Tap"
-        width={540}
-        height={306}
-        priority
-        unoptimized
-      />
+    <span className={styles.brand}>
+      <K2TapLockup className={styles.brandLogo} tone={tone} />
+      <small className={styles.brandBy}>by K2 Tech</small>
     </span>
   )
 }
