@@ -20,6 +20,14 @@ import { DemoModal, facilityCopy } from './DemoModal'
 import { DemoStaffCall } from './DemoStaffCall'
 import styles from './demo.module.css'
 
+type MenuEntry = {
+  key: string
+  icon: React.ReactNode
+  label: string
+  description: string
+  facility?: CustomerFacility
+}
+
 type DemoExperienceProps = {
   project: ProjectConfig
   /** Mesa lida da rota quando a demonstração abre a partir de uma peça de mesa. */
@@ -43,10 +51,30 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
     '--experience-border': project.theme.border,
   } as CSSProperties
 
-  // As ações da casa usam o nome que o negócio dá ("Pague Fácil", "Como chegar").
-  // A linha de facilidades existe para o que elas não cobrem — sem repetir nada.
+  // Uma lista só: as ações da casa primeiro, com o nome que o negócio dá a elas
+  // ("Pague Fácil", "Como chegar"), e depois as facilidades que elas não cobrem.
   const covered = new Set(project.actions.map((action) => action.facility))
-  const remainingFacilities = customerFacilities.filter((facility) => !covered.has(facility))
+  const menu: MenuEntry[] = [
+    ...project.actions.map((action) => ({
+      key: action.id,
+      icon: <ExperienceIcon name={action.icon} size={22} />,
+      label: action.label,
+      description: action.description,
+      facility: isCustomerFacility(action.facility) ? action.facility : undefined,
+    })),
+    ...customerFacilities
+      .filter((facility) => !covered.has(facility))
+      .map((facility) => {
+        const Icon = facilityIcons[facility]
+        return {
+          key: facility,
+          icon: <Icon size={22} strokeWidth={1.8} aria-hidden="true" />,
+          label: facilityLabels[facility],
+          description: facilityCopy[facility].subtitle,
+          facility,
+        }
+      }),
+  ]
 
   const openFacility = (facility: CustomerFacility, trigger: HTMLButtonElement) => {
     openerRef.current = trigger
@@ -83,30 +111,34 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
           <DemoStaffCall staffCall={project.staffCall} table={table} />
         )}
 
-        <nav className={styles.actionGrid} aria-label="Atalhos da experiência">
-          {project.actions.map((action) => {
-            const facility = action.facility
+        <nav className={styles.menu} aria-label="O que você pode fazer aqui">
+          {menu.map((item) => {
             const inner = (
               <>
-                <span className={styles.actionIcon}>
-                  <ExperienceIcon name={action.icon} size={19} />
+                <span className={styles.menuIcon}>{item.icon}</span>
+                <span className={styles.menuCopy}>
+                  <b>{item.label}</b>
+                  <small>{item.description}</small>
                 </span>
-                <b>{action.label}</b>
-                <span>{action.description}</span>
+                {item.facility && (
+                  <span className={styles.menuArrow} aria-hidden="true">
+                    <ArrowRight size={18} />
+                  </span>
+                )}
               </>
             )
 
-            return isCustomerFacility(facility) ? (
+            return item.facility ? (
               <button
-                className={styles.actionCard}
-                key={action.id}
+                className={styles.menuItem}
+                key={item.key}
                 type="button"
-                onClick={(event) => openFacility(facility, event.currentTarget)}
+                onClick={(event) => openFacility(item.facility!, event.currentTarget)}
               >
                 {inner}
               </button>
             ) : (
-              <div className={styles.actionCard} key={action.id}>
+              <div className={styles.menuItem} key={item.key}>
                 {inner}
               </div>
             )
@@ -119,33 +151,6 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
           <small>{project.highlight.eyebrow}</small>
           <b>{project.highlight.title}</b>
         </div>
-
-        {remainingFacilities.length > 0 && (
-          <section className={styles.facilities} aria-labelledby="facilities-title">
-            <h2 id="facilities-title">Facilidades da casa</h2>
-            <div className={styles.facilityRow}>
-              {remainingFacilities.map((facility) => {
-                const Icon = facilityIcons[facility]
-                return (
-                  <button
-                    className={styles.facilityChip}
-                    key={facility}
-                    type="button"
-                    onClick={(event) => openFacility(facility, event.currentTarget)}
-                  >
-                    <span className={styles.facilityChipIcon}>
-                      <Icon size={17} strokeWidth={1.8} aria-hidden="true" />
-                    </span>
-                    <span>
-                      <b>{facilityLabels[facility]}</b>
-                      <small>{facilityCopy[facility].subtitle}</small>
-                    </span>
-                  </button>
-                )
-              })}
-            </div>
-          </section>
-        )}
 
         {project.openingHours && (
           <section className={styles.block} aria-labelledby="hours-title">

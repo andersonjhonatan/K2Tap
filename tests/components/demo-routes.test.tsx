@@ -26,7 +26,7 @@ describe('DemoExperience', () => {
     expect(screen.getAllByRole('button', { name: 'Chamar garçom' })).toHaveLength(1)
   })
 
-  it('mostra a grade de facilidades inteira quando as ações não cobrem nenhuma', () => {
+  it('lista as cinco facilidades quando as ações do projeto não cobrem nenhuma', () => {
     const barber = getProjectBySlug('k2-barbearia')!
     render(<DemoExperience project={barber} />)
 
@@ -41,7 +41,7 @@ describe('DemoExperience', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: 'O sabor da casa, a um toque.' }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Facilidades da casa' })).toBeInTheDocument()
+    expect(screen.getByRole('navigation', { name: /O que você pode fazer/ })).toBeInTheDocument()
 
     // Nada de QR Code, mapa ou formulário abertos antes de o cliente pedir.
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()

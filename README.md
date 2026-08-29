@@ -226,10 +226,13 @@ A página não abre com Wi-Fi, Pix, redes, mapa e opinião expostos: cada um é 
 cliente pede. O toque abre o `DemoModal`, um painel de vidro — fundo escurecido com desfoque e um
 brilho da cor do negócio — que herda o tema do projeto.
 
-Cada facilidade tem **um** ponto de entrada. As ações do projeto vêm primeiro, com o nome que o
-negócio dá a elas ("Pague Fácil", "Como chegar"); a linha _Facilidades da casa_ mostra apenas o que
-essas ações não cobrem. No restaurante sobra só Redes; na barbearia, cujas ações não apontam para
-nenhuma facilidade, aparecem as cinco. Se todas estiverem cobertas, a linha não é renderizada.
+Tudo o que o cliente pode fazer vive em **uma lista só**, logo abaixo do topo: as ações do projeto
+primeiro, com o nome que o negócio dá a elas ("Pague Fácil", "Como chegar"), e depois as facilidades
+que essas ações não cobrem. No restaurante entra só Redes no fim; na barbearia, cujas ações não
+apontam para nenhuma facilidade, entram as cinco.
+
+Assim cada facilidade tem um ponto de entrada único. As linhas que abrem alguma coisa mostram seta e
+ganham faixa da cor do negócio ao passar o mouse; as que são só informação ficam sem seta.
 
 No desktop ele aparece centralizado; no celular sobe como folha inferior, com alça e cantos
 arredondados só em cima. Fecha no botão, no Escape ou tocando fora, devolve o foco ao atalho que o
