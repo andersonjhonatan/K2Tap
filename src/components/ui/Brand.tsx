@@ -1,3 +1,5 @@
+import Image from 'next/image'
+import { k2TapLogoData } from './k2TapLogo'
 import styles from './ui.module.css'
 
 type BrandProps = {
@@ -6,16 +8,16 @@ type BrandProps = {
 
 export function Brand({ compact = false }: BrandProps) {
   return (
-    <span className={styles.brand}>
-      <span className={styles.brandMark} aria-hidden="true">
-        <span>K2</span>
-      </span>
-      {!compact && (
-        <span className={styles.brandText}>
-          K2 TAP
-          <small>by K2 Tech</small>
-        </span>
-      )}
+    <span className={`${styles.brand} ${compact ? styles.brandCompact : ''}`}>
+      <Image
+        className={styles.brandImage}
+        src={k2TapLogoData}
+        alt="K2 Tap"
+        width={540}
+        height={306}
+        priority
+        unoptimized
+      />
     </span>
   )
 }
