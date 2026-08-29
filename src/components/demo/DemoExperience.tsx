@@ -1,13 +1,14 @@
 'use client'
 
-import type { CSSProperties } from 'react'
 import { useCallback, useRef, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, ConciergeBell } from 'lucide-react'
 import type { FacilityKind, ProjectConfig } from '@/types/project'
+import { experienceTheme } from '@/lib/theme'
 import { siteConfig } from '@/config/site'
 import { useCopyToast } from '@/hooks/useCopyToast'
 import { Toast } from '@/components/feedback/Toast'
+import { ExperienceArtwork } from '@/components/artwork/ExperienceArtwork'
 import { ExperienceIcon } from '@/components/showcase/ExperienceIcon'
 import { DemoBar } from './DemoBar'
 import {
@@ -42,24 +43,19 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
   const openerRef = useRef<HTMLButtonElement | null>(null)
   const { toast, dismiss, copy, notify } = useCopyToast()
 
-  const theme = {
-    '--experience-bg': project.theme.background,
-    '--experience-fg': project.theme.foreground,
-    '--experience-muted': project.theme.muted,
-    '--experience-accent': project.theme.accent,
-    '--experience-surface': project.theme.surface,
-    '--experience-border': project.theme.border,
-  } as CSSProperties
+  const theme = experienceTheme(project.theme)
 
   // Uma lista só: as ações da casa primeiro, com o nome que o negócio dá a elas
   // ("Pague Fácil", "Como chegar"), e depois as facilidades que elas não cobrem.
   const covered = new Set(project.actions.map((action) => action.facility))
   const menu: MenuEntry[] = [
-    ...project.actions.map((action) => ({
+    ...project.actions.map((action, index) => ({
       key: action.id,
       icon: <ExperienceIcon name={action.icon} size={22} />,
       label: action.label,
-      description: action.description,
+      // A primeira ação carrega a chamada principal do negócio, que antes
+      // aparecia como um botão solto no topo dizendo a mesma coisa.
+      description: index === 0 ? project.experience.primaryCta : action.description,
       facility: isCustomerFacility(action.facility) ? action.facility : undefined,
     })),
     ...customerFacilities
@@ -102,17 +98,26 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
           <small>{project.experience.eyebrow}</small>
           <h1>{project.experience.headline}</h1>
           <p>{project.experience.description}</p>
-          <div className={styles.heroActions}>
-            <span className={styles.heroCta}>{project.experience.primaryCta}</span>
-          </div>
         </header>
+
+        <ExperienceArtwork
+          className={styles.artwork}
+          projectId={project.id}
+          eyebrow={project.experience.artworkEyebrow}
+          title={project.experience.artworkTitle}
+          description={project.experience.artworkDescription}
+        />
 
         {table && project.staffCall && (
           <DemoStaffCall staffCall={project.staffCall} table={table} />
         )}
 
         <nav className={styles.menu} aria-label="O que você pode fazer aqui">
-          {menu.map((item) => {
+          <h2 className={styles.menuTitle}>O que você quer fazer?</h2>
+
+          {menu.map((item, index) => {
+            // O primeiro item é o que o negócio quer que o cliente faça.
+            const className = `${styles.menuItem} ${index === 0 ? styles.menuFeature : ''}`
             const inner = (
               <>
                 <span className={styles.menuIcon}>{item.icon}</span>
@@ -120,17 +125,15 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
                   <b>{item.label}</b>
                   <small>{item.description}</small>
                 </span>
-                {item.facility && (
-                  <span className={styles.menuArrow} aria-hidden="true">
-                    <ArrowRight size={18} />
-                  </span>
-                )}
+                <span className={styles.menuArrow} aria-hidden="true">
+                  <ArrowRight size={18} />
+                </span>
               </>
             )
 
             return item.facility ? (
               <button
-                className={styles.menuItem}
+                className={className}
                 key={item.key}
                 type="button"
                 onClick={(event) => openFacility(item.facility!, event.currentTarget)}
@@ -138,7 +141,7 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
                 {inner}
               </button>
             ) : (
-              <div className={styles.menuItem} key={item.key}>
+              <div className={className} key={item.key}>
                 {inner}
               </div>
             )

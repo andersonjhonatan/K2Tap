@@ -255,192 +255,8 @@
   font-weight: 850;
 }
 
-.artwork {
-  position: relative;
-  min-height: 162px;
-  overflow: hidden;
+.phoneArtwork {
   margin-top: 14px;
-  border: 1px solid var(--experience-border);
-  border-radius: 22px;
-  background: var(--experience-surface);
-}
-
-.artCopy {
-  position: relative;
-  z-index: 3;
-  max-width: 72%;
-  padding: 22px 18px;
-}
-
-.artCopy small,
-.artCopy b,
-.artCopy span {
-  display: block;
-}
-
-.artCopy small {
-  color: var(--experience-accent);
-  font-size: 0.45rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-}
-
-.artCopy b {
-  margin-top: 12px;
-  font-size: 1.12rem;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
-}
-
-.artCopy span {
-  margin-top: 9px;
-  color: var(--experience-muted);
-  font-size: 0.56rem;
-  line-height: 1.45;
-}
-
-.restaurantArtwork {
-  background: linear-gradient(140deg, #fff8eb, #ead1b7);
-}
-
-.plate {
-  position: absolute;
-  right: -24px;
-  bottom: -23px;
-  width: 138px;
-  height: 138px;
-  transform: rotate(-8deg);
-  border: 16px solid #f9efe1;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 45% 42%,
-    #d46b45 0 18%,
-    #6e8b48 19% 30%,
-    #ead29c 31% 58%,
-    #8a4c32 59% 65%,
-    #f7e8d6 66%
-  );
-  box-shadow: 0 14px 32px rgb(74 42 25 / 20%);
-}
-
-.plate::after {
-  position: absolute;
-  right: 21px;
-  bottom: 18px;
-  display: grid;
-  width: 28px;
-  height: 28px;
-  place-items: center;
-  border-radius: 50%;
-  background: #3c2118;
-  color: white;
-  content: '12';
-  font-size: 0.5rem;
-  font-weight: 900;
-}
-
-.barberArtwork {
-  background: #171b20;
-}
-
-.barberLines {
-  position: absolute;
-  inset: -35% -10%;
-  transform: rotate(-15deg);
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0 20px,
-    rgb(201 166 107 / 13%) 21px 22px
-  );
-}
-
-.barberMark {
-  position: absolute;
-  right: -8px;
-  bottom: -32px;
-  color: rgb(201 166 107 / 12%);
-  font-family: Georgia, serif;
-  font-size: 7.2rem;
-  font-weight: 900;
-}
-
-.storeArtwork {
-  background: linear-gradient(140deg, #fff, #f1dfef);
-}
-
-.storeEdition {
-  position: absolute;
-  top: -34px;
-  right: -3px;
-  color: rgb(166 63 131 / 10%);
-  font-family: Georgia, serif;
-  font-size: 9rem;
-  line-height: 1;
-}
-
-.swatches {
-  position: absolute;
-  right: 18px;
-  bottom: 17px;
-  display: flex;
-  gap: 5px;
-}
-
-.swatches i {
-  width: 17px;
-  height: 38px;
-  transform: skew(-8deg);
-  background: #a63f83;
-}
-
-.swatches i:nth-child(2) {
-  background: #d3a5ca;
-}
-
-.swatches i:nth-child(3) {
-  background: #302034;
-}
-
-.serviceArtwork {
-  background: linear-gradient(140deg, #f8fffe, #d9efec);
-}
-
-.serviceGrid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.45;
-  background-image:
-    linear-gradient(rgb(22 133 127 / 10%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(22 133 127 / 10%) 1px, transparent 1px);
-  background-size: 18px 18px;
-}
-
-.serviceUi {
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  display: grid;
-  width: 72px;
-  gap: 6px;
-  padding: 11px;
-  border: 1px solid #b9dbd7;
-  border-radius: 14px;
-  background: rgb(255 255 255 / 78%);
-  box-shadow: 0 12px 26px rgb(17 59 58 / 12%);
-}
-
-.serviceUi i {
-  height: 5px;
-  border-radius: 999px;
-  background: #16857f;
-}
-
-.serviceUi i:nth-child(2) {
-  width: 70%;
-}
-
-.serviceUi i:nth-child(3) {
-  width: 45%;
 }
 
 .actionGrid {
@@ -500,7 +316,7 @@ button.actionCard:hover {
   padding: 16px;
   border-radius: 18px;
   background: var(--experience-accent);
-  color: white;
+  color: var(--experience-on-accent);
 }
 
 .highlight small,
@@ -710,7 +526,7 @@ button.actionCard:hover {
   place-items: center;
   border-radius: 14px;
   background: var(--experience-accent);
-  color: white;
+  color: var(--experience-on-accent);
 }
 
 .staffCallIcon i {

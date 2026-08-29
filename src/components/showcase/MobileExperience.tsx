@@ -1,6 +1,6 @@
-import type { CSSProperties } from 'react'
 import type { FacilityKind, ProjectConfig } from '@/types/project'
-import { ExperienceArtwork } from './experiences/ExperienceArtwork'
+import { experienceTheme } from '@/lib/theme'
+import { ExperienceArtwork } from '@/components/artwork/ExperienceArtwork'
 import {
   ActionGrid,
   ExperienceFooter,
@@ -19,14 +19,7 @@ type MobileExperienceProps = {
 }
 
 export function MobileExperience({ project, onOpenFacility }: MobileExperienceProps) {
-  const theme = {
-    '--experience-bg': project.theme.background,
-    '--experience-fg': project.theme.foreground,
-    '--experience-muted': project.theme.muted,
-    '--experience-accent': project.theme.accent,
-    '--experience-surface': project.theme.surface,
-    '--experience-border': project.theme.border,
-  } as CSSProperties
+  const theme = experienceTheme(project.theme)
 
   // Quando as ações do projeto já levam às facilidades, a grade completa seria
   // repetição: nesse caso basta o atalho das redes, que fica de fora delas.
@@ -37,6 +30,7 @@ export function MobileExperience({ project, onOpenFacility }: MobileExperiencePr
       <div className={styles.experience}>
         <ExperienceHeader project={project} />
         <ExperienceArtwork
+          className={styles.phoneArtwork}
           projectId={project.id}
           eyebrow={project.experience.artworkEyebrow}
           title={project.experience.artworkTitle}

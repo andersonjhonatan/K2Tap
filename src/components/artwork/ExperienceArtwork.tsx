@@ -1,17 +1,14 @@
+import type { CSSProperties, ReactNode } from 'react'
 import type { ProjectId } from '@/types/project'
-import styles from '../showcase.module.css'
+import styles from './artwork.module.css'
 
-/**
- * Decoração da arte de cada projeto. Todas são posicionadas em absoluto e o
- * texto fica acima delas por z-index, então a ordem no DOM não importa.
- */
-const decorations: Record<ProjectId, { className: string; decoration: React.ReactNode }> = {
+const decorations: Record<ProjectId, { className: string; decoration: ReactNode }> = {
   restaurant: {
-    className: styles.restaurantArtwork,
+    className: styles.restaurant,
     decoration: <div className={styles.plate} aria-hidden="true" />,
   },
   barber: {
-    className: styles.barberArtwork,
+    className: styles.barber,
     decoration: (
       <>
         <div className={styles.barberLines} aria-hidden="true" />
@@ -22,7 +19,7 @@ const decorations: Record<ProjectId, { className: string; decoration: React.Reac
     ),
   },
   store: {
-    className: styles.storeArtwork,
+    className: styles.store,
     decoration: (
       <>
         <div className={styles.storeEdition} aria-hidden="true">
@@ -37,7 +34,7 @@ const decorations: Record<ProjectId, { className: string; decoration: React.Reac
     ),
   },
   service: {
-    className: styles.serviceArtwork,
+    className: styles.service,
     decoration: (
       <>
         <div className={styles.serviceGrid} aria-hidden="true" />
@@ -51,22 +48,39 @@ const decorations: Record<ProjectId, { className: string; decoration: React.Reac
   },
 }
 
+type ExperienceArtworkProps = {
+  projectId: ProjectId
+  eyebrow: string
+  title: string
+  description: string
+  /**
+   * Multiplica toda a composição. Quando não vem, quem chama controla pelo CSS
+   * com `--art-scale`, o que permite variar por breakpoint.
+   */
+  scale?: number
+  className?: string
+}
+
+/**
+ * A composição visual de cada negócio. As decorações são posicionadas em
+ * absoluto e o texto fica acima delas por z-index, então a ordem não importa.
+ */
 export function ExperienceArtwork({
   projectId,
   eyebrow,
   title,
   description,
-}: {
-  projectId: ProjectId
-  eyebrow: string
-  title: string
-  description: string
-}) {
-  const { className, decoration } = decorations[projectId]
+  scale,
+  className = '',
+}: ExperienceArtworkProps) {
+  const { className: theme, decoration } = decorations[projectId]
 
   return (
-    <div className={`${styles.artwork} ${className}`}>
-      <div className={styles.artCopy}>
+    <div
+      className={`${styles.artwork} ${theme} ${className}`}
+      style={scale ? ({ '--art-scale': scale } as CSSProperties) : undefined}
+    >
+      <div className={styles.copy}>
         <small>{eyebrow}</small>
         <b>{title}</b>
         <span>{description}</span>

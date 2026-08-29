@@ -87,6 +87,8 @@ export type ProjectConfig = {
     foreground: string
     muted: string
     accent: string
+    /** Cor do texto sobre o accent: nem todo accent aceita branco por cima. */
+    onAccent: string
     surface: string
     border: string
   }

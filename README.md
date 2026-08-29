@@ -56,6 +56,7 @@ src/
     demo/mesa/[numero]/   # a mesma experiência aberta a partir de uma peça de mesa
     garcom/               # painel de chamados de quem atende
   components/
+    artwork/              # a arte de cada negócio, usada pelas duas superfícies
     demo/                 # experiência em tela cheia e modal das rotas /demo
     facilities/           # modal e seis painéis de facilidades
     feedback/             # toast interno
@@ -97,7 +98,7 @@ artifacts/
 1. Adicione um novo identificador em `ProjectId`, em `src/types/project.ts`.
 2. Inclua a configuração completa em `src/data/projects.ts`.
 3. Registre a arte do projeto em `decorations`, dentro de
-   `src/components/showcase/experiences/ExperienceArtwork.tsx`.
+   `src/components/artwork/ExperienceArtwork.tsx`.
 4. Associe um ícone em `ProjectSelector.tsx`.
 5. Adicione ou atualize os testes de troca de projeto.
 
@@ -226,13 +227,15 @@ A página não abre com Wi-Fi, Pix, redes, mapa e opinião expostos: cada um é 
 cliente pede. O toque abre o `DemoModal`, um painel de vidro — fundo escurecido com desfoque e um
 brilho da cor do negócio — que herda o tema do projeto.
 
-Tudo o que o cliente pode fazer vive em **uma lista só**, logo abaixo do topo: as ações do projeto
+Tudo o que o cliente pode fazer vive em **uma lista só**, logo abaixo da arte: as ações do projeto
 primeiro, com o nome que o negócio dá a elas ("Pague Fácil", "Como chegar"), e depois as facilidades
 que essas ações não cobrem. No restaurante entra só Redes no fim; na barbearia, cujas ações não
-apontam para nenhuma facilidade, entram as cinco.
+apontam para nenhuma facilidade, entram as cinco. Assim cada facilidade tem um ponto de entrada
+único.
 
-Assim cada facilidade tem um ponto de entrada único. As linhas que abrem alguma coisa mostram seta e
-ganham faixa da cor do negócio ao passar o mouse; as que são só informação ficam sem seta.
+A primeira linha é a ação principal do negócio e vem destacada, preenchida com a cor da marca e
+carregando o texto de `experience.primaryCta` — que antes era um botão solto no topo dizendo a mesma
+coisa. As demais mostram seta quando abrem alguma coisa e ficam sem seta quando são só informação.
 
 No desktop ele aparece centralizado; no celular sobe como folha inferior, com alça e cantos
 arredondados só em cima. Fecha no botão, no Escape ou tocando fora, devolve o foco ao atalho que o
@@ -343,6 +346,23 @@ npm run start
 ```
 
 O servidor usa a porta `3000` por padrão.
+
+## A arte de cada negócio
+
+`components/artwork/ExperienceArtwork.tsx` desenha a composição de cada projeto — o prato do
+restaurante, as listras e o monograma da barbearia, as amostras da loja, a grade do serviço. Tudo é
+CSS, sem imagem.
+
+A mesma composição serve a prévia dentro do telefone e a página inteira: as medidas são multiplicadas
+por `--art-scale`, que vale 1 na prévia e 1.6 na demonstração (1.15 no celular). Quem chama pode
+passar a escala pela prop `scale` ou controlá-la pelo CSS, o que permite variar por breakpoint.
+
+## Cor sobre a cor da marca
+
+`theme.onAccent` existe porque nem todo accent aceita branco por cima: o dourado da barbearia com
+texto branco fica ilegível. Todo lugar que pinta algo com `--experience-accent` usa
+`--experience-on-accent` no texto — destaque da lista, ícones, botão do chamado, chips e o bloco de
+destaque do dia.
 
 ## Onde mora cada regra
 

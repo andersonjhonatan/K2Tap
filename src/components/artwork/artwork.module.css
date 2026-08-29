@@ -1,0 +1,202 @@
+/*
+ * A arte de cada negócio, compartilhada pela prévia no telefone e pela
+ * demonstração em tela cheia. Tudo é dimensionado por --art-scale: a prévia
+ * usa 1 e a página inteira usa um valor maior, sem duplicar composição.
+ */
+
+.artwork {
+  --art-scale: 1;
+
+  position: relative;
+  min-height: calc(162px * var(--art-scale));
+  overflow: hidden;
+  border: 1px solid var(--experience-border);
+  border-radius: calc(22px * var(--art-scale));
+  background: var(--experience-surface);
+}
+
+.copy {
+  position: relative;
+  z-index: 3;
+  max-width: 72%;
+  padding: calc(22px * var(--art-scale)) calc(18px * var(--art-scale));
+}
+
+.copy small,
+.copy b,
+.copy span {
+  display: block;
+}
+
+.copy small {
+  color: var(--experience-accent);
+  font-size: calc(0.45rem * var(--art-scale));
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.copy b {
+  margin-top: calc(12px * var(--art-scale));
+  font-size: calc(1.12rem * var(--art-scale));
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.copy span {
+  margin-top: calc(9px * var(--art-scale));
+  color: var(--experience-muted);
+  font-size: calc(0.56rem * var(--art-scale));
+  line-height: 1.45;
+}
+
+/* Restaurante */
+
+.restaurant {
+  background: linear-gradient(140deg, #fff8eb, #ead1b7);
+}
+
+.plate {
+  position: absolute;
+  right: calc(-24px * var(--art-scale));
+  bottom: calc(-23px * var(--art-scale));
+  width: calc(138px * var(--art-scale));
+  height: calc(138px * var(--art-scale));
+  transform: rotate(-8deg);
+  border: calc(16px * var(--art-scale)) solid #f9efe1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 45% 42%,
+    #d46b45 0 18%,
+    #6e8b48 19% 30%,
+    #ead29c 31% 58%,
+    #8a4c32 59% 65%,
+    #f7e8d6 66%
+  );
+  box-shadow: 0 calc(14px * var(--art-scale)) calc(32px * var(--art-scale)) rgb(74 42 25 / 20%);
+}
+
+.plate::after {
+  position: absolute;
+  right: calc(21px * var(--art-scale));
+  bottom: calc(18px * var(--art-scale));
+  display: grid;
+  width: calc(28px * var(--art-scale));
+  height: calc(28px * var(--art-scale));
+  place-items: center;
+  border-radius: 50%;
+  background: #3c2118;
+  color: white;
+  content: '12';
+  font-size: calc(0.5rem * var(--art-scale));
+  font-weight: 900;
+}
+
+/* Barbearia */
+
+.barber {
+  background: #171b20;
+}
+
+.barberLines {
+  position: absolute;
+  inset: -35% -10%;
+  transform: rotate(-15deg);
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 calc(20px * var(--art-scale)),
+    rgb(201 166 107 / 13%) calc(21px * var(--art-scale)) calc(22px * var(--art-scale))
+  );
+}
+
+.barberMark {
+  position: absolute;
+  right: calc(-8px * var(--art-scale));
+  bottom: calc(-32px * var(--art-scale));
+  color: rgb(201 166 107 / 12%);
+  font-family: Georgia, serif;
+  font-size: calc(7.2rem * var(--art-scale));
+  font-weight: 900;
+}
+
+/* Loja */
+
+.store {
+  background: linear-gradient(140deg, #fff, #f1dfef);
+}
+
+.storeEdition {
+  position: absolute;
+  top: calc(-34px * var(--art-scale));
+  right: calc(-3px * var(--art-scale));
+  color: rgb(166 63 131 / 10%);
+  font-family: Georgia, serif;
+  font-size: calc(9rem * var(--art-scale));
+  line-height: 1;
+}
+
+.swatches {
+  position: absolute;
+  right: calc(18px * var(--art-scale));
+  bottom: calc(17px * var(--art-scale));
+  display: flex;
+  gap: calc(5px * var(--art-scale));
+}
+
+.swatches i {
+  width: calc(17px * var(--art-scale));
+  height: calc(38px * var(--art-scale));
+  transform: skew(-8deg);
+  background: #a63f83;
+}
+
+.swatches i:nth-child(2) {
+  background: #d3a5ca;
+}
+
+.swatches i:nth-child(3) {
+  background: #302034;
+}
+
+/* Serviço */
+
+.service {
+  background: linear-gradient(140deg, #f8fffe, #d9efec);
+}
+
+.serviceGrid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+  background-image:
+    linear-gradient(rgb(22 133 127 / 10%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(22 133 127 / 10%) 1px, transparent 1px);
+  background-size: calc(18px * var(--art-scale)) calc(18px * var(--art-scale));
+}
+
+.serviceUi {
+  position: absolute;
+  right: calc(18px * var(--art-scale));
+  bottom: calc(18px * var(--art-scale));
+  display: grid;
+  width: calc(72px * var(--art-scale));
+  gap: calc(6px * var(--art-scale));
+  padding: calc(11px * var(--art-scale));
+  border: 1px solid #b9dbd7;
+  border-radius: calc(14px * var(--art-scale));
+  background: rgb(255 255 255 / 78%);
+  box-shadow: 0 calc(12px * var(--art-scale)) calc(26px * var(--art-scale)) rgb(17 59 58 / 12%);
+}
+
+.serviceUi i {
+  height: calc(5px * var(--art-scale));
+  border-radius: 999px;
+  background: #16857f;
+}
+
+.serviceUi i:nth-child(2) {
+  width: 70%;
+}
+
+.serviceUi i:nth-child(3) {
+  width: 45%;
+}
