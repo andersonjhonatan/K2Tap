@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from 'react'
 import { projects } from '@/data/projects'
 import type { FacilityKind, ProjectId } from '@/types/project'
 import { FacilitiesModal } from '@/components/facilities/FacilitiesModal'
+import { DemoLaunch } from './DemoLaunch'
 import { PhoneMockup } from './PhoneMockup'
 import { ProjectSelector } from './ProjectSelector'
 import styles from './showcase.module.css'
@@ -77,6 +78,8 @@ export function ProjectShowcase() {
               />
             </div>
           </div>
+
+          <DemoLaunch project={activeProject} />
         </div>
       </div>
     </section>

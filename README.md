@@ -52,12 +52,17 @@ npm run format     # formata os arquivos com Prettier
 ```text
 src/
   app/                    # App Router, metadata, SEO e páginas
+    demo/[slug]/          # demonstração real de cada projeto, em tela cheia
+    demo/mesa/[numero]/   # a mesma experiência aberta a partir de uma peça de mesa
+    garcom/               # painel de chamados de quem atende
   components/
-    facilities/           # modal e cinco painéis de facilidades
+    demo/                 # experiência em tela cheia das rotas /demo
+    facilities/           # modal e seis painéis de facilidades
     feedback/             # toast interno
     landing/              # Hero, demo NFC, possibilidades, métricas e CTA
     layout/               # Header e Footer
-    showcase/             # seletor, telefone e quatro experiências
+    showcase/             # seletor, telefone, quatro experiências e chamada da demonstração
+    waiter/               # painel da equipe em /garcom
     ui/                   # elementos compartilhados
   config/                 # dados institucionais
   data/                   # navegação e projetos fictícios
@@ -123,6 +128,73 @@ O provider atual é deliberadamente `demo`. A aplicação gera apenas uma refer�
 
 Para produção, um backend ou provedor de pagamentos deve gerar o BR Code/Pix Copia e Cola e preencher `pix.payload`. O adaptador `src/lib/pix.ts` aceita esse payload sem exigir mudanças nos componentes de apresentação. Nunca coloque tokens, chaves privadas ou credenciais de provider no frontend.
 
+## Chamar garçom (atendimento na mesa)
+
+Projetos com equipe de atendimento — restaurante, pizzaria, bar, recepção — podem exibir um atalho
+para chamar quem atende. O recurso é opcional e aparece somente quando o projeto define `staffCall`
+em `src/data/projects.ts`:
+
+```ts
+staffCall: {
+  role: 'Garçom',                       // rótulo da aba, do painel e do chamado
+  table: '12',                          // identificador enviado na URL do chamado
+  spot: 'Mesa 12',                      // rótulo legível da origem
+  actionLabel: 'Chamar garçom',
+  actionDescription: 'Atendimento na mesa em um toque.',
+  headline: 'Chame o garçom sem levantar a mão.',
+  description: 'Texto de apoio exibido acima dos motivos.',
+  reasons: ['Fazer o pedido', 'Pedir a conta'],
+  customerPath: '/demo/mesa/12',
+  staffPath: '/garcom',
+}
+```
+
+O cliente escolhe o motivo e confirma. O chamado então vira um link para o painel da equipe, com a
+mesa e o motivo na própria URL:
+
+```text
+/demo/mesa/12   →   /garcom?mesa=12&motivo=Pedir+a+conta
+```
+
+`src/lib/staff-call.ts` monta essas URLs. A origem é resolvida no navegador, então os QR Codes
+funcionam em `localhost`, em preview e no domínio final sem configuração extra.
+
+O chamado aparece em duas superfícies:
+
+- na prévia dentro do telefone, pela aba do `role` no modal de facilidades (`StaffCallPanel`);
+- na demonstração em tela cheia, na seção `#chamar` (`DemoStaffCall`). Na rota de mesa ela vem logo
+  depois do topo, porque é o motivo de o cliente ter encostado o celular.
+
+O envio é encenado: nada trafega entre aparelhos e nenhum chamado real é disparado. O que é real é o
+link — abra `/garcom?mesa=12&motivo=...` em outro celular e o chamado daquela mesa aparece na fila,
+no topo, com o tempo de espera correndo.
+
+Para habilitar em outro projeto, basta adicionar o bloco `staffCall` na configuração dele — a aba, o
+atalho, a seção e o painel passam a existir automaticamente. Sem o bloco, nada muda.
+
+## Rotas de demonstração
+
+Além da prévia dentro do mockup de telefone, a experiência roda de verdade em rotas próprias. É
+para lá que aponta o botão **"Veja como fica na sua empresa"**, em
+`src/components/showcase/DemoLaunch.tsx`, usando o slug do projeto selecionado no momento.
+
+| Rota                  | O que é                                                             |
+| --------------------- | ------------------------------------------------------------------- |
+| `/demo/[slug]`        | A experiência completa em tela cheia, como o cliente final vê       |
+| `/demo/mesa/[numero]` | A mesma experiência aberta pela peça de mesa, já com a mesa no topo |
+| `/garcom`             | O painel de chamados de quem atende o salão                         |
+
+`/demo/[slug]` é gerado estaticamente para os quatro projetos e entra no `sitemap.ts`. As rotas de
+mesa e do painel da equipe são operacionais: ficam com `robots: noindex` e são bloqueadas em
+`robots.ts`.
+
+Os componentes ficam em `src/components/demo/` e recebem a mesma `ProjectConfig` do restante do
+projeto — tema, ações, Wi-Fi, Pix, redes, localização e horários vêm todos da configuração, sem
+conteúdo espalhado no JSX. O painel da equipe fica em `src/components/waiter/`.
+
+Para trocar o número da mesa demonstrada, basta abrir outra rota: `/demo/mesa/7`, `/demo/mesa/A3`.
+O identificador aceita de um a quatro caracteres alfanuméricos e qualquer outro valor cai em 404.
+
 ## Como alterar redes sociais
 
 Edite `socials` na configuração do projeto. Cada item contém `network`, `handle` e `href`. Os links atuais usam `example.com` para evitar que a demonstração direcione a contas reais por acidente.
@@ -146,7 +218,9 @@ O Restaurante possui `openingHours.summary`, `openingHours.period` e uma lista `
 
 ## Modal de facilidades
 
-`FacilitiesModal` é renderizado dentro do mockup do telefone. Ele possui:
+`FacilitiesModal` é renderizado dentro do mockup do telefone. As abas disponíveis dependem do
+projeto: Wi-Fi, Pix, Redes, Mapa e Opinião sempre aparecem, e a aba de chamado da equipe entra
+apenas quando o projeto define `staffCall`. Ele possui:
 
 - dialog acessível com `aria-modal`;
 - fechamento por Escape;
@@ -159,7 +233,7 @@ O Restaurante possui `openingHours.summary`, `openingHours.period` e uma lista `
 - toast com `aria-live`;
 - clipping pelo próprio telefone.
 
-Os painéis Wi-Fi, Pix, Redes, Mapa e Opinião são componentes independentes.
+Os painéis Wi-Fi, Pix, Chamar garçom, Redes, Mapa e Opinião são componentes independentes.
 
 ## Demonstração NFC
 
@@ -168,6 +242,8 @@ Os painéis Wi-Fi, Pix, Redes, Mapa e Opinião são componentes independentes.
 ## SEO
 
 A aplicação usa Metadata API, Open Graph dinâmico, Twitter Card, ícone, `robots.ts`, `sitemap.ts` e JSON-LD para Organização e Produto.
+
+As rotas `/demo/[slug]` entram no `sitemap.ts`; `/garcom` e `/demo/mesa/` ficam fora do índice.
 
 Antes de publicar em domínio definitivo, revise `siteConfig.url` e `siteConfig.commercialUrl` em `src/config/site.ts`.
 
@@ -182,9 +258,14 @@ Os testes de componente cobrem:
 - toast;
 - estrelas e envio de opinião;
 - fallback da Web Share API;
-- seleção e replay da demonstração NFC.
+- seleção e replay da demonstração NFC;
+- chamado do garçom e exibição dos links do cliente e da equipe;
+- destino do botão "Veja como fica na sua empresa" a cada troca de projeto;
+- experiência em tela cheia, chamado com mesa e motivo na URL;
+- fila do painel da equipe, atender e concluir.
 
-O E2E cobre o caminho completo da landing até Wi-Fi, Pix, Redes, Mapa/compartilhamento e Opinião. A suíte visual registra 375×812, 390×844, 430×932 e 1440×900.
+O E2E cobre o caminho completo da landing até Wi-Fi, Pix, Redes, Mapa/compartilhamento, Opinião e
+chamado do garçom, seguindo para `/demo/k2-restaurante`, `/demo/mesa/12` e `/garcom`. A suíte visual registra 375×812, 390×844, 430×932 e 1440×900.
 
 ## Deploy
 
@@ -210,4 +291,8 @@ O servidor usa a porta `3000` por padrão.
 
 ## Evolução futura
 
-A configuração já utiliza slugs como `k2-restaurante`, `k2-barbearia`, `k2-loja` e `k2-servico`. Isso prepara a base para rotas futuras `/tag/[slug]` e dados multi-tenant, sem alterar a demonstração atual. A próxima etapa recomendada é resolver o projeto por slug em uma camada de dados segura e manter payloads reais de pagamento exclusivamente no backend.
+Os slugs `k2-restaurante`, `k2-barbearia`, `k2-loja` e `k2-servico` já resolvem rotas reais em
+`/demo/[slug]`. A próxima etapa recomendada é trocar o array local por uma camada de dados
+multi-tenant resolvida por slug, manter payloads reais de pagamento exclusivamente no backend e
+levar a fila de chamados para um canal compartilhado (WebSocket ou polling), o que faria o painel
+da equipe deixar de ser encenado e passar a receber chamados de qualquer aparelho.

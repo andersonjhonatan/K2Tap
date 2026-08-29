@@ -72,4 +72,50 @@ describe('ProjectShowcase', () => {
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
     await waitFor(() => expect(opener).toHaveFocus())
   })
+  it('chama o garçom e revela os links do cliente e da equipe', async () => {
+    const user = userEvent.setup()
+    render(<ProjectShowcase />)
+
+    await user.click(screen.getByRole('button', { name: /PRECISA DE ALGUMA COISA/ }))
+    expect(screen.getByRole('dialog', { name: 'Chamar atendimento' })).toBeInTheDocument()
+
+    await user.click(screen.getByRole('radio', { name: 'Pedir a conta' }))
+    await user.click(screen.getByRole('button', { name: 'Chamar garçom' }))
+
+    expect(
+      await screen.findByText(/Garçom a caminho da mesa 12/, {}, { timeout: 4000 }),
+    ).toBeInTheDocument()
+    expect(screen.getByText(/Motivo enviado: Pedir a conta/)).toBeInTheDocument()
+
+    const links = screen.getAllByRole('link', { name: /Abrir link/ })
+    expect(links).toHaveLength(2)
+    expect(links[0]).toHaveAttribute('href', expect.stringContaining('/demo/mesa/12'))
+    expect(links[1]).toHaveAttribute('href', expect.stringContaining('/garcom'))
+  })
+
+  it('leva para a rota da demonstração real do projeto ativo', async () => {
+    const user = userEvent.setup()
+    render(<ProjectShowcase />)
+
+    expect(screen.getByRole('link', { name: /Veja como fica na sua empresa/ })).toHaveAttribute(
+      'href',
+      '/demo/k2-restaurante',
+    )
+    expect(screen.getByRole('link', { name: /Tela do cliente na mesa 12/ })).toHaveAttribute(
+      'href',
+      '/demo/mesa/12',
+    )
+    expect(screen.getByRole('link', { name: /Painel do garçom/ })).toHaveAttribute(
+      'href',
+      '/garcom',
+    )
+
+    await user.click(screen.getByRole('tab', { name: /K2 Barbearia/ }))
+
+    expect(screen.getByRole('link', { name: /Veja como fica na sua empresa/ })).toHaveAttribute(
+      'href',
+      '/demo/k2-barbearia',
+    )
+    expect(screen.queryByRole('link', { name: /Painel do garçom/ })).not.toBeInTheDocument()
+  })
 })

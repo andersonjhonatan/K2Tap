@@ -2,6 +2,7 @@ import {
   BadgeCheck,
   BriefcaseBusiness,
   CalendarDays,
+  ConciergeBell,
   FolderCheck,
   Grid2X2,
   MapPin,
@@ -20,6 +21,7 @@ import type { ProjectIcon } from '@/types/project'
 
 const icons = {
   'badge-check': BadgeCheck,
+  bell: ConciergeBell,
   briefcase: BriefcaseBusiness,
   calendar: CalendarDays,
   folder: FolderCheck,

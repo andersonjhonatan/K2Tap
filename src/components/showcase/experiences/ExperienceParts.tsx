@@ -1,4 +1,4 @@
-import { ArrowRight, Heart, MapPin, QrCode, Star, Wifi } from 'lucide-react'
+import { ArrowRight, ConciergeBell, Heart, MapPin, QrCode, Star, Wifi } from 'lucide-react'
 import type { FacilityKind, ProjectConfig } from '@/types/project'
 import { ExperienceIcon } from '../ExperienceIcon'
 import type { ExperienceProps } from './types'
@@ -111,6 +111,38 @@ export function SocialShortcut({ onOpenFacility }: Pick<ExperienceProps, 'onOpen
       <span>
         <b>Redes sociais</b>
         <span>Instagram • WhatsApp • TikTok</span>
+      </span>
+      <ArrowRight size={15} aria-hidden="true" />
+    </button>
+  )
+}
+
+export function StaffCallShortcut({
+  project,
+  onOpenFacility,
+}: {
+  project: ProjectConfig
+  onOpenFacility: (kind: FacilityKind, trigger: HTMLButtonElement) => void
+}) {
+  const staffCall = project.staffCall
+  if (!staffCall) return null
+
+  return (
+    <button
+      className={styles.staffCall}
+      type="button"
+      onClick={(event) => onOpenFacility('staff', event.currentTarget)}
+    >
+      <span className={styles.staffCallIcon} aria-hidden="true">
+        <ConciergeBell size={17} />
+        <i />
+      </span>
+      <span className={styles.staffCallCopy}>
+        <small>PRECISA DE ALGUMA COISA?</small>
+        <b>{staffCall.actionLabel}</b>
+        <span>
+          {staffCall.spot} • {staffCall.actionDescription}
+        </span>
       </span>
       <ArrowRight size={15} aria-hidden="true" />
     </button>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useRef, useState } from 'react'
-import { Heart, MapPin, QrCode, Star, Wifi, X } from 'lucide-react'
+import { ConciergeBell, Heart, MapPin, QrCode, Star, Wifi, X } from 'lucide-react'
 import type { FacilityKind, ProjectConfig } from '@/types/project'
 import { useClipboard } from '@/hooks/useClipboard'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
@@ -12,6 +12,7 @@ import { LocationPanel } from './LocationPanel'
 import { PixPanel } from './PixPanel'
 import { ReviewPanel } from './ReviewPanel'
 import { SocialPanel } from './SocialPanel'
+import { StaffCallPanel } from './StaffCallPanel'
 import { WifiPanel } from './WifiPanel'
 import type { CopyFeedback } from './types'
 import styles from './facilities.module.css'
@@ -26,6 +27,11 @@ const facilityMeta = {
     title: 'Pagamento rápido',
     subtitle: 'QR Code demonstrativo e chave fictícia em um só lugar.',
     Icon: QrCode,
+  },
+  staff: {
+    title: 'Chamar atendimento',
+    subtitle: 'O chamado sai da mesa e chega no celular da equipe.',
+    Icon: ConciergeBell,
   },
   social: {
     title: 'Redes sociais',
@@ -50,8 +56,17 @@ type FacilitiesModalProps = {
   onClose: () => void
 }
 
+const baseFacilities: FacilityKind[] = ['wifi', 'pix', 'social', 'location', 'review']
+
+function listFacilities(project: ProjectConfig): FacilityKind[] {
+  return project.staffCall ? [...baseFacilities, 'staff'] : baseFacilities
+}
+
 export function FacilitiesModal({ project, initialFacility, onClose }: FacilitiesModalProps) {
-  const [activeFacility, setActiveFacility] = useState(initialFacility)
+  const available = listFacilities(project)
+  const [activeFacility, setActiveFacility] = useState(
+    available.includes(initialFacility) ? initialFacility : 'wifi',
+  )
   const modalRef = useRef<HTMLDivElement>(null)
   const copy = useClipboard()
   const { toast, showToast, dismiss } = useToast()
@@ -132,11 +147,19 @@ export function FacilitiesModal({ project, initialFacility, onClose }: Facilitie
           </button>
         </header>
 
-        <FacilitiesNavigation active={activeFacility} onChange={changeFacility} />
+        <FacilitiesNavigation
+          active={activeFacility}
+          available={available}
+          staffLabel={project.staffCall?.role}
+          onChange={changeFacility}
+        />
 
         <div className={styles.modalBody} id="facility-panel" role="tabpanel">
           {activeFacility === 'wifi' && <WifiPanel project={project} onCopy={handleCopy} />}
           {activeFacility === 'pix' && <PixPanel project={project} onCopy={handleCopy} />}
+          {activeFacility === 'staff' && project.staffCall && (
+            <StaffCallPanel staffCall={project.staffCall} onCopy={handleCopy} />
+          )}
           {activeFacility === 'social' && <SocialPanel project={project} />}
           {activeFacility === 'location' && (
             <LocationPanel project={project} onCopy={handleCopy} onNotify={notify} />

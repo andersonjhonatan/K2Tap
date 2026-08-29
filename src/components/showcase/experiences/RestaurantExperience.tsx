@@ -4,6 +4,7 @@ import {
   ExperienceHeader,
   Highlight,
   SocialShortcut,
+  StaffCallShortcut,
 } from './ExperienceParts'
 import type { ExperienceProps } from './types'
 import styles from '../showcase.module.css'
@@ -22,6 +23,7 @@ export function RestaurantExperience({ project, onOpenFacility }: ExperienceProp
       </div>
 
       <ActionGrid project={project} onOpenFacility={onOpenFacility} />
+      <StaffCallShortcut project={project} onOpenFacility={onOpenFacility} />
       <Highlight project={project} />
 
       {project.openingHours && (

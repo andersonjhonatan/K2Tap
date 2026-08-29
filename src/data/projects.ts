@@ -113,6 +113,19 @@ export const projects = [
       address: 'Av. Boa Viagem, 1200 — Recife, PE',
       mapQuery: 'Boa Viagem Recife PE',
     },
+    staffCall: {
+      role: 'Garçom',
+      table: '12',
+      spot: 'Mesa 12',
+      actionLabel: 'Chamar garçom',
+      actionDescription: 'Atendimento na mesa em um toque.',
+      headline: 'Chame o garçom sem levantar a mão.',
+      description:
+        'O cliente encosta o celular na peça da mesa, escolhe o motivo e confirma. O chamado abre na hora no painel de quem está atendendo.',
+      reasons: ['Fazer o pedido', 'Pedir a conta', 'Repor bebida', 'Tirar uma dúvida'],
+      customerPath: '/demo/mesa/12',
+      staffPath: '/garcom',
+    },
     openingHours: {
       summary: 'Aberto todos os dias',
       period: '08:00 às 22:00',
@@ -289,3 +302,6 @@ export const defaultProject = projects[0]
 export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug)
 }
+
+/** Projeto usado pelas rotas de mesa e pelo painel da equipe. */
+export const tableProject = projects.find((project) => project.staffCall)
