@@ -35,6 +35,15 @@ export type SocialLink = {
   href: string
 }
 
+export type StaffCallReasonIcon = 'bell' | 'order' | 'drink' | 'bill' | 'help'
+
+export type StaffCallReason = {
+  /** Identificador estável, usado na fila e na URL do chamado. */
+  id: string
+  label: string
+  icon: StaffCallReasonIcon
+}
+
 export type StaffCall = {
   /** Como a equipe é chamada na experiência: Garçom, Atendente, Recepção. */
   role: string
@@ -47,7 +56,7 @@ export type StaffCall = {
   headline: string
   description: string
   /** Motivos oferecidos ao cliente antes de confirmar o chamado. */
-  reasons: string[]
+  reasons: StaffCallReason[]
   /** Rota da tela que o cliente enxerga ao encostar o celular na peça da mesa. */
   customerPath: string
   /** Rota do painel que chega no celular de quem atende. */

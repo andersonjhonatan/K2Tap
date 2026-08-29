@@ -82,24 +82,139 @@
   padding: clamp(20px, 4vw, 32px) 0;
 }
 
-.incomingNote {
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  margin: 0;
-  padding: 14px 16px;
+.setup {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
   border: 1px solid rgb(111 179 255 / 26%);
-  border-radius: 16px;
-  background: rgb(20 110 245 / 14%);
-  color: #cfe0f2;
-  font-size: 0.88rem;
+  border-radius: 20px;
+  background: linear-gradient(140deg, rgb(20 110 245 / 16%), rgb(255 255 255 / 3%));
+}
+
+.setupCopy {
+  display: grid;
+  align-items: start;
+  gap: 12px;
+  grid-template-columns: 22px minmax(0, 1fr);
+}
+
+.setupCopy svg {
+  margin-top: 2px;
+  color: #6fb3ff;
+}
+
+.setupCopy b {
+  display: block;
+  font-size: 0.98rem;
+  letter-spacing: -0.02em;
+}
+
+.setupCopy span {
+  display: block;
+  margin-top: 5px;
+  color: #9db3c9;
+  font-size: 0.84rem;
   line-height: 1.55;
 }
 
-.incomingNote svg {
-  flex: none;
-  margin-top: 2px;
-  color: #6fb3ff;
+.setupActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.setupActions button,
+.setupActions a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 17px;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 13px;
+  appearance: none;
+  background: rgb(255 255 255 / 5%);
+  color: #cfe0f2;
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.setupActions button:hover:not(:disabled),
+.setupActions a:hover {
+  background: rgb(255 255 255 / 10%);
+}
+
+.setupPrimary {
+  border-color: transparent !important;
+  background: var(--blue) !important;
+  color: white !important;
+}
+
+.setupPrimary:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.group {
+  display: grid;
+  gap: 10px;
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.groupHead h2 {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7f94aa;
+}
+
+.groupHead span {
+  display: grid;
+  min-width: 24px;
+  height: 24px;
+  place-items: center;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: rgb(20 110 245 / 22%);
+  color: #a9d2ff;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.empty {
+  display: grid;
+  justify-items: center;
+  padding: 34px 20px;
+  border: 1px dashed rgb(255 255 255 / 12%);
+  border-radius: 20px;
+  color: #7f94aa;
+  text-align: center;
+}
+
+.empty svg {
+  color: #46586c;
+}
+
+.empty b {
+  margin-top: 12px;
+  color: #cfe0f2;
+  font-size: 1rem;
+}
+
+.empty span {
+  max-width: 32em;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  line-height: 1.55;
 }
 
 .call {
@@ -113,7 +228,7 @@
   grid-template-columns: 64px minmax(0, 1fr) auto;
 }
 
-.new {
+.pending {
   border-color: rgb(111 179 255 / 40%);
   background: linear-gradient(140deg, rgb(20 110 245 / 20%), rgb(255 255 255 / 4%));
   box-shadow: 0 16px 34px rgb(20 110 245 / 18%);
@@ -156,19 +271,10 @@
   align-items: center;
   gap: 7px;
   color: #6fb3ff;
-  font-size: 0.66rem;
+  font-size: 0.68rem;
   font-weight: 900;
-  letter-spacing: 0.11em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-}
-
-.callState em {
-  color: #9db3c9;
-  font-size: 0.62rem;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: none;
 }
 
 .dot {
@@ -244,8 +350,9 @@
 
 .footer {
   display: flex;
-  align-items: flex-start;
-  gap: 9px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
   width: min(720px, calc(100% - 28px));
   margin: auto auto 0;
   padding: 20px 0 calc(28px + env(safe-area-inset-bottom, 0px));
@@ -254,10 +361,29 @@
   line-height: 1.55;
 }
 
-.footer svg {
-  flex: none;
-  margin-top: 3px;
-  color: #6fb3ff;
+.footer button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 999px;
+  appearance: none;
+  background: none;
+  color: #9db3c9;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.footer button:hover {
+  background: rgb(255 255 255 / 6%);
+  color: #cfe0f2;
+}
+
+.footer > span {
+  flex: 1 1 220px;
 }
 
 @media (max-width: 620px) {

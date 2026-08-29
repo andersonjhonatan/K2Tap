@@ -1,11 +1,10 @@
-import type { StaffCall } from '@/types/project'
+import type { StaffCall, StaffCallReason } from '@/types/project'
 import { siteConfig } from '@/config/site'
 
 export type StaffCallRequest = {
   table: string
+  reasonId: string
   reason: string
-  /** Momento do chamado em ISO, usado para calcular a espera no painel da equipe. */
-  at: string
 }
 
 /**
@@ -24,23 +23,27 @@ export function buildCustomerUrl(staffCall: StaffCall, origin = resolveOrigin())
 
 export function buildStaffUrl(
   staffCall: StaffCall,
-  request?: Pick<StaffCallRequest, 'reason'>,
+  reason?: StaffCallReason,
   origin = resolveOrigin(),
 ) {
   const params = new URLSearchParams({ mesa: staffCall.table })
-  if (request?.reason) params.set('motivo', request.reason)
+  if (reason) {
+    params.set('motivo', reason.label)
+    params.set('id', reason.id)
+  }
   return `${origin}${staffCall.staffPath}?${params.toString()}`
 }
 
 export function parseStaffCallRequest(searchParams: {
   mesa?: string
   motivo?: string
+  id?: string
 }): StaffCallRequest | null {
   const table = searchParams.mesa?.trim()
   if (!table) return null
   return {
     table: table.slice(0, 12),
+    reasonId: searchParams.id?.trim().slice(0, 40) || 'chamado',
     reason: searchParams.motivo?.trim().slice(0, 60) || 'Atendimento na mesa',
-    at: new Date().toISOString(),
   }
 }

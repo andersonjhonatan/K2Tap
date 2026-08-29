@@ -122,7 +122,12 @@ export const projects = [
       headline: 'Chame o garçom sem levantar a mão.',
       description:
         'O cliente encosta o celular na peça da mesa, escolhe o motivo e confirma. O chamado abre na hora no painel de quem está atendendo.',
-      reasons: ['Fazer o pedido', 'Pedir a conta', 'Repor bebida', 'Tirar uma dúvida'],
+      reasons: [
+        { id: 'pedido', label: 'Fazer o pedido', icon: 'order' },
+        { id: 'conta', label: 'Pedir a conta', icon: 'bill' },
+        { id: 'bebida', label: 'Repor bebida', icon: 'drink' },
+        { id: 'duvida', label: 'Tirar uma dúvida', icon: 'help' },
+      ],
       customerPath: '/demo/mesa/12',
       staffPath: '/garcom',
     },

@@ -1,0 +1,19 @@
+{
+  "name": "K2 Tap Garçom",
+  "short_name": "K2 Garçom",
+  "description": "Chamados das mesas no celular de quem atende.",
+  "start_url": "/garcom",
+  "scope": "/garcom",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#071321",
+  "theme_color": "#071321",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

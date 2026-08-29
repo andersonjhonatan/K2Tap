@@ -62,13 +62,16 @@ src/
     landing/              # Hero, demo NFC, possibilidades, métricas e CTA
     layout/               # Header e Footer
     showcase/             # seletor, telefone, quatro experiências e chamada da demonstração
-    waiter/               # painel da equipe em /garcom
+    waiter/               # painel da equipe (PWA) em /garcom
     ui/                   # elementos compartilhados
   config/                 # dados institucionais
   data/                   # navegação e projetos fictícios
-  hooks/                  # clipboard, foco, motion e toast
-  lib/                    # payloads Wi-Fi e apresentação Pix
+  hooks/                  # clipboard, foco, motion, toast e fila de chamados
+  lib/                    # Wi-Fi, Pix, URLs do chamado, fila e alertas da equipe
   types/                  # contratos TypeScript
+public/
+  sw.js                   # service worker do painel da equipe
+  garcom.webmanifest      # manifesto do PWA
 tests/
   components/             # Vitest + Testing Library
   e2e/                    # Playwright e capturas visuais
@@ -143,31 +146,55 @@ staffCall: {
   actionDescription: 'Atendimento na mesa em um toque.',
   headline: 'Chame o garçom sem levantar a mão.',
   description: 'Texto de apoio exibido acima dos motivos.',
-  reasons: ['Fazer o pedido', 'Pedir a conta'],
+  reasons: [
+    { id: 'pedido', label: 'Fazer o pedido', icon: 'order' },
+    { id: 'conta', label: 'Pedir a conta', icon: 'bill' },
+  ],                                    // icon: bell | order | drink | bill | help
   customerPath: '/demo/mesa/12',
   staffPath: '/garcom',
 }
 ```
 
-O cliente escolhe o motivo e confirma. O chamado então vira um link para o painel da equipe, com a
-mesa e o motivo na própria URL:
+O cliente escolhe o motivo e confirma. O chamado entra em uma fila real e aparece no painel da
+equipe, que pode aceitar e concluir — e o status volta sozinho para a tela do cliente.
+
+### A fila
+
+`src/lib/waiter-queue.ts` guarda os chamados no `localStorage` e avisa quem estiver escutando por
+um evento próprio (mesma aba) e pelo evento `storage` (outras abas e janelas). O hook
+`useWaiterQueue` expõe isso com `useSyncExternalStore`, sem efeito de sincronização e sem
+descompasso na hidratação.
+
+Na prática: abra `/demo/mesa/12` em uma aba e `/garcom` em outra, no mesmo navegador. O chamado
+feito na mesa aparece na fila na hora, e ao tocar em **Atender** a tela da mesa passa a mostrar
+"Garçom a caminho".
+
+Entre aparelhos diferentes o estado não é compartilhado — isso exigiria backend. Para esse caso o
+chamado viaja pela URL:
 
 ```text
-/demo/mesa/12   →   /garcom?mesa=12&motivo=Pedir+a+conta
+/demo/mesa/12   →   /garcom?mesa=12&motivo=Pedir+a+conta&id=conta
 ```
 
-`src/lib/staff-call.ts` monta essas URLs. A origem é resolvida no navegador, então os QR Codes
-funcionam em `localhost`, em preview e no domínio final sem configuração extra.
+`src/lib/staff-call.ts` monta essas URLs e a origem é resolvida no navegador, então os QR Codes
+funcionam em `localhost`, em preview e no domínio final sem configuração extra. Ao abrir esse
+endereço, o painel semeia o chamado na fila daquele aparelho.
 
-O chamado aparece em duas superfícies:
+### O painel da equipe é um PWA
+
+`/garcom` tem manifesto (`public/garcom.webmanifest`) e service worker (`public/sw.js`), então pode
+ser instalado como aplicativo no celular de quem atende. Com a permissão concedida, cada chamado
+novo dispara **notificação persistente e vibração**, mesmo com a tela apagada — é o que faz o
+garçom perceber a mesa sem estar olhando o aparelho. O botão _Testar alerta_ valida isso na hora.
+
+O service worker também trata `push`, pronto para um backend com Web Push. Ele age apenas sob
+`/garcom`: o restante do site nunca é servido de cache offline.
+
+### Onde o chamado aparece
 
 - na prévia dentro do telefone, pela aba do `role` no modal de facilidades (`StaffCallPanel`);
 - na demonstração em tela cheia, na seção `#chamar` (`DemoStaffCall`). Na rota de mesa ela vem logo
   depois do topo, porque é o motivo de o cliente ter encostado o celular.
-
-O envio é encenado: nada trafega entre aparelhos e nenhum chamado real é disparado. O que é real é o
-link — abra `/garcom?mesa=12&motivo=...` em outro celular e o chamado daquela mesa aparece na fila,
-no topo, com o tempo de espera correndo.
 
 Para habilitar em outro projeto, basta adicionar o bloco `staffCall` na configuração dele — a aba, o
 atalho, a seção e o painel passam a existir automaticamente. Sem o bloco, nada muda.
@@ -261,8 +288,9 @@ Os testes de componente cobrem:
 - seleção e replay da demonstração NFC;
 - chamado do garçom e exibição dos links do cliente e da equipe;
 - destino do botão "Veja como fica na sua empresa" a cada troca de projeto;
-- experiência em tela cheia, chamado com mesa e motivo na URL;
-- fila do painel da equipe, atender e concluir.
+- experiência em tela cheia, chamado entrando na fila e link com mesa e motivo;
+- painel da equipe: semeadura pela URL, atender, concluir e fila vazia;
+- ida e volta completa entre a tela da mesa e o painel.
 
 O E2E cobre o caminho completo da landing até Wi-Fi, Pix, Redes, Mapa/compartilhamento, Opinião e
 chamado do garçom, seguindo para `/demo/k2-restaurante`, `/demo/mesa/12` e `/garcom`. A suíte visual registra 375×812, 390×844, 430×932 e 1440×900.
@@ -294,5 +322,6 @@ O servidor usa a porta `3000` por padrão.
 Os slugs `k2-restaurante`, `k2-barbearia`, `k2-loja` e `k2-servico` já resolvem rotas reais em
 `/demo/[slug]`. A próxima etapa recomendada é trocar o array local por uma camada de dados
 multi-tenant resolvida por slug, manter payloads reais de pagamento exclusivamente no backend e
-levar a fila de chamados para um canal compartilhado (WebSocket ou polling), o que faria o painel
-da equipe deixar de ser encenado e passar a receber chamados de qualquer aparelho.
+levar a fila de chamados para um canal compartilhado (WebSocket, polling ou Web Push, que o service
+worker já sabe receber), o que faria o painel da equipe passar a receber chamados de qualquer
+aparelho, e não só das abas do mesmo navegador.

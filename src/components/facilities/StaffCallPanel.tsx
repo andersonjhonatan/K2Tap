@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react'
 import { Check, ConciergeBell, Copy, ExternalLink, Smartphone, UserRound } from 'lucide-react'
 import { QRCodeSVG } from 'qrcode.react'
-import type { StaffCall } from '@/types/project'
+import type { StaffCall, StaffCallReason } from '@/types/project'
 import { buildCustomerUrl, buildStaffUrl } from '@/lib/staff-call'
+import { ReasonIcon } from '@/components/ui/ReasonIcon'
 import type { CopyHandler } from './types'
 import styles from './facilities.module.css'
 
@@ -28,7 +29,7 @@ const shortUrl = (url: string) => {
 
 export function StaffCallPanel({ staffCall, onCopy }: StaffCallPanelProps) {
   const [status, setStatus] = useState<CallStatus>('idle')
-  const [reason, setReason] = useState(staffCall.reasons[0] ?? '')
+  const [reason, setReason] = useState<StaffCallReason>(staffCall.reasons[0])
 
   useEffect(() => {
     if (status !== 'sending') return
@@ -54,7 +55,7 @@ export function StaffCallPanel({ staffCall, onCopy }: StaffCallPanelProps) {
             eyebrow: `CELULAR DO ${staffCall.role.toUpperCase()}`,
             title: 'Painel de chamados da equipe',
             description: `O ${staffCall.role.toLowerCase()} recebe o chamado aqui, com mesa e motivo.`,
-            url: buildStaffUrl(staffCall, { reason }),
+            url: buildStaffUrl(staffCall, reason),
             Icon: Smartphone,
           },
         ]
@@ -75,17 +76,18 @@ export function StaffCallPanel({ staffCall, onCopy }: StaffCallPanelProps) {
           <legend>Motivo do chamado</legend>
           {staffCall.reasons.map((item) => (
             <label
-              className={`${styles.reasonChip} ${reason === item ? styles.reasonChipActive : ''}`}
-              key={item}
+              className={`${styles.reasonChip} ${reason.id === item.id ? styles.reasonChipActive : ''}`}
+              key={item.id}
             >
               <input
                 type="radio"
                 name="staff-call-reason"
-                value={item}
-                checked={reason === item}
+                value={item.id}
+                checked={reason.id === item.id}
                 onChange={() => setReason(item)}
               />
-              {item}
+              <ReasonIcon name={item.icon} size={12} />
+              {item.label}
             </label>
           ))}
         </fieldset>
@@ -111,7 +113,7 @@ export function StaffCallPanel({ staffCall, onCopy }: StaffCallPanelProps) {
               {staffCall.role} a caminho da {staffCall.spot.toLowerCase()}
             </b>
             <span>
-              Motivo enviado: {reason}. O chamado apareceu na hora no celular de quem está
+              Motivo enviado: {reason.label}. O chamado apareceu na hora no celular de quem está
               atendendo.
             </span>
           </div>

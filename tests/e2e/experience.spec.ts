@@ -85,8 +85,14 @@ test('fluxo completo da demonstração K2 Tap', async ({ page }) => {
 
   await page.goto('/garcom?mesa=12&motivo=Pedir%20a%20conta')
   await expect(page.getByRole('heading', { name: 'Chamados do garçom' })).toBeVisible()
-  await expect(page.getByText('Pedir a conta').first()).toBeVisible()
-  await page.getByRole('button', { name: 'Atender' }).first().click()
-  await expect(page.getByText('Em atendimento').first()).toBeVisible()
+  await expect(page.getByRole('button', { name: /Ativar alertas/ })).toBeVisible()
+  const queued = page.getByRole('article').first()
+  await expect(queued).toHaveAttribute('aria-label', /Mesa 12/)
+  await expect(queued).toContainText('Aguardando atendimento')
+  await page
+    .getByRole('button', { name: /Atender/ })
+    .first()
+    .click()
+  await expect(page.getByText('Você está a caminho').first()).toBeVisible()
   await page.screenshot({ path: 'artifacts/final/garcom-390x844.png' })
 })
