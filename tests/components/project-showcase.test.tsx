@@ -101,14 +101,6 @@ describe('ProjectShowcase', () => {
       'href',
       '/demo/k2-restaurante',
     )
-    expect(screen.getByRole('link', { name: /Tela do cliente na mesa 12/ })).toHaveAttribute(
-      'href',
-      '/demo/mesa/12',
-    )
-    expect(screen.getByRole('link', { name: /Painel do garçom/ })).toHaveAttribute(
-      'href',
-      '/garcom',
-    )
 
     await user.click(screen.getByRole('tab', { name: /K2 Barbearia/ }))
 
@@ -116,6 +108,13 @@ describe('ProjectShowcase', () => {
       'href',
       '/demo/k2-barbearia',
     )
+  })
+
+  it('não expõe as telas operacionais na página de vendas', () => {
+    render(<ProjectShowcase />)
+
+    // Mesa e painel do garçom pertencem à demonstração do negócio, não à landing.
+    expect(screen.queryByRole('link', { name: /Tela do cliente/ })).not.toBeInTheDocument()
     expect(screen.queryByRole('link', { name: /Painel do garçom/ })).not.toBeInTheDocument()
   })
 })
