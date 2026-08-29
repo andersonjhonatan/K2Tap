@@ -1,17 +1,17 @@
 'use client'
 
 import type { CSSProperties } from 'react'
-import { useCallback } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, ConciergeBell } from 'lucide-react'
-import type { ExperienceAction, ProjectConfig } from '@/types/project'
+import type { FacilityKind, ProjectConfig } from '@/types/project'
 import { siteConfig } from '@/config/site'
 import { useClipboard } from '@/hooks/useClipboard'
 import { useToast } from '@/hooks/useToast'
 import { Toast } from '@/components/feedback/Toast'
 import { ExperienceIcon } from '@/components/showcase/ExperienceIcon'
 import { DemoBar } from './DemoBar'
-import { DemoFacilities } from './DemoFacilities'
+import { DemoModal, demoFacilities, facilityMeta, type DemoFacility } from './DemoModal'
 import { DemoStaffCall } from './DemoStaffCall'
 import styles from './demo.module.css'
 
@@ -21,20 +21,12 @@ type DemoExperienceProps = {
   table?: string
 }
 
-const facilityAnchors: Record<string, string> = {
-  wifi: '#wifi',
-  pix: '#pix',
-  social: '#redes',
-  location: '#mapa',
-  review: '#opiniao',
-  staff: '#chamar',
-}
-
-function actionHref(action: ExperienceAction) {
-  return action.facility ? facilityAnchors[action.facility] : undefined
-}
+const isDemoFacility = (facility?: FacilityKind): facility is DemoFacility =>
+  facility !== undefined && facility !== 'staff'
 
 export function DemoExperience({ project, table }: DemoExperienceProps) {
+  const [activeFacility, setActiveFacility] = useState<DemoFacility | null>(null)
+  const openerRef = useRef<HTMLButtonElement | null>(null)
   const copy = useClipboard()
   const { toast, showToast, dismiss } = useToast()
 
@@ -46,6 +38,16 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
     '--experience-surface': project.theme.surface,
     '--experience-border': project.theme.border,
   } as CSSProperties
+
+  const openFacility = (facility: DemoFacility, trigger: HTMLButtonElement) => {
+    openerRef.current = trigger
+    setActiveFacility(facility)
+  }
+
+  const closeFacility = useCallback(() => {
+    setActiveFacility(null)
+    requestAnimationFrame(() => openerRef.current?.focus())
+  }, [])
 
   const handleCopy = useCallback(
     async (value: string, title?: string, description?: string) => {
@@ -106,7 +108,6 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
 
         <nav className={styles.actionGrid} aria-label="Atalhos da experiência">
           {project.actions.map((action) => {
-            const href = actionHref(action)
             const inner = (
               <>
                 <span className={styles.actionIcon}>
@@ -117,10 +118,17 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
               </>
             )
 
-            return href ? (
-              <a className={styles.actionCard} key={action.id} href={href}>
+            return isDemoFacility(action.facility) ? (
+              <button
+                className={styles.actionCard}
+                key={action.id}
+                type="button"
+                onClick={(event) =>
+                  openFacility(action.facility as DemoFacility, event.currentTarget)
+                }
+              >
                 {inner}
-              </a>
+              </button>
             ) : (
               <div className={styles.actionCard} key={action.id}>
                 {inner}
@@ -136,7 +144,30 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
           <b>{project.highlight.title}</b>
         </div>
 
-        <DemoFacilities project={project} onCopy={handleCopy} onNotify={notify} />
+        <section className={styles.facilities} aria-labelledby="facilities-title">
+          <h2 id="facilities-title">Facilidades da casa</h2>
+          <div className={styles.facilityRow}>
+            {demoFacilities.map((facility) => {
+              const { label, subtitle, Icon } = facilityMeta[facility]
+              return (
+                <button
+                  className={styles.facilityChip}
+                  key={facility}
+                  type="button"
+                  onClick={(event) => openFacility(facility, event.currentTarget)}
+                >
+                  <span className={styles.facilityChipIcon}>
+                    <Icon size={17} strokeWidth={1.8} aria-hidden="true" />
+                  </span>
+                  <span>
+                    <b>{label}</b>
+                    <small>{subtitle}</small>
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+        </section>
 
         {project.openingHours && (
           <section className={styles.block} aria-labelledby="hours-title">
@@ -171,6 +202,17 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
           <Link href="/#experiencias">Ver outros exemplos</Link>
         </div>
       </footer>
+
+      {activeFacility && (
+        <DemoModal
+          facility={activeFacility}
+          project={project}
+          onSelect={setActiveFacility}
+          onClose={closeFacility}
+          onCopy={handleCopy}
+          onNotify={notify}
+        />
+      )}
 
       <div className={styles.toastHost}>
         <Toast toast={toast} onDismiss={dismiss} />

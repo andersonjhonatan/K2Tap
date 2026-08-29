@@ -56,7 +56,7 @@ src/
     demo/mesa/[numero]/   # a mesma experiência aberta a partir de uma peça de mesa
     garcom/               # painel de chamados de quem atende
   components/
-    demo/                 # experiência em tela cheia das rotas /demo
+    demo/                 # experiência em tela cheia e modal das rotas /demo
     facilities/           # modal e seis painéis de facilidades
     feedback/             # toast interno
     landing/              # Hero, demo NFC, possibilidades, métricas e CTA
@@ -215,6 +215,17 @@ para lá que aponta o botão **"Veja como fica na sua empresa"**, em
 mesa e do painel da equipe são operacionais: ficam com `robots: noindex` e são bloqueadas em
 `robots.ts`.
 
+### Facilidades em modal
+
+A página não abre com Wi-Fi, Pix, redes, mapa e opinião expostos: cada um é uma facilidade que o
+cliente pede. Os cartões de atalho e a linha _Facilidades da casa_ abrem o `DemoModal`, um painel de
+vidro — fundo escurecido com desfoque e um brilho da cor do negócio — que herda o tema do projeto.
+
+No desktop ele aparece centralizado; no celular sobe como folha inferior, com alça e cantos
+arredondados só em cima. Fecha no botão, no Escape ou tocando fora, devolve o foco ao atalho que o
+abriu e trava a rolagem da página enquanto está aberto. As abas internas deixam o cliente passear
+entre as facilidades sem fechar.
+
 Os componentes ficam em `src/components/demo/` e recebem a mesma `ProjectConfig` do restante do
 projeto — tema, ações, Wi-Fi, Pix, redes, localização e horários vêm todos da configuração, sem
 conteúdo espalhado no JSX. O painel da equipe fica em `src/components/waiter/`.
@@ -288,7 +299,9 @@ Os testes de componente cobrem:
 - seleção e replay da demonstração NFC;
 - chamado do garçom e exibição dos links do cliente e da equipe;
 - destino do botão "Veja como fica na sua empresa" a cada troca de projeto;
-- experiência em tela cheia, chamado entrando na fila e link com mesa e motivo;
+- experiência em tela cheia com as facilidades fechadas;
+- abertura do modal, troca de abas, Escape, fechamento e retorno de foco;
+- chamado entrando na fila e link com mesa e motivo;
 - painel da equipe: semeadura pela URL, atender, concluir e fila vazia;
 - ida e volta completa entre a tela da mesa e o painel.
 

@@ -528,6 +528,254 @@ a.actionCard:hover {
   letter-spacing: -0.03em;
 }
 
+.facilities {
+  margin-top: 36px;
+}
+
+.facilities h2 {
+  margin: 0 0 16px;
+  color: var(--experience-muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.facilityRow {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+}
+
+.facilityChip {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--experience-border);
+  border-radius: 18px;
+  appearance: none;
+  background: color-mix(in srgb, var(--experience-surface) 85%, transparent);
+  color: inherit;
+  cursor: pointer;
+  grid-template-columns: 38px minmax(0, 1fr);
+  text-align: left;
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.facilityChip:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--experience-accent) 45%, transparent);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--experience-fg) 10%, transparent);
+}
+
+.facilityChipIcon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--experience-accent) 14%, transparent);
+  color: var(--experience-accent);
+}
+
+.facilityChip b,
+.facilityChip small {
+  display: block;
+}
+
+.facilityChip b {
+  font-size: 0.95rem;
+}
+
+.facilityChip small {
+  margin-top: 3px;
+  color: var(--experience-muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+/* Modal de facilidades: vidro sobre a experiência */
+
+.modal {
+  position: fixed;
+  z-index: 70;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.modalBackdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  appearance: none;
+  /* Escurece sempre, independente do tema do negócio, com um brilho da marca
+     subindo de onde a folha aparece. */
+  background:
+    radial-gradient(
+      130% 80% at 50% 100%,
+      color-mix(in srgb, var(--experience-accent) 30%, transparent),
+      transparent 62%
+    ),
+    rgb(6 11 18 / 58%);
+  cursor: pointer;
+  backdrop-filter: blur(10px) saturate(120%);
+  animation: backdropIn 260ms ease;
+}
+
+@keyframes backdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog {
+  position: relative;
+  display: flex;
+  width: min(560px, 100%);
+  max-height: min(88vh, 760px);
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--experience-fg) 12%, rgb(255 255 255 / 28%));
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--experience-surface) 78%, transparent);
+  box-shadow:
+    0 40px 90px color-mix(in srgb, var(--experience-fg) 35%, transparent),
+    inset 0 1px 0 rgb(255 255 255 / 22%);
+  backdrop-filter: blur(28px) saturate(160%);
+  animation: dialogIn 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.dialogGrab {
+  display: none;
+}
+
+.dialogHeader {
+  display: grid;
+  align-items: start;
+  gap: 14px;
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid color-mix(in srgb, var(--experience-border) 70%, transparent);
+  grid-template-columns: 44px minmax(0, 1fr) 36px;
+}
+
+.dialogIcon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 15px;
+  background: color-mix(in srgb, var(--experience-accent) 16%, transparent);
+  color: var(--experience-accent);
+}
+
+.dialogHeader small {
+  display: block;
+  color: var(--experience-accent);
+  font-size: 0.64rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.dialogHeader h2 {
+  margin: 8px 0 0;
+  font-size: clamp(1.2rem, 3.6vw, 1.5rem);
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+.dialogHeader > div > span {
+  display: block;
+  margin-top: 6px;
+  color: var(--experience-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.dialogClose {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--experience-border);
+  border-radius: 12px;
+  appearance: none;
+  background: color-mix(in srgb, var(--experience-bg) 55%, transparent);
+  color: var(--experience-fg);
+  cursor: pointer;
+}
+
+.dialogClose:hover {
+  background: color-mix(in srgb, var(--experience-accent) 14%, transparent);
+}
+
+.dialogTabs {
+  display: flex;
+  gap: 6px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  border-bottom: 1px solid color-mix(in srgb, var(--experience-border) 70%, transparent);
+  scrollbar-width: none;
+}
+
+.dialogTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.dialogTabs button {
+  display: inline-flex;
+  flex: 1 0 auto;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 9px 15px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  appearance: none;
+  background: none;
+  color: var(--experience-muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.dialogTabs button:hover {
+  background: color-mix(in srgb, var(--experience-accent) 10%, transparent);
+}
+
+.dialogTabOn {
+  border-color: color-mix(in srgb, var(--experience-accent) 35%, transparent) !important;
+  background: color-mix(in srgb, var(--experience-accent) 16%, transparent) !important;
+  color: var(--experience-accent) !important;
+}
+
+.dialogBody {
+  overflow-y: auto;
+  padding: 20px 22px calc(24px + env(safe-area-inset-bottom, 0px));
+  overscroll-behavior: contain;
+}
+
 /* Blocos de facilidades */
 
 .block {
@@ -558,14 +806,9 @@ a.actionCard:hover {
 
 .splitCard {
   display: grid;
-  align-items: center;
-  gap: 20px;
-  margin-top: 18px;
-  padding: 20px;
-  border: 1px solid var(--experience-border);
-  border-radius: 22px;
-  background: var(--experience-surface);
-  grid-template-columns: auto minmax(0, 1fr);
+  justify-items: center;
+  gap: 18px;
+  grid-template-columns: 1fr;
 }
 
 .qrBox {
@@ -587,6 +830,7 @@ a.actionCard:hover {
 
 .dataList {
   display: grid;
+  width: 100%;
   min-width: 0;
   gap: 10px;
 }
@@ -664,7 +908,6 @@ a.actionCard:hover {
 .socialList {
   display: grid;
   gap: 10px;
-  margin-top: 18px;
 }
 
 .socialList a {
@@ -711,7 +954,6 @@ a.actionCard:hover {
 
 .mapCard {
   overflow: hidden;
-  margin-top: 18px;
   border: 1px solid var(--experience-border);
   border-radius: 22px;
   background: var(--experience-surface);
@@ -720,7 +962,7 @@ a.actionCard:hover {
 .mapEmbed {
   display: block;
   width: 100%;
-  height: 260px;
+  height: 230px;
   border: 0;
 }
 
@@ -765,11 +1007,7 @@ a.actionCard:hover {
 /* Opinião */
 
 .reviewForm {
-  margin-top: 18px;
-  padding: 20px;
-  border: 1px solid var(--experience-border);
-  border-radius: 22px;
-  background: var(--experience-surface);
+  display: block;
 }
 
 .reviewStars {
@@ -844,8 +1082,7 @@ a.actionCard:hover {
 .reviewDone {
   display: grid;
   justify-items: center;
-  margin-top: 18px;
-  padding: 34px 20px;
+  padding: 24px 12px;
   border: 1px solid var(--experience-border);
   border-radius: 22px;
   background: var(--experience-surface);
@@ -953,7 +1190,7 @@ a.actionCard:hover {
 
 .toastHost {
   position: fixed;
-  z-index: 60;
+  z-index: 80;
   right: 0;
   bottom: 0;
   left: 0;
@@ -967,9 +1204,45 @@ a.actionCard:hover {
     display: none;
   }
 
-  .splitCard {
-    justify-items: center;
-    grid-template-columns: 1fr;
+  .modal {
+    align-items: end;
+    padding: 0;
+  }
+
+  .dialog {
+    width: 100%;
+    max-height: 92vh;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 26px 26px 0 0;
+    animation: sheetIn 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  @keyframes sheetIn {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  .dialogGrab {
+    display: block;
+    width: 42px;
+    height: 4px;
+    margin: 10px auto 0;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--experience-muted) 45%, transparent);
+  }
+
+  .dialogHeader {
+    padding: 16px 18px 14px;
+  }
+
+  .dialogBody {
+    padding-inline: 18px;
   }
 
   .staffHandoff {
@@ -991,7 +1264,9 @@ a.actionCard:hover {
 
 @media (prefers-reduced-motion: reduce) {
   .staffPulse,
-  .staffResult {
+  .staffResult,
+  .dialog,
+  .modalBackdrop {
     animation: none;
   }
 }

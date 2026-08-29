@@ -71,8 +71,18 @@ test('fluxo completo da demonstração K2 Tap', async ({ page }) => {
   await expect(
     page.getByRole('heading', { level: 1, name: 'O sabor da casa, a um toque.' }),
   ).toBeVisible()
-  await expect(page.getByRole('img', { name: /QR Code da rede Wi-Fi/ })).toBeVisible()
+  await expect(page.getByRole('img', { name: /QR Code/ })).toBeHidden()
   await page.screenshot({ path: 'artifacts/final/demo-restaurante-390x844.png' })
+
+  await page.getByRole('button', { name: /Wi-Fi Escaneie/ }).click()
+  const facilityDialog = page.getByRole('dialog')
+  await expect(facilityDialog).toBeVisible()
+  await expect(facilityDialog.getByRole('img', { name: /QR Code da rede Wi-Fi/ })).toBeVisible()
+  await facilityDialog.getByRole('tab', { name: 'Pix' }).click()
+  await expect(facilityDialog.getByRole('img', { name: /QR Code Pix/ })).toBeVisible()
+  await page.screenshot({ path: 'artifacts/final/demo-modal-390x844.png' })
+  await facilityDialog.getByRole('button', { name: 'Fechar' }).click()
+  await expect(facilityDialog).toBeHidden()
 
   await page.goto('/demo/mesa/12')
   await expect(page.getByRole('heading', { name: /Chame o garçom/ })).toBeVisible()

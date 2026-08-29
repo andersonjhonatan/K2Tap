@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { DemoExperience } from '@/components/demo/DemoExperience'
 import { WaiterPanel } from '@/components/waiter/WaiterPanel'
@@ -12,15 +12,53 @@ beforeEach(() => {
 })
 
 describe('DemoExperience', () => {
-  it('roda a experiência completa em tela cheia', () => {
+  it('roda a experiência completa em tela cheia, com as facilidades fechadas', () => {
     render(<DemoExperience project={restaurant} />)
 
     expect(
       screen.getByRole('heading', { level: 1, name: 'O sabor da casa, a um toque.' }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('img', { name: /QR Code da rede Wi-Fi/ })).toBeInTheDocument()
-    expect(screen.getByRole('img', { name: /QR Code Pix demonstrativo/ })).toBeInTheDocument()
-    expect(screen.getByTitle('Mapa de K2 Restaurante')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Facilidades da casa' })).toBeInTheDocument()
+
+    // Nada de QR Code, mapa ou formulário abertos antes de o cliente pedir.
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(screen.queryByRole('img', { name: /QR Code/ })).not.toBeInTheDocument()
+    expect(screen.queryByTitle('Mapa de K2 Restaurante')).not.toBeInTheDocument()
+  })
+
+  it('abre a facilidade em modal, troca de aba e fecha devolvendo o foco', async () => {
+    const user = userEvent.setup()
+    render(<DemoExperience project={restaurant} />)
+
+    const opener = screen.getByRole('button', { name: /Wi-Fi Escaneie/ })
+    await user.click(opener)
+
+    const dialog = screen.getByRole('dialog')
+    expect(within(dialog).getByRole('img', { name: /QR Code da rede Wi-Fi/ })).toBeInTheDocument()
+
+    await user.click(within(dialog).getByRole('tab', { name: 'Pix' }))
+    expect(
+      within(dialog).getByRole('img', { name: /QR Code Pix demonstrativo/ }),
+    ).toBeInTheDocument()
+    expect(within(dialog).queryByRole('img', { name: /Wi-Fi/ })).not.toBeInTheDocument()
+
+    await user.click(within(dialog).getByRole('tab', { name: 'Mapa' }))
+    expect(within(dialog).getByTitle('Mapa de K2 Restaurante')).toBeInTheDocument()
+
+    await user.click(within(dialog).getByRole('button', { name: 'Fechar' }))
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
+    await waitFor(() => expect(opener).toHaveFocus())
+  })
+
+  it('fecha o modal com Escape', async () => {
+    const user = userEvent.setup()
+    render(<DemoExperience project={restaurant} />)
+
+    await user.click(screen.getByRole('button', { name: /Opinião Um minuto/ }))
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+
+    fireEvent.keyDown(document, { key: 'Escape' })
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
   })
 
   it('anuncia a mesa quando a rota vem de uma peça de mesa', () => {
