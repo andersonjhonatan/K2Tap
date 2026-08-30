@@ -1,0 +1,83 @@
+.siteCanvas {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 2% 16%, rgb(57 149 255 / 18%), transparent 21%),
+    radial-gradient(ellipse at 97% 31%, rgb(83 167 255 / 22%), transparent 23%),
+    radial-gradient(ellipse at 4% 53%, rgb(58 145 245 / 13%), transparent 20%),
+    radial-gradient(ellipse at 96% 72%, rgb(51 145 250 / 18%), transparent 22%),
+    radial-gradient(ellipse at 18% 94%, rgb(91 173 255 / 14%), transparent 23%),
+    linear-gradient(180deg, #f8fbff 0%, #eaf4ff 28%, #f7faff 50%, #e9f3ff 76%, #f6f9fd 100%);
+}
+
+.siteCanvas::before,
+.siteCanvas::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+}
+
+.siteCanvas::before {
+  opacity: 0.46;
+  background-image: radial-gradient(circle, rgb(20 110 245 / 28%) 1px, transparent 1.3px);
+  background-size: 27px 27px;
+  mask-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    black 250px,
+    black 820px,
+    transparent 1120px,
+    transparent 1480px
+  );
+}
+
+.siteCanvas::after {
+  opacity: 0.74;
+  background: repeating-linear-gradient(
+    164deg,
+    transparent 0,
+    transparent 760px,
+    rgb(255 255 255 / 58%) 761px,
+    rgb(255 255 255 / 30%) 1010px,
+    rgb(69 157 255 / 7%) 1180px,
+    transparent 1390px,
+    transparent 1840px
+  );
+}
+
+.siteCanvas > section {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 700px) {
+  .siteCanvas {
+    background:
+      radial-gradient(ellipse at 100% 15%, rgb(57 149 255 / 22%), transparent 18%),
+      radial-gradient(ellipse at 0% 36%, rgb(83 167 255 / 17%), transparent 16%),
+      radial-gradient(ellipse at 100% 62%, rgb(51 145 250 / 19%), transparent 17%),
+      radial-gradient(ellipse at 0% 87%, rgb(91 173 255 / 15%), transparent 16%),
+      linear-gradient(180deg, #f8fbff 0%, #e9f3ff 31%, #f7faff 54%, #e7f2ff 79%, #f6f9fd 100%);
+  }
+
+  .siteCanvas::before {
+    opacity: 0.38;
+    background-size: 24px 24px;
+  }
+
+  .siteCanvas::after {
+    background: repeating-linear-gradient(
+      162deg,
+      transparent 0,
+      transparent 610px,
+      rgb(255 255 255 / 55%) 611px,
+      rgb(255 255 255 / 24%) 790px,
+      rgb(69 157 255 / 7%) 930px,
+      transparent 1110px,
+      transparent 1510px
+    );
+  }
+}

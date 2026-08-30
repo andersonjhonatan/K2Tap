@@ -14,10 +14,11 @@ export function Footer() {
 
         <nav className={styles.footerNav} aria-label="Navegação do rodapé">
           {primaryNavigation.map((item) => (
-            <a key={item.href} href={item.href}>
+            <a key={item.href} href={`/${item.href}`}>
               {item.label}
             </a>
           ))}
+          <a href="/comprar">Comprar K2 Tap</a>
         </nav>
 
         <div className={styles.footerDivider} />

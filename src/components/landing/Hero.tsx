@@ -5,6 +5,11 @@ import styles from './landing.module.css'
 export function Hero() {
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
+      <div className={styles.heroCanvas} aria-hidden="true">
+        <span className={styles.canvasGlow} />
+        <span className={styles.canvasPanel} />
+        <span className={styles.canvasRibbon} />
+      </div>
       <div className={`wrap ${styles.heroGrid}`}>
         <div className={styles.heroCopy}>
           <span className="eyebrow">K2 Tap • NFC inteligente</span>
@@ -42,6 +47,11 @@ export function Hero() {
         </div>
 
         <div className={styles.stage} aria-label="Representação visual da K2 Tap e celular">
+          <div className={styles.stageAmbience} aria-hidden="true">
+            <span className={styles.orbitPrimary} />
+            <span className={styles.orbitSecondary} />
+            <span className={styles.ambientSpark} />
+          </div>
           <div className={styles.halo} />
           <div className={styles.phone}>
             <div className={styles.screen}>
@@ -92,6 +102,13 @@ export function Hero() {
             <span />
             <span />
             <span />
+          </div>
+          <div className={styles.signalBadge} aria-hidden="true">
+            <i />
+            <span>
+              <small>Sinal ativo</small>
+              <b>NFC pronto</b>
+            </span>
           </div>
         </div>
       </div>

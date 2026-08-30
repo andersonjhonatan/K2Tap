@@ -2,11 +2,13 @@ import { CommercialCTA } from '@/components/landing/CommercialCTA'
 import { Hero } from '@/components/landing/Hero'
 import { NfcDemo } from '@/components/landing/NfcDemo'
 import { Possibilities } from '@/components/landing/Possibilities'
+import { ProductPresence } from '@/components/landing/ProductPresence'
 import { ProductMetrics } from '@/components/landing/ProductMetrics'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { ProjectShowcase } from '@/components/showcase/ProjectShowcase'
 import { siteConfig } from '@/config/site'
+import homeStyles from './home.module.css'
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -33,9 +35,10 @@ export default function Home() {
     <>
       <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
       <Header />
-      <main id="top">
+      <main className={homeStyles.siteCanvas} id="top">
         <Hero />
         <NfcDemo />
+        <ProductPresence />
         <ProjectShowcase />
         <Possibilities />
         <ProductMetrics />

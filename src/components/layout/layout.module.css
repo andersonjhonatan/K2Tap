@@ -63,9 +63,10 @@
   justify-content: center;
   gap: 8px;
   padding: 10px 17px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--ink);
   border-radius: 999px;
-  background: white;
+  background: var(--ink);
+  color: white;
   font-size: 0.78rem;
   font-weight: 750;
   transition:
@@ -125,6 +126,11 @@
 .mobileCommercial {
   margin-top: 7px;
   background: var(--ink);
+  color: white !important;
+}
+
+.mobilePurchase {
+  background: linear-gradient(135deg, #197df1, #0b5ecb);
   color: white !important;
 }
 
