@@ -3,7 +3,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import type { ProjectConfig } from '@/types/project'
 import { createWifiPayload } from '@/lib/wifi'
 import type { CopyHandler } from '@/hooks/useCopyToast'
-import styles from './facilities.module.css'
+import styles from './facilities.styles'
 
 type WifiPanelProps = {
   project: ProjectConfig

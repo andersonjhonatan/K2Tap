@@ -1,6 +1,7 @@
 import { MousePointerClick, PackageCheck, Palette, ScanLine, Smartphone } from 'lucide-react'
 import { Reveal } from '@/components/ui/Reveal'
-import styles from './pricing.module.css'
+import { cn } from '@/lib/cn'
+import styles from './pricing.styles'
 
 const steps = [
   { icon: MousePointerClick, title: 'Escolha seu K2 Tap', text: 'Cartão, Expositor ou Combo.' },
@@ -12,7 +13,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className={`${styles.section} ${styles.howSection}`} aria-labelledby="how-title">
+    <section className={cn(styles.section, styles.howSection)} aria-labelledby="how-title">
       <div className="wrap">
         <Reveal className={styles.sectionHeading}>
           <span className={styles.eyebrow}>Simples do início ao Tap</span>

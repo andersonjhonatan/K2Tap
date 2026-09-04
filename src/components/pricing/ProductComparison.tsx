@@ -2,7 +2,8 @@ import { Check, Minus } from 'lucide-react'
 import { comparisonRows, products } from '@/data/products'
 import type { PurchaseProductId } from '@/data/products'
 import { Reveal } from '@/components/ui/Reveal'
-import styles from './pricing.module.css'
+import { cn } from '@/lib/cn'
+import styles from './pricing.styles'
 
 function Availability({ available }: { available: boolean }) {
   return available ? (
@@ -51,7 +52,10 @@ export function ProductComparison() {
         <div className={styles.comparisonMobile}>
           {products.map((product) => (
             <Reveal
-              className={`${styles.comparisonMobileCard} ${product.featured ? styles.comparisonMobileFeatured : ''}`}
+              className={cn(
+                styles.comparisonMobileCard,
+                product.featured && styles.comparisonMobileFeatured,
+              )}
               key={product.id}
             >
               <div>

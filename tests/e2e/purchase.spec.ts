@@ -38,7 +38,10 @@ test('apresenta produtos, preços e CTAs de compra corretos', async ({ page }) =
   ] as const
 
   for (const [label, message] of purchaseButtons) {
-    const href = await page.getByRole('link', { name: label, exact: true }).first().getAttribute('href')
+    const href = await page
+      .getByRole('link', { name: label, exact: true })
+      .first()
+      .getAttribute('href')
     expect(href).toContain('https://wa.me/')
     expect(decodeURIComponent(href ?? '')).toContain(message)
   }

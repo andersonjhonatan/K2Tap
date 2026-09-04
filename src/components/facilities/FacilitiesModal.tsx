@@ -14,7 +14,7 @@ import { ReviewPanel } from './ReviewPanel'
 import { SocialPanel } from './SocialPanel'
 import { StaffCallPanel } from './StaffCallPanel'
 import { WifiPanel } from './WifiPanel'
-import styles from './facilities.module.css'
+import styles from './facilities.styles'
 
 /** Só o texto muda por facilidade: ícone e rótulo vêm de `data/facilities`. */
 const facilityCopy = {

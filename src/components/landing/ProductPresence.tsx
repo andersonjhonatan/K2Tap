@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from '@/components/ui/Reveal'
-import styles from './landing.module.css'
+import styles from './landing.styles'
 
 export function ProductPresence() {
   return (
@@ -38,8 +38,7 @@ export function ProductPresence() {
 
             <div className={styles.presenceReveal}>
               <span>
-                <i aria-hidden="true" />
-                O próximo passo está mais perto do que parece.
+                <i aria-hidden="true" />O próximo passo está mais perto do que parece.
               </span>
               <a href="/comprar#purchase-product-combo">
                 Descobrir o Combo

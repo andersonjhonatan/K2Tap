@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import type { FacilityKind, ProjectConfig } from '@/types/project'
 import { MobileExperience } from './MobileExperience'
-import styles from './showcase.module.css'
+import styles from './showcase.styles'
 
 type PhoneMockupProps = {
   project: ProjectConfig

@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { comboProduct, getPurchaseUrl } from '@/data/products'
-import styles from './pricing.module.css'
+import { cn } from '@/lib/cn'
+import styles from './pricing.styles'
 
 export function MobileComboCta() {
   const [visible, setVisible] = useState(false)
@@ -12,17 +13,16 @@ export function MobileComboCta() {
     const comboCard = document.querySelector('#purchase-product-combo')
     if (!comboCard) return
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.18 },
-    )
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
+      threshold: 0.18,
+    })
 
     observer.observe(comboCard)
     return () => observer.disconnect()
   }, [])
 
   return (
-    <aside className={`${styles.mobileComboCta} ${visible ? styles.mobileComboCtaVisible : ''}`}>
+    <aside className={cn(styles.mobileComboCta, visible && styles.mobileComboCtaVisible)}>
       <a
         href={getPurchaseUrl(comboProduct)}
         target="_blank"

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowLeft, Radio } from 'lucide-react'
 import { siteConfig } from '@/config/site'
-import styles from './demo.module.css'
+import styles from './demo.styles'
 
 type DemoBarProps = {
   projectName: string

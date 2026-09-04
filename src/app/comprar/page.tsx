@@ -13,7 +13,7 @@ import { Header } from '@/components/layout/Header'
 import { Reveal } from '@/components/ui/Reveal'
 import { products } from '@/data/products'
 import { siteConfig } from '@/config/site'
-import styles from '@/components/pricing/pricing.module.css'
+import styles from '@/components/pricing/pricing.styles'
 
 export const metadata: Metadata = {
   title: { absolute: 'K2 Tap | Cartão NFC, Expositor e Combo' },

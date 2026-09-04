@@ -8,7 +8,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { ProjectShowcase } from '@/components/showcase/ProjectShowcase'
 import { siteConfig } from '@/config/site'
-import homeStyles from './home.module.css'
+import homeStyles from './home.styles'
 
 const structuredData = {
   '@context': 'https://schema.org',

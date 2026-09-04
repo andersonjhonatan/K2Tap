@@ -1,6 +1,6 @@
 import type { FacilityKind } from '@/types/project'
 import { facilityIcons, facilityLabels } from '@/data/facilities'
-import styles from './facilities.module.css'
+import styles from './facilities.styles'
 
 type FacilitiesNavigationProps = {
   active: FacilityKind

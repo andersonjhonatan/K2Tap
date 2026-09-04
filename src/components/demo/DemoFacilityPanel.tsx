@@ -4,13 +4,14 @@ import { ArrowUpRight, Copy, ExternalLink, MapPin, Share2, ShieldCheck, Wifi } f
 import { QRCodeSVG } from 'qrcode.react'
 import type { ProjectConfig } from '@/types/project'
 import type { CustomerFacility } from '@/data/facilities'
+import { cn } from '@/lib/cn'
 import { getPixPresentation } from '@/lib/pix'
 import { createWifiPayload } from '@/lib/wifi'
 import type { CopyHandler } from '@/hooks/useCopyToast'
 import { useShareLocation } from '@/hooks/useShareLocation'
 import { SocialIcon } from '@/components/ui/SocialIcon'
 import { DemoReview } from './DemoReview'
-import styles from './demo.module.css'
+import styles from './demo.styles'
 
 type DemoFacilityPanelProps = {
   facility: CustomerFacility
@@ -98,7 +99,7 @@ function PixPanel({ project, onCopy }: Omit<DemoFacilityPanelProps, 'facility' |
             Copiar
           </button>
         </div>
-        <p className={`${styles.note} ${styles.noteWarning}`}>
+        <p className={cn(styles.note, styles.noteWarning)}>
           <ShieldCheck size={13} aria-hidden="true" />
           QR fictício desta demonstração: nenhuma cobrança real é criada.
         </p>

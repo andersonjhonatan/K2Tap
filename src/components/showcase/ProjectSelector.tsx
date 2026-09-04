@@ -1,7 +1,8 @@
 import { ArrowRight } from 'lucide-react'
 import type { ProjectConfig, ProjectIcon } from '@/types/project'
+import { cn } from '@/lib/cn'
 import { ExperienceIcon } from './ExperienceIcon'
-import styles from './showcase.module.css'
+import styles from './showcase.styles'
 
 const tabIcons: Record<ProjectConfig['id'], ProjectIcon> = {
   restaurant: 'utensils',
@@ -23,7 +24,7 @@ export function ProjectSelector({ projects, activeProject, onSelect }: ProjectSe
         const active = project.id === activeProject
         return (
           <button
-            className={`${styles.projectTab} ${active ? styles.activeTab : ''}`}
+            className={cn(styles.projectTab, active && styles.activeTab)}
             key={project.id}
             type="button"
             role="tab"

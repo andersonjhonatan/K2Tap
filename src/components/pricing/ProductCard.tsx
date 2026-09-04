@@ -2,7 +2,8 @@ import Image from 'next/image'
 import { ArrowUpRight, Check } from 'lucide-react'
 import type { PurchaseProduct } from '@/data/products'
 import { getPurchaseUrl } from '@/data/products'
-import styles from './pricing.module.css'
+import { cn } from '@/lib/cn'
+import styles from './pricing.styles'
 
 type ProductCardProps = {
   product: PurchaseProduct
@@ -12,7 +13,7 @@ type ProductCardProps = {
 export function ProductCard({ product, index }: ProductCardProps) {
   return (
     <article
-      className={`${styles.productCard} ${product.featured ? styles.featuredProduct : ''}`}
+      className={cn(styles.productCard, product.featured && styles.featuredProduct)}
       id={`purchase-product-${product.id}`}
       data-product-id={product.id}
     >

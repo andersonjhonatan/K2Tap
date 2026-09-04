@@ -1,11 +1,12 @@
 import { K2TapLogo } from '@/components/brand/K2TapLogo'
 import { primaryNavigation } from '@/data/navigation'
-import styles from './layout.module.css'
+import { cn } from '@/lib/cn'
+import styles from './layout.styles'
 
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={`wrap ${styles.footerInner}`}>
+      <div className={cn('wrap', styles.footerInner)}>
         <K2TapLogo className={styles.footerLogo} tone="dark" showTagline={false} />
         <p className={styles.footerTagline}>
           Uma solução K2 Tech para transformar um toque físico em uma experiência digital simples,

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { comboProduct, getPurchaseUrl } from '@/data/products'
 import { Reveal } from '@/components/ui/Reveal'
-import styles from './pricing.module.css'
+import styles from './pricing.styles'
 
 export function PurchaseFinalCta() {
   return (
@@ -17,11 +17,7 @@ export function PurchaseFinalCta() {
               <small>Combo K2 Tap</small>
               <strong>{comboProduct.priceLabel}</strong>
             </div>
-            <a
-              href={getPurchaseUrl(comboProduct)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={getPurchaseUrl(comboProduct)} target="_blank" rel="noopener noreferrer">
               Quero o Combo K2 Tap
               <ArrowUpRight size={17} aria-hidden="true" />
             </a>

@@ -11,7 +11,7 @@ import {
   SocialShortcut,
   StaffCallShortcut,
 } from './experiences/ExperienceParts'
-import styles from './showcase.module.css'
+import styles from './showcase.styles'
 
 type MobileExperienceProps = {
   project: ProjectConfig

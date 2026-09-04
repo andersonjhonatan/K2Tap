@@ -2,14 +2,15 @@
 
 import { Send, Star } from 'lucide-react'
 import { useReviewForm } from '@/hooks/useReviewForm'
-import styles from './facilities.module.css'
+import { cn } from '@/lib/cn'
+import styles from './facilities.styles'
 
 export function ReviewPanel() {
   const { score, setScore, comment, setComment, submitted, submit } = useReviewForm()
 
   if (submitted) {
     return (
-      <div className={`${styles.panel} ${styles.reviewSuccess}`} role="status">
+      <div className={cn(styles.panel, styles.reviewSuccess)} role="status">
         <div className={styles.successMark}>
           <Star size={22} fill="currentColor" aria-hidden="true" />
         </div>

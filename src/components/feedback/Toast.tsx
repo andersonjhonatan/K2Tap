@@ -1,6 +1,7 @@
 import { Check, TriangleAlert, X } from 'lucide-react'
 import type { ToastState } from '@/hooks/useToast'
-import styles from '@/components/facilities/facilities.module.css'
+import { cn } from '@/lib/cn'
+import styles from '@/components/facilities/facilities.styles'
 
 type ToastProps = {
   toast: ToastState | null
@@ -12,7 +13,7 @@ export function Toast({ toast, onDismiss }: ToastProps) {
 
   return (
     <div
-      className={`${styles.toast} ${toast.variant === 'error' ? styles.toastError : ''}`}
+      className={cn(styles.toast, toast.variant === 'error' && styles.toastError)}
       role="status"
       aria-live="polite"
       aria-atomic="true"

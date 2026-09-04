@@ -2,7 +2,7 @@
 
 import { Send, Star } from 'lucide-react'
 import { useReviewForm } from '@/hooks/useReviewForm'
-import styles from './demo.module.css'
+import styles from './demo.styles'
 
 export function DemoReview({ projectName }: { projectName: string }) {
   const { score, setScore, comment, setComment, submitted, submit } = useReviewForm()

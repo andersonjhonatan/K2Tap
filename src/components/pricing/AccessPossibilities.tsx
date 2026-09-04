@@ -13,7 +13,8 @@ import {
   Wifi,
 } from 'lucide-react'
 import { Reveal } from '@/components/ui/Reveal'
-import styles from './pricing.module.css'
+import { cn } from '@/lib/cn'
+import styles from './pricing.styles'
 
 const possibilities = [
   { icon: AtSign, label: 'Redes sociais' },
@@ -33,7 +34,7 @@ const possibilities = [
 export function AccessPossibilities() {
   return (
     <section className={styles.accessSection} aria-labelledby="access-title">
-      <div className={`wrap ${styles.accessGrid}`}>
+      <div className={cn('wrap', styles.accessGrid)}>
         <Reveal className={styles.accessCopy}>
           <span className={styles.eyebrow}>Um toque. Muitos destinos.</span>
           <h2 id="access-title">Tudo o que seu cliente precisa acessar.</h2>

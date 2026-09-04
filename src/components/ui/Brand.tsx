@@ -1,5 +1,5 @@
 import { K2TapLockup, K2TapMark } from '@/components/brand/K2TapLogo'
-import styles from './ui.module.css'
+import styles from './ui.styles'
 
 type BrandProps = {
   /** Só a marca, sem as letras — para espaços apertados. */

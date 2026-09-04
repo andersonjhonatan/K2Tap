@@ -3,11 +3,12 @@
 import { Check, ConciergeBell, Copy, ExternalLink, Smartphone, UserRound } from 'lucide-react'
 import { QRCodeSVG } from 'qrcode.react'
 import type { StaffCall } from '@/types/project'
+import { cn } from '@/lib/cn'
 import { buildCustomerUrl, buildStaffUrl } from '@/lib/staff-call'
 import type { CopyHandler } from '@/hooks/useCopyToast'
 import { useStaffCall } from '@/hooks/useStaffCall'
 import { ReasonIcon } from '@/components/ui/ReasonIcon'
-import styles from './facilities.module.css'
+import styles from './facilities.styles'
 
 type StaffCallPanelProps = {
   staffCall: StaffCall
@@ -65,7 +66,7 @@ export function StaffCallPanel({ staffCall, onCopy }: StaffCallPanelProps) {
           <legend>Motivo do chamado</legend>
           {staffCall.reasons.map((item) => (
             <label
-              className={`${styles.reasonChip} ${reason.id === item.id ? styles.reasonChipActive : ''}`}
+              className={cn(styles.reasonChip, reason.id === item.id && styles.reasonChipActive)}
               key={item.id}
             >
               <input
@@ -159,7 +160,7 @@ export function StaffCallPanel({ staffCall, onCopy }: StaffCallPanelProps) {
         </div>
       )}
 
-      <div className={`${styles.tip} ${status === 'sent' ? '' : styles.warning}`}>
+      <div className={cn(styles.tip, status !== 'sent' && styles.warning)}>
         <ConciergeBell size={13} aria-hidden="true" />
         {status === 'sent'
           ? 'Abra os dois links em celulares diferentes para ver o chamado saindo da mesa e chegando na equipe.'

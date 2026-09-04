@@ -1,5 +1,5 @@
 import { Reveal } from '@/components/ui/Reveal'
-import styles from './landing.module.css'
+import styles from './landing.styles'
 
 const metrics = [
   {

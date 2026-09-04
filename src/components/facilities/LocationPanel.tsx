@@ -4,7 +4,7 @@ import { ExternalLink, MapPin, Share2 } from 'lucide-react'
 import type { ProjectConfig } from '@/types/project'
 import { useShareLocation } from '@/hooks/useShareLocation'
 import type { CopyHandler } from '@/hooks/useCopyToast'
-import styles from './facilities.module.css'
+import styles from './facilities.styles'
 
 type LocationPanelProps = {
   project: ProjectConfig

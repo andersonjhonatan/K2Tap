@@ -2,7 +2,8 @@
 
 import type { ReactNode } from 'react'
 import { useEffect, useRef, useState } from 'react'
-import styles from './ui.module.css'
+import { cn } from '@/lib/cn'
+import styles from './ui.styles'
 
 type RevealProps = {
   children: ReactNode
@@ -37,7 +38,7 @@ export function Reveal({ children, className = '' }: RevealProps) {
   }, [])
 
   return (
-    <div ref={ref} className={`${styles.reveal} ${visible ? styles.revealed : ''} ${className}`}>
+    <div ref={ref} className={cn(styles.reveal, visible && styles.revealed, className)}>
       {children}
     </div>
   )

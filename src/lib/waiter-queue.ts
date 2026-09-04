@@ -7,6 +7,7 @@ export type WaiterCall = {
   table: string
   reasonId: string
   reason: string
+  note?: string
   icon: StaffCallReasonIcon
   createdAt: string
   status: WaiterCallStatus
@@ -18,6 +19,9 @@ export const WAITER_QUEUE_KEY = 'k2tap-waiter-queue-v1'
 export const WAITER_QUEUE_EVENT = 'k2tap-waiter-queue-update'
 
 const MAX_CALLS = 50
+
+/** Referência simples para comunicar uma previsão honesta ao cliente. */
+export const ESTIMATED_MINUTES_PER_CALL = 4
 
 /**
  * A fila vive no armazenamento do próprio navegador. Isso mantém a demonstração
@@ -80,12 +84,18 @@ function createId() {
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`
 }
 
-export function createWaiterCall(table: string, reason: StaffCallReason): WaiterCall {
+export function createWaiterCall(
+  table: string,
+  reason: StaffCallReason,
+  note?: string,
+): WaiterCall {
+  const sanitizedNote = note?.trim().slice(0, 160)
   const call: WaiterCall = {
     id: createId(),
     table,
     reasonId: reason.id,
     reason: reason.label,
+    note: sanitizedNote || undefined,
     icon: reason.icon,
     createdAt: new Date().toISOString(),
     status: 'pending',
@@ -120,6 +130,27 @@ export function findOpenCall(calls: WaiterCall[], table: string) {
   return calls.find((call) => call.table === table && call.status !== 'done')
 }
 
+/** Chamados pendentes em ordem justa: o horário mais antigo vem primeiro. */
+export function sortPendingWaiterCalls(calls: WaiterCall[]) {
+  return calls
+    .filter((call) => call.status === 'pending')
+    .toSorted((first, second) => {
+      const timeDifference =
+        new Date(first.createdAt).getTime() - new Date(second.createdAt).getTime()
+      return timeDifference || first.id.localeCompare(second.id)
+    })
+}
+
+/** Posição humana (1, 2, 3...) de um chamado que ainda aguarda atendimento. */
+export function waiterQueuePosition(calls: WaiterCall[], id: string) {
+  const index = sortPendingWaiterCalls(calls).findIndex((call) => call.id === id)
+  return index === -1 ? null : index + 1
+}
+
+export function estimatedWaitMinutes(position: number) {
+  return Math.max(1, position) * ESTIMATED_MINUTES_PER_CALL
+}
+
 /**
  * Escuta a fila na aba atual (evento próprio) e nas demais abas do mesmo
  * navegador (evento `storage`). Devolve a função de cancelamento.
@@ -151,4 +182,13 @@ export function waitingSeconds(call: WaiterCall, now: number) {
   const reference = call.status === 'done' ? call.completedAt : undefined
   const end = reference ? new Date(reference).getTime() : now
   return Math.max(0, Math.floor((end - new Date(call.createdAt).getTime()) / 1000))
+}
+
+/** Tempo entre a chamada da mesa e a confirmação da equipe. */
+export function responseSeconds(call: WaiterCall) {
+  if (!call.acceptedAt) return null
+  return Math.max(
+    0,
+    Math.floor((new Date(call.acceptedAt).getTime() - new Date(call.createdAt).getTime()) / 1000),
+  )
 }

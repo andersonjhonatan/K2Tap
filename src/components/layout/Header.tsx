@@ -5,8 +5,9 @@ import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { siteConfig } from '@/config/site'
 import { primaryNavigation } from '@/data/navigation'
+import { cn } from '@/lib/cn'
 import { Brand } from '@/components/ui/Brand'
-import styles from './layout.module.css'
+import styles from './layout.styles'
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -26,7 +27,7 @@ export function Header() {
 
   return (
     <header className={styles.header}>
-      <div className={`wrap ${styles.headerInner}`}>
+      <div className={cn('wrap', styles.headerInner)}>
         <a className={styles.brandLink} href={onHome ? '#top' : '/'}>
           <Brand />
           <span className="srOnly">— voltar ao início</span>

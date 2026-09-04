@@ -1,6 +1,7 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
-import styles from './ui.module.css'
+import { cn } from '@/lib/cn'
+import styles from './ui.styles'
 
 type ButtonProps = ComponentPropsWithoutRef<'a'> & {
   children: ReactNode
@@ -17,7 +18,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <a
-      className={`${styles.button} ${styles[variant]} ${className}`}
+      className={cn(styles.button, styles[variant], className)}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       {...props}
     >

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import type { ProjectConfig } from '@/types/project'
-import styles from './showcase.module.css'
+import styles from './showcase.styles'
 
 export function DemoLaunch({ project }: { project: ProjectConfig }) {
   return (

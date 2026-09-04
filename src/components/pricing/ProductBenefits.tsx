@@ -1,6 +1,6 @@
 import { Battery, CircleGauge, Palette, QrCode, RefreshCw, Sparkles } from 'lucide-react'
 import { Reveal } from '@/components/ui/Reveal'
-import styles from './pricing.module.css'
+import styles from './pricing.styles'
 
 const benefits = [
   { icon: Battery, title: 'Sem bateria', text: 'O NFC funciona sem necessidade de recarga.' },

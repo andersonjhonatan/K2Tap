@@ -1,5 +1,6 @@
 import { Reveal } from '@/components/ui/Reveal'
-import styles from './pricing.module.css'
+import { cn } from '@/lib/cn'
+import styles from './pricing.styles'
 
 const questions = [
   {
@@ -34,15 +35,14 @@ const questions = [
   },
   {
     question: 'Depois posso alterar meus links?',
-    answer:
-      'Sim. O destino digital pode ser atualizado sem precisar substituir o produto físico.',
+    answer: 'Sim. O destino digital pode ser atualizado sem precisar substituir o produto físico.',
   },
 ]
 
 export function PurchaseFaq() {
   return (
-    <section className={`${styles.section} ${styles.faqSection}`} aria-labelledby="faq-title">
-      <div className={`wrap ${styles.faqGrid}`}>
+    <section className={cn(styles.section, styles.faqSection)} aria-labelledby="faq-title">
+      <div className={cn('wrap', styles.faqGrid)}>
         <Reveal className={styles.faqHeading}>
           <span className={styles.eyebrow}>Antes de escolher</span>
           <h2 id="faq-title">Perguntas frequentes.</h2>

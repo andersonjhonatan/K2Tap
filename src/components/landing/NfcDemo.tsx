@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Radio, RotateCcw } from 'lucide-react'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
-import styles from './nfc-demo.module.css'
+import { cn } from '@/lib/cn'
+import styles from './nfc-demo.styles'
 
 const steps = [
   {
@@ -107,9 +108,10 @@ export function NfcDemo() {
                   return (
                     <button
                       key={item.id}
-                      className={`${styles.step} ${active ? styles.activeStep : ''}`}
+                      className={cn(styles.step, active && styles.activeStep)}
                       type="button"
                       role="tab"
+                      aria-label={`${String(item.id).padStart(2, '0')} ${item.title} — ${item.description}`}
                       aria-selected={active}
                       aria-controls="nfc-demo-scene"
                       tabIndex={active ? 0 : -1}

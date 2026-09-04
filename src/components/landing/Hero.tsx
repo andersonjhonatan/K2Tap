@@ -1,6 +1,7 @@
 import { ArrowRight, Radio, Sparkles, Star } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import styles from './landing.module.css'
+import { cn } from '@/lib/cn'
+import styles from './landing.styles'
 
 export function Hero() {
   return (
@@ -10,7 +11,7 @@ export function Hero() {
         <span className={styles.canvasPanel} />
         <span className={styles.canvasRibbon} />
       </div>
-      <div className={`wrap ${styles.heroGrid}`}>
+      <div className={cn('wrap', styles.heroGrid)}>
         <div className={styles.heroCopy}>
           <span className="eyebrow">K2 Tap • NFC inteligente</span>
           <h1 id="hero-title">

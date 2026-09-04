@@ -3,7 +3,7 @@ import type { FacilityKind, OpeningHour, ProjectConfig } from '@/types/project'
 import { customerFacilities, facilityIcons, facilityLabels } from '@/data/facilities'
 import { ExperienceIcon } from '../ExperienceIcon'
 import type { ExperienceProps } from './types'
-import styles from '../showcase.module.css'
+import styles from '../showcase.styles'
 
 export function ExperienceHeader({ project }: { project: ProjectConfig }) {
   return (
@@ -40,6 +40,7 @@ export function ActionGrid({
             className={styles.actionCard}
             key={action.id}
             type="button"
+            aria-label={`${action.label} ${action.description}`}
             onClick={(event) => onOpenFacility(action.facility!, event.currentTarget)}
           >
             {content}
@@ -74,6 +75,7 @@ export function FacilityGrid({ onOpenFacility }: Pick<ExperienceProps, 'onOpenFa
               className={styles.facilityTool}
               key={facility}
               type="button"
+              aria-label={`${facilityLabels[facility]} ${facilityHints[facility]}`}
               onClick={(event) => onOpenFacility(facility, event.currentTarget)}
             >
               <Icon size={14} aria-hidden="true" />

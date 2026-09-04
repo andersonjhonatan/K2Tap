@@ -7,7 +7,7 @@ import { FacilitiesModal } from '@/components/facilities/FacilitiesModal'
 import { DemoLaunch } from './DemoLaunch'
 import { PhoneMockup } from './PhoneMockup'
 import { ProjectSelector } from './ProjectSelector'
-import styles from './showcase.module.css'
+import styles from './showcase.styles'
 
 export function ProjectShowcase() {
   const [activeProjectId, setActiveProjectId] = useState<ProjectId>('restaurant')

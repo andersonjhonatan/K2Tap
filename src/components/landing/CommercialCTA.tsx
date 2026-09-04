@@ -1,7 +1,7 @@
 import { siteConfig } from '@/config/site'
 import { Button } from '@/components/ui/Button'
 import { Reveal } from '@/components/ui/Reveal'
-import styles from './landing.module.css'
+import styles from './landing.styles'
 
 export function CommercialCTA() {
   return (

@@ -53,7 +53,8 @@ export const products: readonly PurchaseProduct[] = [
     shortName: 'Expositor',
     price: 99.9,
     priceLabel: 'R$ 99,90',
-    description: 'Uma presença profissional para balcões, recepções, mesas e pontos de atendimento.',
+    description:
+      'Uma presença profissional para balcões, recepções, mesas e pontos de atendimento.',
     image: {
       src: '/images/k2tap-display.png',
       width: 1122,

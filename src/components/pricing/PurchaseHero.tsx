@@ -1,13 +1,14 @@
 import Image from 'next/image'
 import { ArrowDown, ArrowUpRight, Radio } from 'lucide-react'
 import { comboProduct, getPurchaseUrl } from '@/data/products'
-import styles from './pricing.module.css'
+import { cn } from '@/lib/cn'
+import styles from './pricing.styles'
 
 export function PurchaseHero() {
   return (
     <section className={styles.hero} aria-labelledby="purchase-title">
       <div className={styles.heroBackdrop} aria-hidden="true" />
-      <div className={`wrap ${styles.heroGrid}`}>
+      <div className={cn('wrap', styles.heroGrid)}>
         <div className={styles.heroCopy}>
           <span className={styles.eyebrow}>
             <Radio size={15} aria-hidden="true" /> K2 Tap • Produtos físicos

@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react'
 import type { ProjectId } from '@/types/project'
-import styles from './artwork.module.css'
+import { cn } from '@/lib/cn'
+import styles from './artwork.styles'
 
 const decorations: Record<ProjectId, { className: string; decoration: ReactNode }> = {
   restaurant: {
@@ -77,7 +78,7 @@ export function ExperienceArtwork({
 
   return (
     <div
-      className={`${styles.artwork} ${theme} ${className}`}
+      className={cn(styles.artwork, theme, className)}
       style={scale ? ({ '--art-scale': scale } as CSSProperties) : undefined}
     >
       <div className={styles.copy}>

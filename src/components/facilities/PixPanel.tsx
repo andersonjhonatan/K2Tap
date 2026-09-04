@@ -1,9 +1,10 @@
 import { Copy, ShieldCheck } from 'lucide-react'
 import { QRCodeSVG } from 'qrcode.react'
 import type { ProjectConfig } from '@/types/project'
+import { cn } from '@/lib/cn'
 import { getPixPresentation } from '@/lib/pix'
 import type { CopyHandler } from '@/hooks/useCopyToast'
-import styles from './facilities.module.css'
+import styles from './facilities.styles'
 
 type PixPanelProps = {
   project: ProjectConfig
@@ -19,7 +20,7 @@ export function PixPanel({ project, onCopy }: PixPanelProps) {
         Uma demonstração de como o pagamento pode aparecer. Nenhuma cobrança é criada por esta
         experiência.
       </p>
-      <div className={`${styles.qrCard} ${styles.pixCard}`}>
+      <div className={cn(styles.qrCard, styles.pixCard)}>
         <div className={styles.demoLabel}>PIX • DEMONSTRAÇÃO</div>
         <h4>Aponte a câmera e pague.</h4>
         <div className={styles.pixLayout}>
@@ -57,7 +58,7 @@ export function PixPanel({ project, onCopy }: PixPanelProps) {
           </div>
         </div>
       </div>
-      <div className={`${styles.tip} ${styles.warning}`}>
+      <div className={cn(styles.tip, styles.warning)}>
         Os dados são demonstrativos e não representam um recebedor ou pagamento real.
       </div>
     </div>

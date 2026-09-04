@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, ConciergeBell } from 'lucide-react'
 import type { FacilityKind, ProjectConfig } from '@/types/project'
+import { cn } from '@/lib/cn'
 import { experienceTheme } from '@/lib/theme'
 import { siteConfig } from '@/config/site'
 import { useCopyToast } from '@/hooks/useCopyToast'
@@ -19,7 +20,7 @@ import {
 } from '@/data/facilities'
 import { DemoModal, facilityCopy } from './DemoModal'
 import { DemoStaffCall } from './DemoStaffCall'
-import styles from './demo.module.css'
+import styles from './demo.styles'
 
 type MenuEntry = {
   key: string
@@ -117,7 +118,7 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
 
           {menu.map((item, index) => {
             // O primeiro item é o que o negócio quer que o cliente faça.
-            const className = `${styles.menuItem} ${index === 0 ? styles.menuFeature : ''}`
+            const className = cn(styles.menuItem, index === 0 && styles.menuFeature)
             const inner = (
               <>
                 <span className={styles.menuIcon}>{item.icon}</span>
@@ -136,6 +137,7 @@ export function DemoExperience({ project, table }: DemoExperienceProps) {
                 className={className}
                 key={item.key}
                 type="button"
+                aria-label={`${item.label} ${item.description}`}
                 onClick={(event) => openFacility(item.facility!, event.currentTarget)}
               >
                 {inner}

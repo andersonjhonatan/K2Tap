@@ -1,7 +1,7 @@
 import { ArrowUpRight } from 'lucide-react'
 import type { ProjectConfig } from '@/types/project'
 import { SocialIcon } from '@/components/ui/SocialIcon'
-import styles from './facilities.module.css'
+import styles from './facilities.styles'
 
 export function SocialPanel({ project }: { project: ProjectConfig }) {
   return (

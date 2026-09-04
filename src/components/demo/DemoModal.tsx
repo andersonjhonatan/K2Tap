@@ -12,7 +12,7 @@ import {
 import type { CopyHandler } from '@/hooks/useCopyToast'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { DemoFacilityPanel } from './DemoFacilityPanel'
-import styles from './demo.module.css'
+import styles from './demo.styles'
 
 /** Só o texto muda aqui: ícone e rótulo curto vêm de `data/facilities`. */
 export const facilityCopy = {
